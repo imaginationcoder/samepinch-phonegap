@@ -49,19 +49,25 @@
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="js/jquery.serialize-hash.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/bootbox.min.js"></script>
 <script type="text/javascript" src="js/api_calls.js"></script>
-
+<script type="text/javascript" src="js/authentication.js"></script>
 <script type="text/javascript">
     app.initialize();
+     //sessionStorage.clear();
+     //localStorage.clear();
     document.addEventListener("deviceready", onDeviceReady, false);
     // Cordova is ready
     function onDeviceReady() {
-        alert('welcome your,device is ready now')
+        // save device information in localStorage
+        //localStorage.removeItem('device_info')
+        //var device_info = {model: device.model, platform: device.platform,version: device.version,uuid: device.uuid}
+        //localStorage.setItem('device_info',device_info)
+        getDeviceInfo()
         window.location.href = 'home.html'
     }
-
 
 </script>
 </body>

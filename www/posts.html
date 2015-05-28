@@ -9,34 +9,37 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
     <!--<link rel="stylesheet" type="text/css" href="css/index.css" />-->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
-    <title>SamePinch-Home</title>
-    <style>
-        .content{
-            margin: 50px;
-        }
-    </style>
+    <title>SamePinch-Login</title>
 </head>
 <body>
 
-<div class="content">
-    <ul>
-        <li>
-            <a href="#" id="get_access_token">Get Access Token</a>
-        </li>
+<div class="container">
 
-        <li>
-            <a href="signup.html" id="register_user">SignUp</a>
-        </li>
+    <div style="margin-top:50px;" class="mainbox col-md-offset-3 col-sm-8 col-sm-offset-2">
+        <ul class="login-navbar list-inline" style="text-align: right;">
+            <li id="sign-out"><a href="#" >Logout</a></li>
+            <li id="sign-in"><a href="signin.html">SignIn</a></li>
+        </ul>
 
-        <li>
-            <a href="signin.html" id="signin_user">SignIn</a>
-        </li>
-
-        <li>
-            <a href="#" id="get_device_info">Get Device Information</a>
-        </li>
-
-    </ul>
+        <div class="table-responsive" id="posts">
+            <table class="table">
+                <thead>
+                <th>Id</th>
+                <th>Post</th>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Post 1lkdjskfjlkdsjfldskjfldskjf</td>
+                </tr>
+                <tr class="active">
+                    <td>2</td>
+                    <td>Post 2 dsgsfgfdgggggggggggg</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
@@ -47,16 +50,6 @@
 <script type="text/javascript" src="js/api_calls.js"></script>
 <script type="text/javascript" src="js/authentication.js"></script>
 
-<script type="text/javascript">
-
-    $('#get_access_token').on('click',function(){
-        getAccessToken()
-    })
-
-    $('#get_device_info').on('click',function(){
-        getDeviceInfo()
-    })
-
-</script>
 </body>
+
 </html>
