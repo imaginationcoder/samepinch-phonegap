@@ -5,33 +5,47 @@
 // Constants ------------------------------------------------
 
 var env = 'dev';
+//var env = 'local';
+//var env = 'prod';
 if(env == 'prod'){
+    window.auth_url = 'https://msocl.herokuapp.com/users/auth/'
     window.api_url = 'https://msocl.herokuapp.com/api/'
     window.app_client_id = '3e0786a2f258e6f9b08250dbd7f35010480988e0d3d1ef373b79e07884be79f9'
     window.app_client_secret = '813c95cc2eb6c0cf4f49d30d0add0c6fc3ea82863d30507beb6733c0e643927c'
-}else{
+    // comment below for apk generation
+    // var device = {model: 'XT1033', platform: 'Android',version: '5.0.2',uuid: 'dd46057341bf77df',cordova: '3.7.0'}
+}else if(env=='dev'){
+    window.auth_url = 'http://localhost:3000/users/auth/'
+    window.api_url = 'http://localhost:3000/api/'
+    window.app_client_id = '3e0786a2f258e6f9b08250dbd7f35010480988e0d3d1ef373b79e07884be79f9'
+    window.app_client_secret = '813c95cc2eb6c0cf4f49d30d0add0c6fc3ea82863d30507beb6733c0e643927c'
+    // for prod same will get from plugin
+    var device = {model: 'XT1033', platform: 'Android',version: '5.0.2',uuid: 'dd46057341bf77df',cordova: '3.7.0'}
+}
+else{
+    window.auth_url = 'http://localhost:3000/users/auth/'
     window.api_url = 'http://localhost:3000/api/'
     window.app_client_id = 'ac26e3f23c6fbd9df027d6201741524547169a5da22ca3030348fef41358d502'
     window.app_client_secret = '694457fa756a3b08bd5f2f76a1d0e883c9c4589c66091017d950418fc8681e6b'
     // for prod same will get from plugin
-    var device = {model: 'XT1033', platform: 'Android',version: '5.0.2',uuid: 'dd46057341bf77df'}
+    var device = {model: 'XT1033', platform: 'Android',version: '5.0.2',uuid: 'dd46057341bf77df',cordova: '3.7.0'}
 
 }
 
 //TODO replace device_token with plugin
-var device_token = 'sample-device-token-123456'
+var device_token = 'sample-android-device-token-123456'
 
 localStorage.setItem('device_token',device_token)
 
 /*
-*  LocalStorage List =>
-*   1) device_token
-*
-* Session Storage :
-*  1) current_user => {email,fname,lname,photo,uid}
-*  2) access_token
-*
-* */
+ *  LocalStorage List =>
+ *   1) device_token
+ *
+ * Session Storage :
+ *  1) current_user => {email,fname,lname,photo,uid}
+ *  2) access_token
+ *
+ * */
 
 // bootbox error dialog
 function errorDialog(title,msg){
@@ -63,28 +77,33 @@ function successDialog(title,msg){
 
 // Get access token
 function getAccessToken() {
-    $.ajax({
-        url: window.api_url + 'clients/token',
-        type: 'post',
-        data: {
-            'grant_type': "client_credentials", 'client_id': window.app_client_id,
-            'client_secret': window.app_client_secret, 'scope': "imsocl"
-        },
-        beforeSend: function () { },
-        success: function (data) {
-            sessionStorage.setItem('access_token',data.access_token)
-           // successDialog('Success',JSON.stringify(data))
-        },
-        error: function (xhr, textStatus, errorThrown) {
-            var error_obj = $.parseJSON(xhr.responseText)
-            console.log(error_obj)
-            errorDialog(error_obj.error,error_obj.error_description)
-        }
-    })
+    if(typeof(localStorage['access_token']) == "undefined" || localStorage['access_token'] == null || localStorage['access_token'] == '') {
+        $.ajax({
+            url: window.api_url + 'clients/token',
+            type: 'post',
+            data: {
+                'grant_type': "client_credentials", 'client_id': window.app_client_id,
+                'client_secret': window.app_client_secret, 'scope': "imsocl"
+            },
+            beforeSend: function () {
+                console.log('getting access_token..')
+            },
+            success: function (data) {
+                localStorage.setItem('access_token', data.access_token)
+                console.log('got the token..')
+                // successDialog('Success',JSON.stringify(data))
+            },
+            error: function (xhr, textStatus, errorThrown) {
+                var error_obj = $.parseJSON(xhr.responseText)
+                console.log(error_obj)
+                errorDialog(error_obj.error, error_obj.error_description)
+            }
+        })
+    }
 }
 $(document).on('ready',function(){
-   // getAccessToken()
-   // resgistration()
+    // getAccessToken()
+    // resgistration()
 })
 
 
@@ -104,7 +123,7 @@ function getDeviceInfo(){
     content += "<strong>Device Version:</strong>  "+ d_version +"<br/>";
     content += "<\/div>";
     bootbox.dialog({
-        title: "Device Info",
+        title: "Your Device Info",
         message: content,
         buttons: {
             danger: {
@@ -114,5 +133,18 @@ function getDeviceInfo(){
         }
     });
 }
+window.addEventListener('load', function() {
+    console.log('invoked fastclick')
+    new FastClick(document.body);
+}, false);
+
+
+
+// get access token if not present
+window.addEventListener('load', function() {
+    // sessionStorage.clear();
+    // localStorage.clear();
+  //  getAccessToken()
+})
 
 

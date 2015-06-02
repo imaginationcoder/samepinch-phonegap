@@ -27,47 +27,56 @@
     <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
     <!--<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />-->
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <!--<link rel="stylesheet" type="text/css" href="css/index.css" />-->
+    <link rel="stylesheet" type="text/css" href="css/index.css" />
+    <link rel="stylesheet" type="text/css" href="css/application.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <title>SamePinch</title>
 </head>
 <body>
+<div class='loading_indicator'>
+    <img src="img/loading.gif">
+</div>
 <div class="app">
-    <h1>PhoneGap</h1>
+    <div class="links">
+        <a href="posts.html">Go to Home</a>
+    </div>
     <div id="deviceready" class="blink">
         <p class="event listening">Connecting to Device</p>
         <p class="event received">Device is Ready</p>
+
     </div>
 </div>
-<div class="links">
-    <ul>
-        <li>
-            <a href="home.html">Go to Home</a>
-        </li>
-    </ul>
-</div>
+
+
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="js/jquery.serialize-hash.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/bootbox.min.js"></script>
+<script type="text/javascript" src="js/handlebars-v3.0.3.js"></script>
+<script type="text/javascript" src="js/handlebars-helpers.js"></script>
+<script type="text/javascript" src="js/fastclick.js"></script>
 <script type="text/javascript" src="js/api_calls.js"></script>
 <script type="text/javascript" src="js/authentication.js"></script>
 <script type="text/javascript">
     app.initialize();
-     //sessionStorage.clear();
-     //localStorage.clear();
+    //sessionStorage.clear()
+    //localStorage.clear()
+
     document.addEventListener("deviceready", onDeviceReady, false);
+    // sessionStorage.clear();
+    //localStorage.clear();
     // Cordova is ready
     function onDeviceReady() {
         // save device information in localStorage
         //localStorage.removeItem('device_info')
         //var device_info = {model: device.model, platform: device.platform,version: device.version,uuid: device.uuid}
         //localStorage.setItem('device_info',device_info)
-        getDeviceInfo()
-        window.location.href = 'home.html'
+       // getDeviceInfo()
+        //window.location.href = 'posts.html'
     }
+    getAccessToken()
 
 </script>
 </body>

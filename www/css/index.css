@@ -57,6 +57,7 @@ body {
     padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
     margin:-115px 0px 0px -112px;  /* offset vertical: half of image height and text area height */
                                    /* offset horizontal: half of text area width */
+    background-size: 90%;
 }
 
 /* Landscape layout (with min-width) */
@@ -81,14 +82,14 @@ h1 {
 .event {
     border-radius:4px;
     -webkit-border-radius:4px;
-    color:#FFFFFF;
+    /*color:#FFFFFF;*/
     font-size:12px;
     margin:0px 30px;
     padding:2px 0px;
 }
 
 .event.listening {
-    background-color:#333333;
+    /*background-color:#333333;*/
     display:block;
 }
 

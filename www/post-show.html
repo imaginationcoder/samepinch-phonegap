@@ -7,7 +7,7 @@
     <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
     <!--<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />-->
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <!--<link rel="stylesheet" type="text/css" href="css/index.css" />--> 
+    <!--<link rel="stylesheet" type="text/css" href="css/index.css" />-->
     <link rel="stylesheet" type="text/css" href="css/application.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <title>SamePinch-Login</title>
@@ -19,15 +19,11 @@
         .custom-list-inline > li {
             margin: 1px !important;
         }
-        .single-post {
-            cursor: pointer;
-        }
-
     </style>
 </head>
 <body>
 <div class='loading_indicator'>
-  <img src="img/loading.gif">
+    <img src="img/loading.gif">
 </div>
 <div class="container">
     <div style="margin-top:20px;" class="mainbox col-md-offset-3 col-sm-8 col-sm-offset-2">
@@ -35,25 +31,21 @@
             <li id="sign-out" style="display: none;"><a href="#" >Logout</a></li>
             <li id="sign-in"><a href="signin.html">SignIn</a></li>
         </ul>
-        <div id="posts-list">
+        <div id="post">
 
         </div>
     </div>
 </div>
 
-
-
-<script id="posts-template" type="text/x-handlebars-template">
-
-    {{#posts}}
-    <div class="bs-example single-post" id="post-{{ uid }}" data-uid="{{ uid }}">
+<script id="single-post-template" type="text/x-handlebars-template">
+    <div data-uid="{{ uid }}" id="post-{{ uid }}" class="bs-example single-post">
         <div class="media">
             <a href="#" class="pull-left">
-               {{#if anonymous}}
-                <img src="{{ ../../anonymous_image }}" class="media-object img-circle" width="60" height="60">
+                {{#if anonymous}}
+                <img src="{{ ../../anonymous_image }}" class="media-object img-circle" width="40" height="40">
                 {{else}}}
                 {{#if owner.photo }}
-                <img src="{{ owner.photo }}" class="media-object img-circle" width="60" height="60">
+                <img src="{{ owner.photo }}" class="media-object img-circle" width="40" height="40">
                 {{ else }}
                 <strong>{{firstChar owner.fname}} {{firstChar owner.lname}}</strong>
                 {{/if}}
@@ -75,41 +67,65 @@
                     <span class="glyphicon glyphicon-time"></span><span> TD</span>
                 </div>
             </div>
+        </div>
+        <hr>
+        <div class="row media">
             <div class="post-content">
                 <p>{{ content }}</p>
-                {{#if image }}
-                <p> <img src="{{ image }}" class="media-object img-rounded" width="50" height="50"></p>
-                {{/if}}
             </div>
         </div>
-        <hr class="custom"/>
-        <div class="row center-block tags">
-            <div>
+        <div class="row">
+            <div class="pull-left">
                 <ul class="list-inline custom-list-inline">
                     {{#each tags}}
                     <li><span class="label label-default">{{ this }}</span></li>
                     {{/each}}
                 </ul>
             </div>
-        </div>
-        <div class="row center-block commenters">
-            <div>
-                <ul class="list-inline">
-                    {{#each commenters}}
-                    <li>
-                        <img src="{{ this }}" class="media-object img-circle" width="30" height="30">
-                    </li>
-                    {{/each}}
-                    <li>
-                        <span class="glyphicon glyphicon-comment"></span> {{ comment_count }}
-                    </li>
-                </ul>
+            <div class="pull-right">
+                <span class="glyphicon glyphicon-thumbs-up"></span><span> {{ upvote_count }}&nbsp;</span>
             </div>
         </div>
-        <hr/>
-    </div>
-    {{/posts}}
+        <hr>
+        <div id="comments">
+            <div class="media">
+                <a class="pull-left" href="#">
+                    <img width="40" height="40" class="media-object img-circle" src="https://test-kl-tmp.s3.amazonaws.com/uploads/user/photo/555c647e6532310010010000/mini_70c736fa7c2b93d8a1aa161d84d9f67d.JPEG">
+                </a>
+                <div class="media-body">
+                    <div class="pull-left">
+                        <h4 class="media-heading comment-text">
+                            {{ content }}
+                        </h4>
+                    </div>
+                    <div class="pull-right">
+                        <span class="glyphicon glyphicon-thumbs-up"></span><span> {{ upvote_count }}&nbsp;</span>
+                    </div>
+                </div>
+                <div class="post-commneted-at">
+                    <p>{{ createdAt }}</p>
+                </div>
+            </div>
+            <hr class="custom">
+        </div>
+        <div id="new-comment" class="row">
 
+
+            <div class="input-group input-group-lg">
+                <input type="text" class="form-control" aria-label="..." aria-describedby="sizing-addon1">
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Comment As  <span class="caret"></span></button>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                        <li><a href="#">As anonymous</a></li>
+                        <li><a href="#">As Identifier</a></li>
+                    </ul>
+                </div><!-- /btn-group -->
+            </div><!-- /input-group -->
+
+
+
+        </div>
+    </div>
 </script>
 
 
@@ -127,9 +143,7 @@
 <script type="text/javascript" src="js/posts.js"></script>
 
 <script type="text/javascript">
-    $(document).ready(function(){
-        getPosts()
-    })
+   singlePostReady()
 </script>
 
 </body>

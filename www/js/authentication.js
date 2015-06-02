@@ -8,21 +8,23 @@ function registerUser(){
         type: 'post',
         data: {
             'command' :"create",
-            'access_token':  sessionStorage['access_token'],
+            'access_token':  localStorage['access_token'],
             'body': body_params
         },
-        beforeSend: function () { },
+        beforeSend: function () {  $('.loading_indicator').css('display', 'inline-block');  },
         success: function (data) {
             body = data.body
-            sessionStorage.setItem('current_user',body)
+            localStorage.setItem('current_user',body)
             // replace access token with verified
-            sessionStorage.setItem('access_token',body.access_token)
+            localStorage.setItem('access_token',body.access_token)
             // successDialog('Success',JSON.stringify(data))
+            $('.loading_indicator').css('display', 'none');
             window.location.href = 'posts.html'
         },
         error: function(xhr,textStatus,errorThrown ) {
             var error_obj = $.parseJSON(xhr.responseText)
             console.log(error_obj)
+            $('.loading_indicator').css('display', 'none');
             errorDialog('Error',error_obj.message)
         }
     })
@@ -36,21 +38,23 @@ function signInUser(){
         type: 'post',
         data: {
             'command' :"signIn",
-            'access_token':  sessionStorage['access_token'],
+            'access_token':  localStorage['access_token'],
             'body':  body_params
         },
-        beforeSend: function () { },
+        beforeSend: function () {  $('.loading_indicator').css('display', 'inline-block');  },
         success: function (data) {
             // replace access token with verified
             body = data.body
-            sessionStorage.setItem('current_user',body)
+            localStorage.setItem('current_user',body)
             // replace access token with verified
-            sessionStorage.setItem('access_token',body.access_token)
+            localStorage.setItem('access_token',body.access_token)
+            $('.loading_indicator').css('display', 'none');
             window.location.href = 'posts.html'
         },
         error: function(xhr,textStatus,errorThrown ) {
             var error_obj = $.parseJSON(xhr.responseText)
             console.log(error_obj)
+            $('.loading_indicator').css('display', 'none');
             errorDialog('Error',error_obj.message)
         }
     })
@@ -64,19 +68,20 @@ function signOutUser(){
         type: 'post',
         data: {
             'command' :"signOut",
-            'access_token':  sessionStorage['access_token'],
+            'access_token':  localStorage['access_token'],
             'body': {
                 "device_token": device_token,
                 "platform": device.platform
             }
         },
-        beforeSend: function () { },
+        beforeSend: function () {  $('.loading_indicator').css('display', 'inline-block');  },
         success: function (data) {
             // remove current_user and access_token
-            sessionStorage.removeItem('current_user')
-            sessionStorage.removeItem('access_token')
+            localStorage.removeItem('current_user')
+            localStorage.removeItem('access_token')
             getAccessToken()// then get new access_token
             successDialog('Success',data.message)
+            $('.loading_indicator').css('display', 'none');
             // window.location.href = 'signin.html'
             $('.login-navbar #sign-out').hide()
             $('.login-navbar #sign-in').show()
@@ -84,6 +89,7 @@ function signOutUser(){
         error: function(xhr,textStatus,errorThrown ) {
             var error_obj = $.parseJSON(xhr.responseText)
             console.log(error_obj)
+            $('.loading_indicator').css('display', 'none');
             errorDialog('Error',error_obj.message)
         }
     })
@@ -95,7 +101,7 @@ $(document).on('ready',function(){
     // sign-in/sign-out navbar ---------------------------
     $('.login-navbar #sign-out').hide()
     $('.login-navbar #sign-in').hide()
-    if(sessionStorage.getItem('current_user')){
+    if(localStorage.getItem('current_user')){
         $('.login-navbar #sign-out').show()
     }else{
         $('.login-navbar #sign-in').show()

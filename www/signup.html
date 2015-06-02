@@ -8,12 +8,21 @@
     <!--<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />-->
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
     <!--<link rel="stylesheet" type="text/css" href="css/index.css" />-->
+    <link rel="stylesheet" type="text/css" href="css/application.css" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
     <title>SamePinch-Login</title>
 </head>
 <body>
+<div class='loading_indicator'>
+    <img src="img/loading.gif">
+</div>
 
 <div id="signupbox" style="margin-top:50px;" class="mainbox col-md-6 col-md-offset-3 col-sm-8 col-sm-offset-2">
+    <div style="margin-top:20px;">
+        <ul class="list-inline" style="text-align: right;">
+            <li id="sign-out"><a href="posts.html" ><span class="glyphicon glyphicon-home"></span> Home</a></li>
+        </ul>
+    </div>
     <div class="panel panel-info">
         <div class="panel-heading">
             <div class="panel-title">Sign Up</div>
@@ -66,7 +75,7 @@
                     </div>
                 </div>
 
-                <div style="border-top: 1px solid #999; padding-top:20px"  class="form-group">
+                <div style="border-top: 1px solid #999; padding-top:20px;display: none;"  class="form-group">
                     <div class="col-md-offset-3 col-md-9">
                         <button id="btn-fbsignup" type="button" class="btn btn-primary"><i class="icon-facebook"></i>   Sign Up with Facebook</button>
                     </div>
@@ -83,6 +92,9 @@
 <script type="text/javascript" src="js/jquery.serialize-hash.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/bootbox.min.js"></script>
+<script type="text/javascript" src="js/handlebars-v3.0.3.js"></script>
+<script type="text/javascript" src="js/handlebars-helpers.js"></script>
+<script type="text/javascript" src="js/fastclick.js"></script>
 <script type="text/javascript" src="js/api_calls.js"></script>
 <script type="text/javascript" src="js/authentication.js"></script>
 
