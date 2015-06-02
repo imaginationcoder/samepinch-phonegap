@@ -43,7 +43,7 @@
             <a href="#" class="pull-left">
                 {{#if anonymous}}
                 <img src="{{ ../../anonymous_image }}" class="media-object img-circle" width="40" height="40">
-                {{else}}}
+                {{else}}
                 {{#if owner.photo }}
                 <img src="{{ owner.photo }}" class="media-object img-circle" width="40" height="40">
                 {{ else }}
@@ -70,9 +70,7 @@
         </div>
         <hr>
         <div class="row media">
-            <div class="post-content">
-                <p>{{ content }}</p>
-            </div>
+                <p class="post-content">{{ content }}</p>
         </div>
         <div class="row">
             <div class="pull-left">
@@ -88,14 +86,16 @@
         </div>
         <hr>
         <div id="comments">
-            <div class="media">
+            <div class="comment"></div>
+            {{#comments }}
+            <div class="comment media" id="comment-{{ uid }}" data-id="{{ uid }}">
                 <a class="pull-left" href="#">
-                    <img width="40" height="40" class="media-object img-circle" src="https://test-kl-tmp.s3.amazonaws.com/uploads/user/photo/555c647e6532310010010000/mini_70c736fa7c2b93d8a1aa161d84d9f67d.JPEG">
+                    <img width="40" height="40" class="media-object img-circle" src="{{ commenter.photo }}">
                 </a>
                 <div class="media-body">
                     <div class="pull-left">
                         <h4 class="media-heading comment-text">
-                            {{ content }}
+                            {{ text }}
                         </h4>
                     </div>
                     <div class="pull-right">
@@ -105,27 +105,55 @@
                 <div class="post-commneted-at">
                     <p>{{ createdAt }}</p>
                 </div>
+                <hr class="custom">
             </div>
-            <hr class="custom">
+
+            {{/comments}}
         </div>
-        <div id="new-comment" class="row">
-
-
+        <div id="send-comment" class="row">
+            <form action="#" method="post" id="comment-form">
             <div class="input-group input-group-lg">
-                <input type="text" class="form-control" aria-label="..." aria-describedby="sizing-addon1">
-                <div class="input-group-btn">
-                    <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">Comment As  <span class="caret"></span></button>
-                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                        <li><a href="#">As anonymous</a></li>
-                        <li><a href="#">As Identifier</a></li>
-                    </ul>
-                </div><!-- /btn-group -->
+                    <input type="text" aria-describedby="sizing-addon1" aria-label="Text input with segmented button dropdown" class="form-control" placeholder="Add comment" name="text">
+                    <div class="input-group-btn">
+                        <button id="btn-send-comment" class="btn btn-default" type="button">Comment As</button>
+                        <button aria-expanded="false" data-toggle="dropdown" class="btn btn-default dropdown-toggle" type="button">
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul role="menu" class="dropdown-menu dropdown-menu-right">
+                            <li class="comment-as" data-value="anonymous"><a href="#">Anonymus</a></li>
+                            <li class="comment-as" data-value="user"><a href="#">User</a></li>
+                        </ul>
+                        <input type="hidden" name="post_id" value="{{ uid }}">
+                        <input type="hidden" name="anonymous" value="true">
+                    </div>
             </div><!-- /input-group -->
-
-
-
+            </form>
         </div>
     </div>
+</script>
+
+<script id="single-comment-template" type="text/x-handlebars-template">
+    <div class="comment media" id="comment-{{ uid }}" data-id="{{ uid }}">
+        <a class="pull-left" href="#">
+            <img width="40" height="40" class="media-object img-circle" src="{{ commenter.photo }}">
+        </a>
+        <div class="media-body">
+            <div class="pull-left">
+                <h4 class="media-heading comment-text">
+                    {{ text }}
+                </h4>
+            </div>
+            <div class="pull-right">
+                <span class="glyphicon glyphicon-thumbs-up"></span><span> {{ upvote_count }}&nbsp;</span>
+            </div>
+        </div>
+        <div class="post-commneted-at">
+            <p>{{ createdAt }}</p>
+        </div>
+        <hr class="custom">
+    </div>
+
 </script>
 
 
@@ -143,7 +171,7 @@
 <script type="text/javascript" src="js/posts.js"></script>
 
 <script type="text/javascript">
-   singlePostReady()
+    singlePostReady()
 </script>
 
 </body>

@@ -95,7 +95,6 @@ function signOutUser(){
     })
 }
 
-
 $(document).on('ready',function(){
 
     // sign-in/sign-out navbar ---------------------------
