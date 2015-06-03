@@ -1,0 +1,309 @@
+@charset "utf-8";
+/* CSS Document */
+
+body {
+  padding-top: 50px;
+  background-color:#f7f7f7;
+  font-family: 'Ubuntu', arial, sans-serif !important;
+  color:#444444;
+}
+
+.navbar-sp {
+	background-color:#c52128;
+	border:none;
+	padding:10px 0;
+}
+
+.navbar-sp img {
+	margin:0 auto;
+	margin-top:2px;
+}
+.navbar-btn-menu {
+	float:left;
+	border:none !important;
+	padding:9px 10px;
+}
+
+.navbar-btn-menu:hover {
+	background-color:transparent !important;
+}
+.navbar-sp a {
+	display:block;
+	padding:0 0 0 6px;
+}
+
+/*presets*/
+.nopadding {
+	padding-left:0px;
+	padding-right:0px;
+}
+.nopadding-left {
+    padding-left:0px;
+}
+.nopadding-right {
+    padding-right:0px;
+}
+.mtop5 {
+	margin-top:5px;
+}
+.mtop10 {
+	margin-top:10px;
+}
+.mtop20 {
+	margin-top:20px;
+}
+.mtop30{
+	margin-top:30px;
+}
+
+.mbottom5 {
+	margin-bottom:5px;
+}
+.mbottom10 {
+	margin-bottom:10px;
+}
+.mbottom20 {
+	margin-bottom:20px;
+}
+.mbottom30{
+	margin-bottom:30px;
+}
+
+
+.mleft5 {
+	margin-left:5px;
+}
+.mleft10 {
+	margin-left:10px;
+}
+.mleft20 {
+	margin-left:20px;
+}
+.mleft30{
+	margin-left:30px;
+}
+.mleft50{
+	margin-left:50px;
+}
+.mleft55{
+	margin-left:55px;
+}
+.mright5 {
+	margin-right:5px;
+}
+.mright10 {
+	margin-right:10px;
+}
+.mright20 {
+	margin-right:20px;
+}
+.mright30{
+	margin-right:30px;
+}
+
+
+.favorite-bar {
+	background-color:#ffffff;
+	height:30px;
+	width:100%;
+	padding:4px 0;
+}
+.favorite-bar a{
+	text-align:center;
+	width:20px;
+	height:auto;
+	margin:0 auto;
+	display:block;
+	font-size:20px;
+	color:#c5c5c5;
+}
+
+.favorite-bar a:hover{
+	color:#c52128;
+}
+
+.wall-post-box {
+	border-radius:8px;
+	border:1px solid #e8e8e8;
+	width:100%;
+	background-color:#ffffff;
+	min-height:120px;
+	overflow:hidden;
+	padding:4px;
+	margin-top:10px;
+	
+}
+.wall-post-box-wrap {
+	position:relative;
+
+	width:100%;
+	//background-color:#ffffff;
+	height:auto;
+	overflow:hidden;
+	padding:4px;
+	//margin-top:10px;
+	
+}
+
+#Wall .profile-pic-wrap {
+	width:42px;
+	height:42px;
+	position:absolute;
+	top:0px;
+	left:13px;
+	float:left;
+}
+
+#Wall .profilepic-placeholder {
+
+   background-color: #ffffff;
+   border-radius: 100%;
+   border: 1px solid #e8e8e8;
+   text-align: center;
+   font-weight: bold;
+   padding: 9px 0;
+   font-size: 16px;
+   letter-spacing: 0px; 
+   text-transform:uppercase;
+   color:#bbbbbb;
+ }
+ 
+ #Wall .profilepic-placeholder img {
+	 margin-top:-4px;
+	 
+ }
+ #Wall .profilepic-img img {
+	 border-radius:100%;
+	 width:42px;
+	 height:42px;
+	 border: 1px solid #e8e8e8;
+ }
+ .profile-name {
+	 color:#444444;
+	 font-size:15px;
+	 font-weight:bold;
+ }
+ 
+ #Wall .post-content img {
+	 width:40px;
+	 height:40px;
+	 border-radius:5px;
+ }
+ 
+ #Wall hr {
+	 margin-top:5px;
+	 margin-bottom:5px;
+ }
+ 
+ #Wall ul.tags {
+	 list-style-type:none;
+	 margin:0px;
+	 text-align:center;
+	 padding:0px;
+	 
+ }
+	 
+ #Wall ul.tags li {
+	 background-color:#f8f8f8;
+	 border:1px solid #e8e8e8;
+	 border-radius:8px;
+	 padding:4px 8px;
+	 color:#888888;
+	 font-size:10px;
+	 display:inline-block;
+	 text-align:center;
+	 margin:0 auto;
+	 margin-bottom:4px;
+ }
+ 
+  #Wall ul.comments{
+	 list-style-type:none;
+	 margin:5px 0;
+	 text-align:center;
+	 padding:0px;
+ }
+ 
+ 
+ #Wall ul.comments li  {
+	width:22px;
+	height:22px;
+	margin:0 auto;
+	border-radius:100%;
+	display:inline;
+ }
+	 
+
+ #Wall ul.comments li img {
+	 width:22px;
+	 height:22px;
+	 border-radius:100%;
+	
+ }
+  
+ #Wall ul.comments li > span > img {
+	 height:26px;
+ }
+ 
+  #Wall ul.comments li > span {
+	 position:relative;
+ }
+ 
+  #Wall ul.comments li > span > span.count { 
+  position:absolute;
+  left:3px;
+  font-size:12px;
+  color:#888888;
+  top:0px;
+  }
+  .time-style {
+	  color:#aaaaaa;
+	  font-style:italic;
+	  font-size:10px;
+  }
+  
+ #Wall .icon-counts span {
+	 font-size:10px;
+ }
+ #Wall .search-bar {
+	 background-color:#e5e5e5;
+	 height:32px;
+	 display:none;
+	 
+}
+ #Wall .search-bar .search-ph {
+	 padding-top:5px;
+	 text-align:center;
+	 display:block;
+	 
+ }
+  #Wall .search-bar .search-textfield {
+	 padding-top:5px;
+	 display:none;
+	 
+ }
+  .search-tf-style {
+	 background-color:transparent;
+	 border:none;
+	 outline:none;
+	 width:85%;
+ }
+ 
+ .search-bar .search-clear {
+	 color:#999999;
+	 float:right;
+	 margin-top:4px;
+ }
+ .sp-spinner {
+	 width:25px;
+	 height:25px;
+	 margin:0 auto;
+	 font-size:18px;
+	 margin-top:10px;
+ }
+	
+	 
+	 	 
+	 
+
+
+

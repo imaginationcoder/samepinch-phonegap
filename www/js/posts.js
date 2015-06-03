@@ -13,7 +13,7 @@ function getPosts(){
             }
         },
         beforeSend: function () {
-            $('.loading_indicator').css('display', 'inline-block');
+            $('.loading_indicator').css('display', 'block');
         },
         success: function (data) {
             var source = $("#posts-template").html();
@@ -50,7 +50,7 @@ function singlePostReady(){
             'access_token':  localStorage['access_token']
         },
         beforeSend: function () {
-            $('.loading_indicator').css('display', 'inline-block');
+            $('.loading_indicator').css('display', 'block');
         },
         success: function (data) {
             var source = $("#single-post-template").html();
@@ -121,7 +121,7 @@ function commentReady(){
                         'body': body_params
                     },
                     beforeSend: function () {
-                        $('.loading_indicator').css('display', 'inline-block');
+                        $('.loading_indicator').css('display', 'block');
                     },
                     success: function (data) {
                         var source = $("#single-comment-template").html();

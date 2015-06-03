@@ -1,87 +1,176 @@
 <!DOCTYPE html>
-<!--
-    Copyright (c) 2012-2014 Adobe Systems Incorporated. All rights reserved.
-
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
-<html>
+<html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="format-detection" content="telephone=no" />
-    <meta name="msapplication-tap-highlight" content="no" />
-    <!-- WARNING: for iOS 7, remove the width=device-width and height=device-height attributes. See https://issues.apache.org/jira/browse/CB-4323 -->
-    <!--<meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width, height=device-height, target-densitydpi=device-dpi" />-->
-    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="css/index.css" />
-    <link rel="stylesheet" type="text/css" href="css/application.css" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
     <title>SamePinch</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/jasny-bootstrap.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400' rel='stylesheet' type='text/css'>
+    <link href='http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css' rel='stylesheet' type='text/css'>
 </head>
 <body>
-<div class='loading_indicator'>
-    <img src="img/loading.gif">
-</div>
-<div class="app">
-    <div class="links" style="margin: 10px;">
-        <a href="posts.html">Go to Home</a> | <a href="#" id="device_info">Device Info</a>
+<div id="Wall">
+    <nav class="navbar navbar-inverse navbar-fixed-top navbar-sp" id="navbar">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-xs-3" id="btnMyNavMenu">
+                </div>
+                <div class="col-md-6 col-xs-6"><img src="img/new/header-icon-samepinch.png" class="img-responsive" width="47" height="28" alt=""/></div>
+                <div class="col-md-3 col-xs-3 nopadding-left" id="rightMenu">
+                    <a href="#" class="pull-right" id="search-toggle-btn"><img src="img/new/search.png" width="26" height="26" alt=""/></a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="search-bar">
+                <div class="container">
+                    <div class="search-ph">
+                        <img src="img/new/icon-search-dark.png" width="20" height="20" alt=""/> search...
+                    </div>
+                    <div class="search-textfield">
+                        <img src="img/new/icon-search-dark.png" width="20" height="20" alt=""/> <input type="text" placeholder="search..." autofocus class="search-tf-style"> <span class="glyphicon glyphicon-remove-circle search-clear"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div id="deviceready" class="blink">
-        <p class="event listening">Connecting to Device</p>
-        <p class="event received">Device is Ready</p>
 
+    <div class="container-fluid">
+        <div class="row">
+            <div class="favorite-bar"> <a href="#"><span class="glyphicon glyphicon-star"></span></a> </div>
+        </div>
     </div>
+    <!-- LOADING Indicator ------ -->
+    <div class="container loading_indicator">
+        <div class="row">
+            <div class="row">
+                <div class="sp-spinner"><i class="fa fa-spinner fa-spin"></i></div>
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="container load-up-posts">-->
+    <!--<div class="row">-->
+    <!--<div class="row">-->
+    <!--<div class="sp-spinner"><i class="fa fa-spinner fa-spin"></i></div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <div class="container mtop20">
+        <div class="row">
+            <div class="col-md-12"  id="posts-list">
+                <!-- each post goes here ------ -->
+
+            </div>
+        </div>
+    </div>
+
+    <!--<div class="container load-below-posts">-->
+        <!--<div class="row">-->
+            <!--<div class="row">-->
+                <!--<div class="sp-spinner"><i class="fa fa-spinner fa-spin"></i></div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+    <!-- /.container -->
 </div>
+
+<script id="posts-template" type="text/x-handlebars-template">
+    {{#posts}}
+    <div class="wall-post-box-wrap single-post" id="post-{{ uid }}" data-uid="{{ uid }}">
+        <div class="wall-post-box">
+            <!-- user picture section -->
+            {{#if anonymous}}
+            <div class="profile-pic-wrap profilepic-placeholder">
+                <img width="30" height="23" alt="" src="images/ananymous-placeholder.png">
+            </div>
+            {{else}}
+            {{#if owner.photo }}
+            <div class="profile-pic-wrap profilepic-img">
+                <img alt="" src="{{ owner.photo }}">
+            </div>
+            {{else}}
+            <div class="profile-pic-wrap profilepic-placeholder">{{firstChar owner.fname}}{{firstChar owner.lname}}</div>
+            <div class="profile-name pull-left mleft50 mtop5">
+                {{#if anonymous}}
+                anonymous
+                {{ else }}
+                {{ owner.fname }} {{owner.lname}}
+                {{/if}}
+            </div>
+            {{/if}}
+            {{/if}}
+            <!--END -- user picture section -->
+            <div class="pull-right mtop5 icon-counts">
+                <img src="img/new/icon-view-count.png" width="26" height="15" alt=""/>
+                <span class="mright5">{{ views }}</span>
+                <img src="img/new/icon-upvote-gray.png" width="21" height="21" alt=""/>
+                <span class="mright5">{{ upvote_count }}</span>
+                <img src="img/new/time.png" width="20" height="20" alt=""/>
+                <span class="mright5 time-style">TD</span> </div>
+            <div class="clearfix"></div>
+            <div class="post-content mleft50">
+                <p>
+                    {{ content }}
+                </p>
+                {{#if image }}
+                <img src="{{ image }}"/>
+                {{/if }}
+            </div>
+            <hr>
+            <ul class="tags">
+                {{#each tags}}
+                <li>{{ this }}</li>
+                {{/each}}
+            </ul>
+            <div class="clearfix"></div>
+            <ul class="comments">
+                {{#each commenters}}
+                <li><img src="{{ this }}" /></li>
+                {{/each}}
+                <li>
+                    <span><img src="img/new/comment_Count.png" width="22" height="26" alt=""/> <span class="count">{{ comment_count }}</span> </span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    {{/posts}}
+
+</script>
+
 
 
 <script type="text/javascript" src="cordova.js"></script>
 <script type="text/javascript" src="js/index.js"></script>
 <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="js/jquery.serialize-hash.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jasny-bootstrap.js"></script>
 <script type="text/javascript" src="js/bootbox.min.js"></script>
 <script type="text/javascript" src="js/handlebars-v3.0.3.js"></script>
 <script type="text/javascript" src="js/handlebars-helpers.js"></script>
 <script type="text/javascript" src="js/fastclick.js"></script>
-<script type="text/javascript" src="js/api_calls.js"></script>
+<script type="text/javascript" src="js/api_calls.js"></script><!--must before application.js  -->
+<script type="text/javascript" src="js/application.js"></script>
 <script type="text/javascript" src="js/authentication.js"></script>
-<script type="text/javascript">
-    app.initialize();
-     //sessionStorage.clear()
-     //localStorage.clear()
+<script type="text/javascript" src="js/posts.js"></script>
 
-    document.addEventListener("deviceready", onDeviceReady, false);
-    // sessionStorage.clear();
-    //localStorage.clear();
-    // Cordova is ready
-    function onDeviceReady() {
-        // save device information in localStorage
-        //localStorage.removeItem('device_info')
-        //var device_info = {model: device.model, platform: device.platform,version: device.version,uuid: device.uuid}
-        //localStorage.setItem('device_info',device_info)
-       // getDeviceInfo()
-        //window.location.href = 'posts.html'
-    }
-    getAccessToken()
-    $('#device_info').on('click',function(){
-        getDeviceInfo()
-    })
-
+<script>
+   getAccessToken()
 </script>
 </body>
 </html>

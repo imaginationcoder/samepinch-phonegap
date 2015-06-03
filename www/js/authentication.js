@@ -11,7 +11,7 @@ function registerUser(){
             'access_token':  localStorage['access_token'],
             'body': body_params
         },
-        beforeSend: function () {  $('.loading_indicator').css('display', 'inline-block');  },
+        beforeSend: function () {  $('.loading_indicator').css('display', 'block');  },
         success: function (data) {
             body = data.body
             localStorage.setItem('current_user',body)
@@ -19,7 +19,7 @@ function registerUser(){
             localStorage.setItem('access_token',body.access_token)
             // successDialog('Success',JSON.stringify(data))
             $('.loading_indicator').css('display', 'none');
-            window.location.href = 'posts.html'
+            window.location.href = 'index.html'
         },
         error: function(xhr,textStatus,errorThrown ) {
             var error_obj = $.parseJSON(xhr.responseText)
@@ -41,7 +41,7 @@ function signInUser(){
             'access_token':  localStorage['access_token'],
             'body':  body_params
         },
-        beforeSend: function () {  $('.loading_indicator').css('display', 'inline-block');  },
+        beforeSend: function () {  $('.loading_indicator').css('display', 'block');  },
         success: function (data) {
             // replace access token with verified
             body = data.body
@@ -49,7 +49,7 @@ function signInUser(){
             // replace access token with verified
             localStorage.setItem('access_token',body.access_token)
             $('.loading_indicator').css('display', 'none');
-            window.location.href = 'posts.html'
+            window.location.href = 'index.html'
         },
         error: function(xhr,textStatus,errorThrown ) {
             var error_obj = $.parseJSON(xhr.responseText)
@@ -74,17 +74,18 @@ function signOutUser(){
                 "platform": device.platform
             }
         },
-        beforeSend: function () {  $('.loading_indicator').css('display', 'inline-block');  },
+        beforeSend: function () {  $('.loading_indicator').css('display', 'block');  },
         success: function (data) {
             // remove current_user and access_token
             localStorage.removeItem('current_user')
             localStorage.removeItem('access_token')
-            getAccessToken()// then get new access_token
-            successDialog('Success',data.message)
+           // getAccessToken()// then get new access_token
+           // successDialog('Success',data.message)
             $('.loading_indicator').css('display', 'none');
             // window.location.href = 'signin.html'
-            $('.login-navbar #sign-out').hide()
-            $('.login-navbar #sign-in').show()
+            //$('.login-navbar #sign-out').hide()
+            //$('.login-navbar #sign-in').show()
+            window.location.href = 'index.html'
         },
         error: function(xhr,textStatus,errorThrown ) {
             var error_obj = $.parseJSON(xhr.responseText)
@@ -98,13 +99,13 @@ function signOutUser(){
 $(document).on('ready',function(){
 
     // sign-in/sign-out navbar ---------------------------
-    $('.login-navbar #sign-out').hide()
-    $('.login-navbar #sign-in').hide()
-    if(localStorage.getItem('current_user')){
-        $('.login-navbar #sign-out').show()
-    }else{
-        $('.login-navbar #sign-in').show()
-    }
+    //$('.login-navbar #sign-out').hide()
+    //$('.login-navbar #sign-in').hide()
+    //if(localStorage.getItem('current_user')){
+    //    $('.login-navbar #sign-out').show()
+    //}else{
+    //    $('.login-navbar #sign-in').show()
+    //}
 
     // signUp ----------------------------------------------
     $('#signup-form #btn-submit-signup').on('click',function(e){
@@ -119,6 +120,11 @@ $(document).on('ready',function(){
 
     // signOut ----------------------------------------------
     $('.login-navbar #sign-out').on('click',function(e){
+        e.preventDefault()
+        signOutUser()
+    })
+
+    $('#sign-out').on('click',function(e){
         e.preventDefault()
         signOutUser()
     })

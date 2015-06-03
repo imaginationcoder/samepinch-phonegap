@@ -77,7 +77,7 @@ function successDialog(title,msg){
 
 // Get access token
 function getAccessToken() {
-    if(typeof(localStorage['access_token']) == "undefined" || localStorage['access_token'] == null || localStorage['access_token'] == '') {
+    if(typeof(localStorage.getItem('access_token')) == "undefined" || localStorage.getItem('access_token') == null || localStorage.getItem('access_token') == '') {
         $.ajax({
             url: window.api_url + 'clients/token',
             type: 'post',
@@ -92,6 +92,7 @@ function getAccessToken() {
                 localStorage.setItem('access_token', data.access_token)
                 console.log('got the token..')
                 // successDialog('Success',JSON.stringify(data))
+                getPosts() // invoke posts
             },
             error: function (xhr, textStatus, errorThrown) {
                 var error_obj = $.parseJSON(xhr.responseText)
@@ -99,12 +100,10 @@ function getAccessToken() {
                 errorDialog(error_obj.error, error_obj.error_description)
             }
         })
+    }else{
+        getPosts()
     }
 }
-$(document).on('ready',function(){
-    // getAccessToken()
-    // resgistration()
-})
 
 
 // Get device Info
