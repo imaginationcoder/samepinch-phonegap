@@ -14,7 +14,7 @@ function registerUser(){
         beforeSend: function () {  $('.loading_indicator').css('display', 'block');  },
         success: function (data) {
             body = data.body
-            localStorage.setItem('current_user',body)
+            localStorage.setItem('current_user',JSON.stringify(body))
             // replace access token with verified
             localStorage.setItem('access_token',body.access_token)
             // successDialog('Success',JSON.stringify(data))
@@ -45,7 +45,7 @@ function signInUser(){
         success: function (data) {
             // replace access token with verified
             body = data.body
-            localStorage.setItem('current_user',body)
+            localStorage.setItem('current_user',JSON.stringify(body))
             // replace access token with verified
             localStorage.setItem('access_token',body.access_token)
             $('.loading_indicator').css('display', 'none');

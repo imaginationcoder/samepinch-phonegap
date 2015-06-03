@@ -49,6 +49,9 @@ body {
 .mtop10 {
 	margin-top:10px;
 }
+.mtop15 {
+	margin-top:15px;
+}
 .mtop20 {
 	margin-top:20px;
 }
@@ -61,6 +64,9 @@ body {
 }
 .mbottom10 {
 	margin-bottom:10px;
+}
+.mbottom15 {
+	margin-bottom:15px;
 }
 .mbottom20 {
 	margin-bottom:20px;
@@ -99,6 +105,10 @@ body {
 }
 .mright30{
 	margin-right:30px;
+}
+
+.txt-center {
+	text-align:center;
 }
 
 
@@ -300,6 +310,79 @@ body {
 	 font-size:18px;
 	 margin-top:10px;
  }
+ 
+ .loader1 {
+	 width:60px;
+	 height:60px;
+	 font-size:36px;
+	 margin:0 auto;
+	 font-family:arial, sans-serif;
+ }
+ 
+ #Login .login-textfield,  #Signup .login-textfield  {
+	 border:none;
+	 border-bottom:1px solid #e7e7e7;
+	 background-color:transparent;
+	 height:30px;
+	 width:100%;
+	 outline:none;
+ }
+ .btn-sp {
+	 background-color:#c52128;
+	 border-radius:0px;
+	 border:none;
+ }
+ 
+ 
+ #Login .social-btn-wrap {
+	 width:288px;
+	 height:auto;
+	 margin:15px auto;
+ }
+ #Login a {
+	 color:#555555;
+ }
+ 
+  #Login .social-btn-wrap  a{ 
+  text-decoration:none;
+  margin-right:1px;
+  }
+  
+  body.login-body {
+	  padding-top:20px;
+  }
+  
+  a.color-blue {
+	 color:#2361f9 !important;
+ }
+  
+  #Signup .icon-back  {
+	  margin-top:6px;
+  }
+  
+  #Signup .upload-profile {
+	  width:52px;
+	  height:52px;
+	  margin:0 auto;
+  }
+  
+  #Signup .upload-profile img{
+	  width:51px;
+	  height:51px;
+	  border-radius:100%;
+	  
+  }
+  
+  .txt-italic {
+	  font-style:italic;
+  }
+  .container {
+	  padding-left:10px;
+	  padding-right:10px;
+  }
+	  
+  
+ 
 	
 	 
 	 	 

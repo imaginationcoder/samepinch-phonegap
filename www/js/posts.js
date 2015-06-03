@@ -1,4 +1,11 @@
 function getPosts(){
+    if(localStorage.getItem('default_posts')){
+        posts = JSON.parse(localStorage.getItem('default_posts'))
+        var source = $("#posts-template").html();
+        var template = Handlebars.compile(source);
+        $('#posts-list').prepend(template(posts));
+    }
+
     $.ajax({
         url: window.api_url+'posts',
         type: 'post',
@@ -18,7 +25,9 @@ function getPosts(){
         success: function (data) {
             var source = $("#posts-template").html();
             var template = Handlebars.compile(source);
-            $('#posts-list').prepend(template(data.body));
+            body = data.body
+            localStorage.setItem('default_posts',JSON.stringify(body))
+            $('#posts-list').prepend(template(body));
             singlePostClick() // enable js for single post click
             $('.loading_indicator').css('display', 'none');
         },
@@ -35,7 +44,7 @@ function getPosts(){
 function singlePostClick(){
     $('.single-post').on('click', function (e) {
         e.preventDefault()
-        alert($(this).data('uid'))
+      //  alert($(this).data('uid'))
         sessionStorage.setItem('post-uid', $(this).data('uid'))
         window.location.href = 'post-show.html'
     })

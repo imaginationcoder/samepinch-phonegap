@@ -96,7 +96,7 @@
             <!-- user picture section -->
             {{#if anonymous}}
             <div class="profile-pic-wrap profilepic-placeholder">
-                <img width="30" height="23" alt="" src="images/ananymous-placeholder.png">
+                <img width="30" height="23" alt="" src="img/new/ananymous-placeholder.png">
             </div>
             {{else}}
             {{#if owner.photo }}
@@ -105,6 +105,8 @@
             </div>
             {{else}}
             <div class="profile-pic-wrap profilepic-placeholder">{{firstChar owner.fname}}{{firstChar owner.lname}}</div>
+            {{/if}}
+            {{/if}}
             <div class="profile-name pull-left mleft50 mtop5">
                 {{#if anonymous}}
                 anonymous
@@ -112,8 +114,6 @@
                 {{ owner.fname }} {{owner.lname}}
                 {{/if}}
             </div>
-            {{/if}}
-            {{/if}}
             <!--END -- user picture section -->
             <div class="pull-right mtop5 icon-counts">
                 <img src="img/new/icon-view-count.png" width="26" height="15" alt=""/>
@@ -170,6 +170,8 @@
 <script type="text/javascript" src="js/posts.js"></script>
 
 <script>
+    //localStorage.clear()
+    //sessionStorage.clear()
    getAccessToken()
 </script>
 </body>
