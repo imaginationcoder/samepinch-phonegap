@@ -37,9 +37,10 @@
     <img src="img/loading.gif">
 </div>
 <div class="app">
-    <div class="links">
-        <a href="posts.html">Go to Home</a>
+    <div class="links" style="margin: 10px;">
+        <a href="posts.html">Go to Home</a> | <a href="#" id="device_info">Device Info</a>
     </div>
+
     <div id="deviceready" class="blink">
         <p class="event listening">Connecting to Device</p>
         <p class="event received">Device is Ready</p>
@@ -61,8 +62,8 @@
 <script type="text/javascript" src="js/authentication.js"></script>
 <script type="text/javascript">
     app.initialize();
-    //sessionStorage.clear()
-    //localStorage.clear()
+     //sessionStorage.clear()
+     //localStorage.clear()
 
     document.addEventListener("deviceready", onDeviceReady, false);
     // sessionStorage.clear();
@@ -77,6 +78,9 @@
         //window.location.href = 'posts.html'
     }
     getAccessToken()
+    $('#device_info').on('click',function(){
+        getDeviceInfo()
+    })
 
 </script>
 </body>
