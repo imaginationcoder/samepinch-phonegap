@@ -23,9 +23,9 @@
             <div class="row">
                 <div class="col-md-3 col-xs-3" id="btnMyNavMenu">
                 </div>
-                <div class="col-md-6 col-xs-6"><img src="img/new/header-icon-samepinch.png" class="img-responsive" width="47" height="28" alt=""/></div>
+                <div class="col-md-6 col-xs-6"><img src="img/header-icon-samepinch.png" class="img-responsive" width="47" height="28" alt=""/></div>
                 <div class="col-md-3 col-xs-3 nopadding-left" id="rightMenu">
-                    <a href="#" class="pull-right" id="search-toggle-btn"><img src="img/new/search.png" width="26" height="26" alt=""/></a>
+                    <a href="#" class="pull-right" id="search-toggle-btn"><img src="img/search.png" width="26" height="26" alt=""/></a>
                 </div>
             </div>
         </div>
@@ -37,10 +37,10 @@
             <div class="search-bar">
                 <div class="container">
                     <div class="search-ph">
-                        <img src="img/new/icon-search-dark.png" width="20" height="20" alt=""/> search...
+                        <img src="img/icon-search-dark.png" width="20" height="20" alt=""/> search...
                     </div>
                     <div class="search-textfield">
-                        <img src="img/new/icon-search-dark.png" width="20" height="20" alt=""/> <input type="text" placeholder="search..." autofocus class="search-tf-style"> <span class="glyphicon glyphicon-remove-circle search-clear"></span>
+                        <img src="img/icon-search-dark.png" width="20" height="20" alt=""/> <input type="text" placeholder="search..." autofocus class="search-tf-style"> <span class="glyphicon glyphicon-remove-circle search-clear"></span>
                     </div>
                 </div>
             </div>
@@ -53,22 +53,15 @@
             <div class="favorite-bar"> <a href="#"><span class="glyphicon glyphicon-star"></span></a> </div>
         </div>
     </div>
-    <!-- LOADING Indicator ------ -->
-    <div class="container loading_indicator">
+
+
+    <div class="container load-up-posts" style="display: none;">
         <div class="row">
             <div class="row">
                 <div class="sp-spinner"><i class="fa fa-spinner fa-spin"></i></div>
             </div>
         </div>
     </div>
-
-    <!--<div class="container load-up-posts">-->
-    <!--<div class="row">-->
-    <!--<div class="row">-->
-    <!--<div class="sp-spinner"><i class="fa fa-spinner fa-spin"></i></div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
 
     <div class="container mtop20">
         <div class="row">
@@ -79,13 +72,13 @@
         </div>
     </div>
 
-    <!--<div class="container load-below-posts">-->
-        <!--<div class="row">-->
-            <!--<div class="row">-->
-                <!--<div class="sp-spinner"><i class="fa fa-spinner fa-spin"></i></div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
+    <div class="container load-below-posts" style="display: none;">
+        <div class="row">
+            <div class="row">
+                <div class="sp-spinner"><i class="fa fa-spinner fa-spin"></i></div>
+            </div>
+        </div>
+    </div>
     <!-- /.container -->
 </div>
 
@@ -96,7 +89,7 @@
             <!-- user picture section -->
             {{#if anonymous}}
             <div class="profile-pic-wrap profilepic-placeholder">
-                <img width="30" height="23" alt="" src="img/new/ananymous-placeholder.png">
+                <img width="30" height="23" alt="" src="img/ananymous-placeholder.png">
             </div>
             {{else}}
             {{#if owner.photo }}
@@ -116,11 +109,11 @@
             </div>
             <!--END -- user picture section -->
             <div class="pull-right mtop5 icon-counts">
-                <img src="img/new/icon-view-count.png" width="26" height="15" alt=""/>
+                <img src="img/icon-view-count.png" width="26" height="15" alt=""/>
                 <span class="mright5">{{ views }}</span>
-                <img src="img/new/icon-upvote-gray.png" width="21" height="21" alt=""/>
+                <img src="img/icon-upvote-gray.png" width="21" height="21" alt=""/>
                 <span class="mright5">{{ upvote_count }}</span>
-                <img src="img/new/time.png" width="20" height="20" alt=""/>
+                <img src="img/time.png" width="20" height="20" alt=""/>
                 <span class="mright5 time-style">TD</span> </div>
             <div class="clearfix"></div>
             <div class="post-content mleft50">
@@ -143,7 +136,7 @@
                 <li><img src="{{ this }}" /></li>
                 {{/each}}
                 <li>
-                    <span><img src="img/new/comment_Count.png" width="22" height="26" alt=""/> <span class="count">{{ comment_count }}</span> </span>
+                    <span><img src="img/comment_Count.png" width="22" height="26" alt=""/> <span class="count">{{ comment_count }}</span> </span>
                 </li>
             </ul>
         </div>
@@ -170,9 +163,9 @@
 <script type="text/javascript" src="js/posts.js"></script>
 
 <script>
-    //localStorage.clear()
+   // localStorage.clear()
     //sessionStorage.clear()
-   getAccessToken()
+    getAccessToken()
 </script>
 </body>
 </html>

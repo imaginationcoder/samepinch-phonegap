@@ -4,7 +4,7 @@
  */
 // Constants ------------------------------------------------
 
-var env = 'prod';
+var env = 'dev';
 //var env = 'local';
 //var env = 'prod';
 if(env == 'prod'){
@@ -145,5 +145,15 @@ window.addEventListener('load', function() {
     // localStorage.clear();
   //  getAccessToken()
 })
+
+function showAjaxSpinner(){
+    spinner = new Spinner({color:'#000000', lines: 12,top: '40%'}).spin(document.body);
+    $("body").css({"opacity": "0.5"});
+}
+
+function hideAjaxSpinner(){
+    spinner.stop();
+    $("body").removeAttr('style');
+}
 
 

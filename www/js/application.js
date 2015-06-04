@@ -14,17 +14,24 @@ $(document).ready(function() {
         var myNavMenuList="";
         myNavMenuList += "<nav id=\"myNavmenu\" class=\"navmenu navmenu-default navmenu-fixed-left offcanvas\" role=\"navigation\">";
         myNavMenuList += "        <a class=\"navmenu-brand\" href=\"#\">"
-        myNavMenuList += "           <img src="+current_user.photo+">"
+        if(current_user.photo){
+            myNavMenuList += "           <img src="+current_user.photo+">"
+
+        }else{
+            myNavMenuList += "<div class='profilepic-placeholder'>";
+            myNavMenuList += current_user.fname.substr(0, 1).toUpperCase() +""+current_user.lname.substr(0, 1).toUpperCase()
+            myNavMenuList += "</div>"
+        }
         myNavMenuList += "               <br>"+current_user.fname+" "
         myNavMenuList += "                 "+current_user.lname
         myNavMenuList += "                <\/a>";
         myNavMenuList += "        <ul class=\"nav navmenu-nav\">";
-        myNavMenuList += "            <li><a href=\"index.html\"> <img src=\"img\/new\/menu-home.png\" width=\"26\" height=\"26\" alt=\"\"\/>  Wall<\/a><\/li>";
-        myNavMenuList += "            <li><a href=\"#\"> <img src=\"img\/new\/icon-createpost.png\" width=\"26\" height=\"26\" alt=\"\"\/>  Create Post<\/a><\/li>";
-        myNavMenuList += "            <li><a href=\"#\"> <img src=\"img\/new\/menu-settings.png\" width=\"26\" height=\"26\" alt=\"\"\/>  Settings<\/a><\/li>";
-        myNavMenuList += "            <li><a href=\"#\"> <img src=\"img\/new\/icon-menu-mtags.png\" width=\"26\" height=\"26\" alt=\"\"\/>  Manage Tags<\/a><\/li>";
-        myNavMenuList += "            <li><a href=\"#\"> <img src=\"img\/new\/icon-menu-about.png\" width=\"26\" height=\"26\" alt=\"\"\/>  About<\/a><\/li>";
-        myNavMenuList += "            <li id=\"sign-out\"><a href=\"#\"> <img src=\"img\/new\/menu-logout.png\" width=\"26\" height=\"26\" alt=\"\"\/> Logout<\/a><\/li>";
+        myNavMenuList += "            <li><a href=\"index.html\"> <img src=\"img/menu-home.png\" width=\"26\" height=\"26\" alt=\"\"\/>  Wall<\/a><\/li>";
+        myNavMenuList += "            <li><a href=\"#\"> <img src=\"img/icon-createpost.png\" width=\"26\" height=\"26\" alt=\"\"\/>  Create Post<\/a><\/li>";
+        myNavMenuList += "            <li><a href=\"#\"> <img src=\"img/menu-settings.png\" width=\"26\" height=\"26\" alt=\"\"\/>  Settings<\/a><\/li>";
+        myNavMenuList += "            <li><a href=\"#\"> <img src=\"img/icon-menu-mtags.png\" width=\"26\" height=\"26\" alt=\"\"\/>  Manage Tags<\/a><\/li>";
+        myNavMenuList += "            <li><a href=\"#\"> <img src=\"img/icon-menu-about.png\" width=\"26\" height=\"26\" alt=\"\"\/>  About<\/a><\/li>";
+        myNavMenuList += "            <li id=\"sign-out\"><a href=\"#\"> <img src=\"img/menu-logout.png\" width=\"26\" height=\"26\" alt=\"\"\/> Logout<\/a><\/li>";
         myNavMenuList += "        <\/ul>";
         myNavMenuList += "    <\/nav>";
 
@@ -33,7 +40,7 @@ $(document).ready(function() {
         $('#myNavmenu').offcanvas({autohide:true, toggle:false})
     }else{
         var btnSignIn="";
-        btnSignIn += "<a class=\"pull-right\" href=\"signin.html\"><img width=\"26\" height=\"26\" alt=\"\" src=\"img\/new\/icon-createpost.png\"><\/a>";
+        btnSignIn += "<a class=\"pull-right\" href=\"signin.html\"><img width=\"26\" height=\"26\" alt=\"\" src=\"img/icon-createpost.png\"><\/a>";
         $('#rightMenu').prepend(btnSignIn)
     }
 

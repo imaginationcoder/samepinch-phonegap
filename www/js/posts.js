@@ -20,7 +20,10 @@ function getPosts(){
             }
         },
         beforeSend: function () {
-            $('.loading_indicator').css('display', 'block');
+          // show up spinner only if user visited first time
+          if(!localStorage.getItem('default_posts')){
+              $('.load-up-posts').show()
+          }
         },
         success: function (data) {
             var source = $("#posts-template").html();
@@ -29,13 +32,13 @@ function getPosts(){
             localStorage.setItem('default_posts',JSON.stringify(body))
             $('#posts-list').prepend(template(body));
             singlePostClick() // enable js for single post click
-            $('.loading_indicator').css('display', 'none');
+            $('.load-up-posts').hide()
         },
         error: function(xhr,textStatus,errorThrown ) {
             var error_obj = $.parseJSON(xhr.responseText)
             console.log(error_obj)
             errorDialog('Error',error_obj.message)
-            $('.loading_indicator').css('display', 'none');
+            $('.load-up-posts').hide()
         }
     })
 }

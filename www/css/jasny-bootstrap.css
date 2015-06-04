@@ -648,6 +648,9 @@
 	font-size:18px;
 	color:#ffffff;
 }
+#myNavmenu .navmenu-nav li a:hover, #myNavmenu .navmenu-nav li a:active, #myNavmenu .navmenu-nav li a:focus  {
+	background-color:#000000;
+}
  #myNavmenu .navmenu-nav li a img {
 	 margin-right:10px;
 	 margin-top:-4px;
@@ -665,4 +668,20 @@
  .mytoggle-menu:hover, .mytoggle-menu:active, .mytoggle-menu:focus {
 	 background-color:transparent !important;
  }
+#myNavmenu .navmenu-brand .profilepic-placeholder  {
+  background-color: #ffffff;
+  border-radius: 100%;
+  border: 1px solid #e8e8e8;
+  text-align: center;
+  font-weight: bold;
+  padding: 20px 0;
+  font-size: 20px;
+  letter-spacing: 0px;
+  text-transform:uppercase;
+  color:#bbbbbb;
+  width:60px;
+  height:60px;
+  margin:0 auto;
+
+}
 	

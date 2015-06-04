@@ -11,20 +11,20 @@ function registerUser(){
             'access_token':  localStorage['access_token'],
             'body': body_params
         },
-        beforeSend: function () {  $('.loading_indicator').css('display', 'block');  },
+        beforeSend: function () {  showAjaxSpinner()  },
         success: function (data) {
             body = data.body
             localStorage.setItem('current_user',JSON.stringify(body))
             // replace access token with verified
             localStorage.setItem('access_token',body.access_token)
             // successDialog('Success',JSON.stringify(data))
-            $('.loading_indicator').css('display', 'none');
+            hideAjaxSpinner()
             window.location.href = 'index.html'
         },
         error: function(xhr,textStatus,errorThrown ) {
             var error_obj = $.parseJSON(xhr.responseText)
             console.log(error_obj)
-            $('.loading_indicator').css('display', 'none');
+            hideAjaxSpinner()
             errorDialog('Error',error_obj.message)
         }
     })
@@ -41,20 +41,20 @@ function signInUser(){
             'access_token':  localStorage['access_token'],
             'body':  body_params
         },
-        beforeSend: function () {  $('.loading_indicator').css('display', 'block');  },
+        beforeSend: function () {  showAjaxSpinner()  },
         success: function (data) {
             // replace access token with verified
             body = data.body
             localStorage.setItem('current_user',JSON.stringify(body))
             // replace access token with verified
             localStorage.setItem('access_token',body.access_token)
-            $('.loading_indicator').css('display', 'none');
+            hideAjaxSpinner()
             window.location.href = 'index.html'
         },
         error: function(xhr,textStatus,errorThrown ) {
             var error_obj = $.parseJSON(xhr.responseText)
             console.log(error_obj)
-            $('.loading_indicator').css('display', 'none');
+            hideAjaxSpinner()
             errorDialog('Error',error_obj.message)
         }
     })
@@ -97,24 +97,26 @@ function signOutUser(){
 }
 
 $(document).on('ready',function(){
-
-    // sign-in/sign-out navbar ---------------------------
-    //$('.login-navbar #sign-out').hide()
-    //$('.login-navbar #sign-in').hide()
-    //if(localStorage.getItem('current_user')){
-    //    $('.login-navbar #sign-out').show()
-    //}else{
-    //    $('.login-navbar #sign-in').show()
-    //}
-
     // signUp ----------------------------------------------
     $('#signup-form #btn-submit-signup').on('click',function(e){
         e.preventDefault()
-        registerUser()
+       form=  $('#signup-form')
+        fname = form.find('input[name="fname"]').val()
+        lname = form.find('input[name="lname"]').val()
+        email = form.find('input[name="email"]').val()
+        psd = form.find('input[name="password"]').val()
+        psd_con = form.find('input[name="password_confirmation"]').val()
+        terms = form.find('input[name="terms"]')
+        if(fname =='' || lname == '' || email == '' || psd == '' || psd_con == '' || (!terms.is(':checked'))){
+            errorDialog('Error','All fields are required')
+        }else{
+            registerUser()
+        }
     })
 
     // signIn -----------------------------------------------
-    $('#signin-form #btn-submit-signin').on('click',function(){
+    $('#signin-form #btn-submit-signin').on('click',function(e){
+        e.preventDefault()
         signInUser()
     })
 
@@ -128,6 +130,5 @@ $(document).on('ready',function(){
         e.preventDefault()
         signOutUser()
     })
-
 })
 
