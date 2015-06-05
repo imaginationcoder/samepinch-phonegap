@@ -37,7 +37,8 @@ $(document).ready(function() {
 
         $('#btnMyNavMenu').html(btnMyNavMenu)
         $('#navbar').append(myNavMenuList)
-        $('#myNavmenu').offcanvas({autohide:true, toggle:false})
+        //TODO enable if same as in IOS app
+      //  $('#myNavmenu').offcanvas({autohide:true, toggle:faldse})
     }else{
         var btnSignIn="";
         btnSignIn += "<a class=\"pull-right\" href=\"signin.html\"><img width=\"26\" height=\"26\" alt=\"\" src=\"img/icon-createpost.png\"><\/a>";

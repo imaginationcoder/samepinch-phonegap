@@ -4,6 +4,7 @@ function getPosts(){
         var source = $("#posts-template").html();
         var template = Handlebars.compile(source);
         $('#posts-list').prepend(template(posts));
+        singlePostClick()
     }
 
     $.ajax({
@@ -62,13 +63,14 @@ function singlePostReady(){
             'access_token':  localStorage['access_token']
         },
         beforeSend: function () {
-            $('.loading_indicator').css('display', 'block');
+            showAjaxSpinner()
         },
         success: function (data) {
             var source = $("#single-post-template").html();
             var template = Handlebars.compile(source);
 
             $('#post').html(template(data.body));
+            $('#comment-form').find('input[name="post_id"]').val(sessionStorage['post-uid'])
 
             //TODO place images
             /*str = $('.post-content').text()
@@ -83,20 +85,20 @@ function singlePostReady(){
              });
              */
             commentReady() //invoke comment section for after
-            $('.loading_indicator').css('display', 'none');
+            hideAjaxSpinner()
         },
         error: function(xhr,textStatus,errorThrown ) {
             var error_obj = $.parseJSON(xhr.responseText)
             console.log(error_obj)
             errorDialog('Error',error_obj.message)
-            $('.loading_indicator').css('display', 'none');
+            hideAjaxSpinner()
         }
     })
 }
 
 function commentReady(){
     // toggle Comment As
-    $('.comment-as').on('click',function(e){
+    /*$('.comment-as').on('click',function(e){
         e.preventDefault()
         console.log(localStorage['current_user'])
         if(localStorage['current_user']){
@@ -114,7 +116,7 @@ function commentReady(){
         }
     })
 
-
+*/
     // send function
     $('#btn-send-comment').on('click',function(e) {
         e.preventDefault()
@@ -133,22 +135,22 @@ function commentReady(){
                         'body': body_params
                     },
                     beforeSend: function () {
-                        $('.loading_indicator').css('display', 'block');
+                       showAjaxSpinner();
                     },
                     success: function (data) {
                         var source = $("#single-comment-template").html();
                         var template = Handlebars.compile(source);
                         // $('#comments').append(template(data.body));
-                        $("#comments .comment:last").after(template(data.body)).hide().fadeIn();
+                        $("#comments ul:first").append(template(data.body)).hide().fadeIn();
                         //clear input
                         comment_text.val('')
-                        $('.loading_indicator').css('display', 'none');
+                        hideAjaxSpinner();
                     },
                     error: function (xhr, textStatus, errorThrown) {
                         var error_obj = $.parseJSON(xhr.responseText)
                         console.log(error_obj)
                         errorDialog('Error', error_obj.message)
-                        $('.loading_indicator').css('display', 'none');
+                       hideAjaxSpinner();
                     }
                 })
             }
