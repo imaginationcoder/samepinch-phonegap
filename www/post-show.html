@@ -151,8 +151,8 @@
                         {{/if}}
                     </div>
                     <div class="col-md-10 col-xs-6 col-sm-9 pull-left mleft">
-                        <div>{{ commenter.fname }} {{ commenter.lname }}</div>
-                        <div class="time">TD</div>
+                        <div>{{ text }}</div>
+                        <div class="time">{{ createdAt }}</div>
                     </div>
                     <div class="col-md-1 col-xs-3 col-sm-2 nopadding-left pull-right">
                         <span class="light-color"> <img src="img/icon-upvote-gray.png" width="18" height="18" alt=""/> {{ upvote_count }} </span>
@@ -187,7 +187,7 @@
                 {{/if}}
             </div>
             <div class="col-md-10 col-xs-6 col-sm-9 pull-left mleft">
-                <div>{{ commenter.fname }} {{ commenter.lname }}</div>
+                <div>{{ text }}</div>
                 <div class="time">{{ createdAt }}</div>
             </div>
             <div class="col-md-1 col-xs-3 col-sm-2 nopadding-left pull-right">
