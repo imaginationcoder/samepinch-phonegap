@@ -97,7 +97,7 @@
                 <img src="img/icon-view-count.png" width="26" height="15" alt="">
                 <span class="mright5">{{ views }}</span>
                 <img src="img/icon-upvote-gray.png" width="21" height="21" alt="">
-                <span class="mright5">{{ upvote_count }}</span>
+                <span id="post-upvote-count" class="mright5">{{ upvote_count }}</span>
                 <img src="img/time.png" width="20" height="20" alt=""> <span class="mright5 time-style">TD</span> </div>
         </div>
     </div>
@@ -118,8 +118,16 @@
                 <!-- flag/like sesction -->
                 <div class="pull-right col-md-2 col-xs-4">
                     <div class="pull-right">
-                        <a href="#"><img src="img/viewpost-flag.png" width="32" height="32" alt="" onmouseover="this.src='img/viewpost-flag-active.png' " onmouseout="this.src='img/viewpost-flag.png'" /></a>
-                        <a href="#"> <img src="img/viewpost-like.png" width="32" height="32" alt="" onmouseover="this.src='img/viewpost-like-active.png' " onmouseout="this.src='img/viewpost-like.png'"/> </a>
+                        <a href="#">
+                            <img src="img/viewpost-flag.png" width="32" height="32" alt="" onmouseover="this.src='img/viewpost-flag-active.png' " onmouseout="this.src='img/viewpost-flag.png'" />
+                        </a>
+
+                        {{#if upvoted }}
+                        <div class="viewPostLikeActive up-down-vote-post" data-id="{{ uid }}"></div>
+                        {{ else }}
+                        <div class="viewPostLike up-down-vote-post"  data-id="{{ uid }}"></div>
+                        {{/if}}
+
                     </div>
                 </div>
             </div>
@@ -131,12 +139,12 @@
             {{#comments }}
             <li id="comment-{{ uid }}" data-id="{{ uid }}">
                 <div class="row">
-                    <div class="col-md-1 col-xs-1 col-sm-1">
+                    <div class="col-md-1 col-xs-1 col-sm-1 profilepic-img">
                         {{#if anonymous}}
-                        <div class="profilepic-img pull-left"><img src="img/ananymous-placeholder.png"/></div>
+                        <div class="profilepic-placeholder"> <img src="img/ananymous-placeholder.png" alt=""/></div>
                         {{else}}
                         {{#if commenter.photo }}
-                        <img src="{{ commenter.photo }}" class="comment-profile" alt=""/>
+                        <img src="{{ commenter.photo }}" alt=""/>
                         {{ else }}
                         <div class="profilepic-placeholder">{{firstChar commenter.fname}}{{firstChar commenter.lname}}</div>
                         {{/if}}
@@ -216,65 +224,8 @@
 
 <script type="text/javascript">
     singlePostReady()
-    // set comment as user
-    if(localStorage['current_user']){
-        current_user = JSON.parse(localStorage.getItem('current_user'))
-        if(current_user.photo){
-            str = "<a href='#'>Comment as "+ current_user.fname +"<img src='"+ current_user.photo +"' alt=''> </a>"
-            $('.comment-as-user').html(str)
-        } else{
-            str ="<div class='profilepic-placeholder'>"
-            str += current_user.fname.substr(0, 1).toUpperCase() +""+current_user.lname.substr(0, 1).toUpperCase()
-            str ="</div>"
-            $('.comment-as-user').html(str)
-        }
-        $('.comment-as-ananymous').html('')
-
-    }
-
-    $('.comment-as-user').on('click',function(e){
-        current_user = JSON.parse(localStorage.getItem('current_user'))
-        if(current_user.photo){
-            var img = $('<img alt="">');
-            img.attr('src', current_user.photo);
-            $('#comment-as-picture').html(img)
-        }else{
-            name ="<div class='profilepic-placeholder'>"
-            name += current_user.fname.substr(0, 1).toUpperCase() +""+current_user.lname.substr(0, 1).toUpperCase()
-            name ="</div>"
-            $('#comment-as-picture').html(name)
-        }
-        str = "<a href='#'>Comment as anonymous <img alt='' src='img/ananymous-placeholder.png'> </a>"
-        $('.comment-as-ananymous').html(str)
-        $(this).html('')
-        $('#comment-form').find('input[name="anonymous"]').val(false);
-
-    })
-
-    $('.comment-as-ananymous').on('click',function(e){
-        current_user = JSON.parse(localStorage.getItem('current_user'))
-        var img = $('<img alt="" src="img/ananymous-placeholder.png">');
-        $('#comment-as-picture').html(img)
-        if(current_user.photo){
-            str = "<a href='#'>Comment as "+ current_user.fname +"<img src='"+ current_user.photo +"' alt=''> </a>"
-            $('.comment-as-user').html(str)
-        } else{
-            str ="<div class='profilepic-placeholder'>"
-            str += current_user.fname.substr(0, 1).toUpperCase() +""+current_user.lname.substr(0, 1).toUpperCase()
-            str ="</div>"
-            $('.comment-as-user').html(str)
-        }
-        $(this).html('')
-        $('#comment-form').find('input[name="anonymous"]').val(true);
-    })
 
 
-    // redirect to signin if current user present and clicks on comment as or navigation
-    $('#switch-comment-as').on('click',function(e){
-        if(!localStorage['current_user']){
-            window.location.href = 'signin.html'
-        }
-    })
 
 </script>
 

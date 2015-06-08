@@ -2,10 +2,10 @@
 /* CSS Document */
 
 body {
-	padding-top: 50px;
-	background-color:#f7f7f7;
-	font-family: 'Ubuntu', arial, sans-serif !important;
-	color:#444444;
+  padding-top: 50px;
+  background-color:#f7f7f7;
+  font-family: 'Ubuntu', arial, sans-serif !important;
+  color:#444444;
 }
 
 .navbar-sp {
@@ -38,10 +38,10 @@ body {
 	padding-right:0px;
 }
 .nopadding-left {
-	padding-left:0px;
+    padding-left:0px;
 }
 .nopadding-right {
-	padding-right:0px;
+    padding-right:0px;
 }
 .mtop5 {
 	margin-top:5px;
@@ -144,7 +144,7 @@ body {
 	overflow:hidden;
 	padding:4px;
 	margin-top:10px;
-
+	
 }
 .wall-post-box:hover, .wall-post-box:active, .wall-post-box:focus {
 	background-color:#f9f9f9;
@@ -154,12 +154,12 @@ body {
 	position:relative;
 
 	width:100%;
-//background-color:#ffffff;
+	//background-color:#ffffff;
 	height:auto;
 	overflow:hidden;
 	padding:4px;
-//margin-top:10px;
-
+	//margin-top:10px;
+	
 }
 
 #Wall .profile-pic-wrap {
@@ -172,320 +172,341 @@ body {
 }
 
 #Wall .profilepic-placeholder, #viewPost #toppanel .profilepic-placeholder, #Profile .profilepic-placeholder, #Wall .comments .profilepic-placeholder, #addPost .dropdown-toggle .profilepic-placeholder, #addPost .dropdown-menu .profilepic-placeholder, #viewPost .dropdown-menu .profilepic-placeholder,
-#viewPost .dropdown-toggle .profilepic-placeholder
-{
+#viewPost .dropdown-toggle .profilepic-placeholder, #viewPost #comments .profilepic-placeholder
+  {
 
-	background-color: #ffffff;
-	border-radius: 100%;
-	border: 1px solid #e8e8e8;
-	text-align: center;
-	font-weight: bold;
-	padding: 9px 0;
-	font-size: 16px;
-	letter-spacing: 0px;
-	text-transform:uppercase;
-	color:#bbbbbb;
-}
+   background-color: #ffffff;
+   border-radius: 100%;
+   border: 1px solid #e8e8e8;
+   text-align: center;
+   font-weight: bold;
+   padding: 9px 0;
+   font-size: 16px;
+   letter-spacing: 0px; 
+   text-transform:uppercase;
+   color:#bbbbbb;
+ }
+ 
+  #viewPost #comments .profilepic-placeholder {
+	  width:30px;
+	  height:30px;
+	  padding: 6px 0;
+	 display:inline-block;
+	 font-size:12px;
+  }
+    #viewPost #comments .profilepic-placeholder img {
+	width:24px !important;
+	height:24px !important;
+	margin-top:-4px;	
+	
+	}
+	#viewPost #comments .profilepic-placeholder img:hover, #viewPost #comments .profilepic-placeholder img:active  {
+		border:1px solid transparent !important;
+	}
+	
+ 
+ #addPost .dropdown-toggle .profilepic-placeholder, #viewPost .dropdown-toggle .profilepic-placeholder  {
+	 width:22px;
+	 height:22px;
+	 font-size:10px;
+	 padding: 4px 0;
+	 display:inline-block;
+ }
+  #addPost .dropdown-menu .profilepic-placeholder, #viewPost .dropdown-menu .profilepic-placeholder  {
+	 width:30px;
+	 height:30px;
+	 font-size:13px;
+	 display:inline-block;
+	 padding:5px 0;
+ }
+ #Wall .comments .profilepic-placeholder {
+	 width:24px;
+	 height:24px;
+	 font-size:12px;
+	 display:inline-block;
+     position: relative;
+	 top: 1px;
+     padding: 5px 0;
+     font-size: 10px;
+ }
+ 
+  #Wall .comments .profilepic-placeholder img {
+	  width:16px;
+	  height:16px;
+	  position:relative;
+	  top:0;
+  }
+ 
+ #Profile .profilepic-placeholder {
+	 width:95px;
+	 height:95px;
+	 margin:0 auto;
+	 margin-top:20px;
+	 padding: 25px 0;
+	 font-size:30px;
+	 
+ }
+ #viewPost #toppanel .profilepic-placeholder {
+	font-size:13px; 
+	 padding: 6px 0;
+	  }
+ 
+ 
+ #Wall .profilepic-placeholder img {
+	 margin-top:-4px;
+	 
+ }
+ #Wall .profilepic-img img,  #viewPost #toppanel .profilepic-img img,  #Profile .profilepic-img img, #viewPost .input-comment .dropdown-menu.profilepic-img img, #viewPost .input-comment .dropdown-toggle.profilepic-img img,
+ #viewPost #comments .profilepic-img img
+   {
+	 border-radius:100%;
+	 width:42px;
+	 height:42px;
+	 /*border: 1px solid #e8e8e8;*/
+	 border:1px solid transparent;
+ }
 
-#addPost .dropdown-toggle .profilepic-placeholder, #viewPost .dropdown-toggle .profilepic-placeholder  {
-	width:22px;
-	height:22px;
-	font-size:10px;
-	padding: 4px 0;
-	display:inline-block;
+ #Profile .profilepic-img img {
+	 width:95px;
+	 height:95px;
+	 border:none;
+	 margin-top:20px;
+	 
+ }
+ #addPost .dropdown-toggle.profilepic-img img {
+	 width:22px;
+	 height:22px;
+	 border-radius:100%;
 }
-#addPost .dropdown-menu .profilepic-placeholder, #viewPost .dropdown-menu .profilepic-placeholder  {
-	width:30px;
-	height:30px;
-	font-size:13px;
-	display:inline-block;
-	padding:5px 0;
+ 
+ #addPost .dropdown-menu.profilepic-img img,  #viewPost #comments .profilepic-img img {
+	 width:30px;
+	 height:30px;
+	 border-radius:100%;
 }
-#Wall .comments .profilepic-placeholder {
-	width:24px;
-	height:24px;
-	font-size:12px;
-	display:inline-block;
-	position: relative;
-	top: 1px;
-	padding: 5px 0;
-	font-size: 10px;
+ 
+ #viewPost .input-comment .dropdown-menu.profilepic-img img {
+     width:30px;
+	 height:30px;
 }
-
-#Wall .comments .profilepic-placeholder img {
-	width:16px;
-	height:16px;
-	position:relative;
-	top:0;
+ #viewPost .input-comment .dropdown-toggle.profilepic-img img {
+     width:22px;
+	 height:22px;
 }
-
-#Profile .profilepic-placeholder {
-	width:95px;
-	height:95px;
-	margin:0 auto;
-	margin-top:20px;
-	padding: 25px 0;
-	font-size:30px;
-
+ #viewPost .input-comment .dropdown-toggle.profilepic-img img:hover {
+     border:1px solid transparent !important;
 }
-#viewPost #toppanel .profilepic-placeholder {
-	font-size:13px;
-	padding: 6px 0;
-}
-
-
-#Wall .profilepic-placeholder img {
-	margin-top:-4px;
-
-}
-#Wall .profilepic-img img,  #viewPost #toppanel .profilepic-img img,  #Profile .profilepic-img img, #viewPost .input-comment .dropdown-menu.profilepic-img img, #viewPost .input-comment .dropdown-toggle.profilepic-img img  {
-	border-radius:100%;
-	width:42px;
-	height:42px;
-	/*border: 1px solid #e8e8e8;*/
-	border:1px solid transparent;
-}
-#Profile .profilepic-img img {
-	width:95px;
-	height:95px;
-	border:none;
-	margin-top:20px;
-
-}
-#addPost .dropdown-toggle.profilepic-img img {
-	width:22px;
-	height:22px;
-	border-radius:100%;
-}
-
-#addPost .dropdown-menu.profilepic-img img {
-	width:30px;
-	height:30px;
-	border-radius:100%;
-}
-
-#viewPost .input-comment .dropdown-menu.profilepic-img img {
-	width:30px;
-	height:30px;
-}
-#viewPost .input-comment .dropdown-toggle.profilepic-img img {
-	width:22px;
-	height:22px;
-}
-#viewPost .input-comment .dropdown-toggle.profilepic-img img:hover {
-	border:1px solid transparent !important;
-}
-
-#Wall .profilepic-img img:hover, .profilepic-img img:focus, .profilepic-img img:active {
-	border:1px solid #666666 !important;
-}
-#viewPost .profilepic-img img:hover, .profilepic-img img:focus, .profilepic-img img:active {
-	border:1px solid #666666 !important;
-}
-
-#viewPost #toppanel .profilepic-img img  {
-	width:30px;
-	height:30px;
-}
-.profile-name {
-	color:#444444;
-	font-size:15px;
-	font-weight:bold;
-}
-#viewPost .profile-name {
-	margin-left:5px;
-	margin-top:5px;
-}
-
-#Wall .post-content img {
-	width:40px;
-	height:40px;
-	border-radius:5px;
-}
-
-#Wall hr {
-	margin-top:5px;
-	margin-bottom:5px;
-}
-
-#Wall ul.tags {
-	list-style-type:none;
-	margin:0px;
-	text-align:center;
-	padding:0px;
-
-}
-
-#Wall ul.tags li {
-	background-color:#f8f8f8;
-	border:1px solid #e8e8e8;
-	border-radius:8px;
-	padding:4px 8px;
-	color:#888888;
-	font-size:10px;
-	display:inline-block;
-	text-align:center;
-	margin:0 auto;
-	margin-bottom:4px;
-}
-
-#Wall ul.comments{
-	list-style-type:none;
-	margin:5px 0;
-	text-align:center;
-	padding:0px;
-}
-
-
-#Wall ul.comments li  {
+ 
+ #Wall .profilepic-img img:hover, .profilepic-img img:focus, .profilepic-img img:active {
+	 border:1px solid #666666 !important;
+ }
+ #viewPost .profilepic-img img:hover, .profilepic-img img:focus, .profilepic-img img:active {
+	 border:1px solid #666666 !important;
+ }
+ 
+ #viewPost #toppanel .profilepic-img img  {
+	  width:30px;
+	 height:30px;
+	 }
+ .profile-name {
+	 color:#444444;
+	 font-size:15px;
+	 font-weight:bold;
+ }
+ #viewPost .profile-name {
+	 margin-left:5px;
+	 margin-top:5px;
+ }
+ 
+ #Wall .post-content img {
+	 width:40px;
+	 height:40px;
+	 border-radius:5px;
+ }
+ 
+ #Wall hr {
+	 margin-top:5px;
+	 margin-bottom:5px;
+ }
+ 
+ #Wall ul.tags {
+	 list-style-type:none;
+	 margin:0px;
+	 text-align:center;
+	 padding:0px;
+	 
+ }
+	 
+ #Wall ul.tags li {
+	 background-color:#f8f8f8;
+	 border:1px solid #e8e8e8;
+	 border-radius:8px;
+	 padding:4px 8px;
+	 color:#888888;
+	 font-size:10px;
+	 display:inline-block;
+	 text-align:center;
+	 margin:0 auto;
+	 margin-bottom:4px;
+ }
+ 
+  #Wall ul.comments{
+	 list-style-type:none;
+	 margin:5px 0;
+	 text-align:center;
+	 padding:0px;
+ }
+ 
+ 
+ #Wall ul.comments li  {
 	width:22px;
 	height:22px;
 	margin:0 auto;
 	border-radius:100%;
 	display:inline;
 	margin-left:1px;
-}
+ }
+	 
 
-
-#Wall ul.comments li img {
-	width:23px;
-	height:23px;
-	border-radius:100%;
-	border:1px solid transparent;
-
+ #Wall ul.comments li img {
+	 width:23px;
+	 height:23px;
+	 border-radius:100%;
+	  border:1px solid transparent;
+	
+ }
+  #Wall ul.comments li img:hover,  #Wall ul.comments li img:active, #Wall ul.comments li img:focus  {
+	 border:1px solid #777777;
+	
+ }
+  
+ #Wall ul.comments li > span > img {
+	 height:26px;
+ }
+ 
+  #Wall ul.comments li > span {
+	 position:relative;
+ }
+ 
+  #Wall ul.comments li > span > span.count { 
+  position:absolute;
+  left:3px;
+  font-size:12px;
+  color:#888888;
+  top:0px;
+  }
+  .time-style {
+	  color:#aaaaaa;
+	  font-style:italic;
+	  font-size:10px;
+  }
+  
+ #Wall .icon-counts span {
+	 font-size:10px;
+ }
+ #Wall .search-bar {
+	 background-color:#e5e5e5;
+	 height:32px;
+	 display:none;
+	 
 }
-#Wall ul.comments li img:hover,  #Wall ul.comments li img:active, #Wall ul.comments li img:focus  {
-	border:1px solid #777777;
-
-}
-
-#Wall ul.comments li > span > img {
-	height:26px;
-}
-
-#Wall ul.comments li > span {
-	position:relative;
-}
-
-#Wall ul.comments li > span > span.count {
-	position:absolute;
-	left:3px;
-	font-size:12px;
-	color:#888888;
-	top:0px;
-}
-.time-style {
-	color:#aaaaaa;
-	font-style:italic;
-	font-size:10px;
-}
-
-#Wall .icon-counts span {
-	font-size:10px;
-}
-#Wall .search-bar {
-	background-color:#e5e5e5;
-	height:32px;
-	display:none;
-
-}
-#Wall .search-bar .search-ph {
-	padding-top:5px;
-	text-align:center;
-	display:block;
-
-}
-#Wall .search-bar .search-textfield {
-	padding-top:5px;
-	display:none;
-
-}
-.search-tf-style {
-	background-color:transparent;
-	border:none;
-	outline:none;
-	width:85%;
-}
-
-.search-bar .search-clear {
-	color:#999999;
-	float:right;
-	margin-top:4px;
-}
-.sp-spinner {
-	width:25px;
-	height:25px;
-	margin:0 auto;
-	font-size:18px;
-	margin-top:10px;
-}
-
-.loader1 {
-	width:60px;
-	height:60px;
-	font-size:36px;
-	margin:0 auto;
-	font-family:arial, sans-serif;
-}
-
-#Login .login-textfield,  #Signup .login-textfield,  #Reset .login-textfield {
-	border:none;
-	border-bottom:1px solid #e7e7e7;
-	background-color:transparent;
-	height:35px;
-	width:100%;
-	outline:none;
-}
-.btn-sp {
-	background-color:#c52128;
-	border-radius:0px;
-	border:none;
-	padding:10px 0;
-}
-
-
-#Login .social-btn-wrap {
-	width:288px;
-	height:auto;
-	margin:15px auto;
-}
-#Login a {
-	color:#555555;
-}
-
-#Login .social-btn-wrap  a{
-	text-decoration:none;
-	margin-right:1px;
-}
-
-body.login-body {
-	padding-top:20px;
-}
-
-a.color-blue {
-	color:#2361f9 !important;
-}
-
-#Signup .icon-back  {
-	margin-top:6px;
-}
-
-#Signup .upload-profile {
-	width:52px;
-	height:52px;
-	margin:0 auto;
-}
-
-#Signup .upload-profile img{
-	width:51px;
-	height:51px;
-	border-radius:100%;
-
-}
-
-.txt-italic {
-	font-style:italic;
-}
+ #Wall .search-bar .search-ph {
+	 padding-top:5px;
+	 text-align:center;
+	 display:block;
+	 
+ }
+  #Wall .search-bar .search-textfield {
+	 padding-top:5px;
+	 display:none;
+	 
+ }
+  .search-tf-style {
+	 background-color:transparent;
+	 border:none;
+	 outline:none;
+	 width:85%;
+ }
+ 
+ .search-bar .search-clear {
+	 color:#999999;
+	 float:right;
+	 margin-top:4px;
+ }
+ .sp-spinner {
+	 width:25px;
+	 height:25px;
+	 margin:0 auto;
+	 font-size:18px;
+	 margin-top:10px;
+ }
+ 
+ .loader1 {
+	 width:60px;
+	 height:60px;
+	 font-size:36px;
+	 margin:0 auto;
+	 font-family:arial, sans-serif;
+ }
+ 
+ #Login .login-textfield,  #Signup .login-textfield,  #Reset .login-textfield {
+	 border:none;
+	 border-bottom:1px solid #e7e7e7;
+	 background-color:transparent;
+	 height:35px;
+	 width:100%;
+	 outline:none;
+ }
+ .btn-sp {
+	 background-color:#c52128;
+	 border-radius:0px;
+	 border:none;
+	 padding:10px 0;
+ }
+ 
+ 
+ #Login .social-btn-wrap {
+	 width:288px;
+	 height:auto;
+	 margin:15px auto;
+ }
+ #Login a {
+	 color:#555555;
+ }
+ 
+  #Login .social-btn-wrap  a{ 
+  text-decoration:none;
+  margin-right:1px;
+  }
+  
+  body.login-body {
+	  padding-top:20px;
+  }
+  
+  a.color-blue {
+	 color:#2361f9 !important;
+ }
+  
+  #Signup .icon-back  {
+	  margin-top:6px;
+  }
+  
+  #Signup .upload-profile {
+	  width:52px;
+	  height:52px;
+	  margin:0 auto;
+  }
+  
+  #Signup .upload-profile img{
+	  width:51px;
+	  height:51px;
+	  border-radius:100%;
+	  
+  }
+  
+  .txt-italic {
+	  font-style:italic;
+  }
 #addPost .btn-rounded {
 	display: inline-block;
 	border-radius: 100%;
@@ -513,7 +534,7 @@ a.color-blue {
 }
 
 #manageTags ul.tags-list li {
-	margin-top:10px;
+	margin-top:10px;	
 }
 
 #addPost ul.tags-list li img, #manageTags ul.tags-list li img {
@@ -524,9 +545,9 @@ a.color-blue {
 	height: 92px;
 	margin-bottom:10px;
 }
-
-
-#addPost #imageUpload {
+ 
+  
+ #addPost #imageUpload {
 	width: 0px;
 	height: 0px;
 	overflow: hidden;
@@ -543,7 +564,12 @@ a.color-blue {
 	height: 200px;
 	overflow: hidden;
 	outline:none;
+	-moz-user-select: text;
+-khtml-user-select: text;
+-webkit-user-select: text;
+-o-user-select: text;
 }
+
 
 #addPost #content-div img {
 	display:block;
@@ -638,22 +664,22 @@ a.color-blue {
 }
 
 #addPost .btn-default:hover, #addPost .btn-default:active, #addPost .btn-default:focus {
-	background-color:#a10010;
+background-color:#a10010;
 }
 #viewPost .input-comment .btn-default:hover, #viewPost .input-comment .btn-default:active, #viewPost .input-comment .btn-default:focus {
-	background-color:#eeeeee;
+background-color:#eeeeee;	
 }
 
 #addPost .profile-pic-addpost img, #viewPost .profile-pic-addpost img {
 	width:20px;
 	height:20px;
-//border-radius:100%;
+	//border-radius:100%;
 }
-
+ 
 #addPost .caret, #viewPost .caret  {
 	border-top: 6px dashed;
 	margin-left: -9px;
-	margin-top: 13px;
+    margin-top: 13px;
 }
 #addPost .dropdown-menu, #viewPost .dropdown-menu, #About .dropdown-menu {
 	min-width:290px;
@@ -665,7 +691,7 @@ a.color-blue {
 }
 #viewPost .dropdown-menu {
 	margin-bottom:10px;
-}
+	}
 #viewPost #comments .dropdown-menu, #About .dropdown-menu {
 	z-index:10;
 	margin-top:15px;
@@ -690,13 +716,13 @@ a.color-blue {
 	color:#ffffff;
 }
 #About .dropdown-menu .caret-dropdown  {
-	right:0;
-	left:0;
-	margin-left:auto;
-	margin-right:auto;
-	width:10px;
-	color:#cccccc;
-	top:-11px;
+right:0;
+left:0;
+margin-left:auto;
+margin-right:auto;	
+width:10px;
+color:#cccccc;
+top:-11px;
 }
 
 #viewPost .dropdown-menu .caret-dropdown {
@@ -710,7 +736,7 @@ a.color-blue {
 }
 
 #About .dropdown-menu .caret-dropdow {
-
+     
 }
 
 #Wall .profilepic-placeholder img {
@@ -781,7 +807,7 @@ a.color-blue {
 #viewPost .comment-list {
 	height:auto;
 	overflow:hidden;
-
+	
 }
 
 #viewPost .comment-more {
@@ -850,15 +876,15 @@ a.color-blue {
 }
 
 .comment-bubble-count {
-	background-image: url(../img/comment_count.png);
-	width: 22px;
-	height: 26px;
-	font-size: 10px;
-	display: inline-block;
-	position: relative;
-	padding: 4px 0px;
-	color: #888888;
-
+  background-image: url(../img/comment_count.png);
+  width: 22px;
+  height: 26px;
+  font-size: 10px;
+  display: inline-block;
+  position: relative;
+  padding: 4px 0px;
+  color: #888888;	
+	
 }
 
 #Settings .mylist-group {
@@ -873,15 +899,15 @@ a.color-blue {
 
 @media (min-device-width:321px) {
 	#addPost ul.tags-list li, #manageTags ul.tags-list li {
-		margin-right:10px;
-	}
+margin-right:10px;
+}
 }
 
 #About ul  {
 	list-style-type:none;
 	margin:0px;
 	padding:0;
-
+	
 }
 
 #About ul li   {
@@ -921,6 +947,23 @@ a.color-blue {
 	height:200px;
 	overflow:auto;
 }
+.viewPostLike, .viewPostLikeActive  {
+	width:32px;
+	height:32px;
+	float:right;
+	margin-left:4px;
+    display:block;
+	background-image:url(../img/viewpost-like.png);
+}
+.viewPostLikeActive  { 
+ background-image:url(../img/viewpost-like-active.png);
+
+}
+
+	
+
+ 
+	
 	 
 	 	 
 	 
