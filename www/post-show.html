@@ -52,13 +52,14 @@
                     <div class="col-xs-5 col-md-3 nopadding-left">
                         <div class="btn-group dropup pull-right">
                             <button type="button" class="btn btn-default" id="btn-send-comment">Comment as</button>
-                            <button id="switch-comment-as" type="button" class="btn btn-default dropdown-toggle profile-pic-addpost" data-toggle="dropdown" aria-expanded="false">
-                                <div class="profilepic-placeholder">
-                                    <img src="img/ananymous-placeholder.png" alt="" id="comment-as-picture"> <span class="caret"></span>
-                                </div>
+                            <button id="switch-comment-as" type="button" class="btn btn-default dropdown-toggle profilepic-img" data-toggle="dropdown" aria-expanded="false">
+                                <span id="comment-as-picture">
+                                    <img src="img/ananymous-placeholder.png" alt="">
+                                </span>
+                                <span class="caret"></span>
                                 <span class="sr-only">Toggle Dropdown</span>
                             </button>
-                            <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                            <ul class="dropdown-menu dropdown-menu-right profilepic-img" role="menu">
                                 <span class="glyphicon glyphicon-triangle-bottom caret-dropdown"></span>
                                 <li class="comment-as-user"></li>
                                 <li class="comment-as-ananymous"></li>
@@ -75,7 +76,7 @@
     <div id="toppanel" class="row mtop5 pbottom5 border-bottom">
         <div class="col-md-5 col-xs-4">
             {{#if anonymous}}
-            <div class="profilepic-img pull-left"><img src="{{ ../../anonymous_image }}"  alt=""/></div>
+            <div class="profilepic-img pull-left"><img src="{{ anonymous_image }}"/></div>
             {{else}}
             {{#if owner.photo }}
             <div class="profilepic-img pull-left"><img src="{{ owner.photo }}"  alt=""/></div>
@@ -111,7 +112,7 @@
             <div class="row">
                 <div class="col-md-10 col-xs-8">
                     {{#each tags}}
-                    <div class="tag">#politics</div>
+                    <div class="tag">{{ this }}</div>
                     {{/each}}
                 </div>
                 <!-- flag/like sesction -->
@@ -131,7 +132,15 @@
             <li id="comment-{{ uid }}" data-id="{{ uid }}">
                 <div class="row">
                     <div class="col-md-1 col-xs-1 col-sm-1">
+                        {{#if anonymous}}
+                        <div class="profilepic-img pull-left"><img src="img/ananymous-placeholder.png"/></div>
+                        {{else}}
+                        {{#if commenter.photo }}
                         <img src="{{ commenter.photo }}" class="comment-profile" alt=""/>
+                        {{ else }}
+                        <div class="profilepic-placeholder">{{firstChar commenter.fname}}{{firstChar commenter.lname}}</div>
+                        {{/if}}
+                        {{/if}}
                     </div>
                     <div class="col-md-10 col-xs-6 col-sm-9 pull-left mleft">
                         <div>{{ commenter.fname }} {{ commenter.lname }}</div>
@@ -159,7 +168,15 @@
     <li id="comment-{{ uid }}" data-id="{{ uid }}">
         <div class="row">
             <div class="col-md-1 col-xs-1 col-sm-1">
+                {{#if anonymous}}
+                <div class="profilepic-img pull-left"><img src="img/ananymous-placeholder.png"/></div>
+                {{else}}
+                {{#if commenter.photo }}
                 <img src="{{ commenter.photo }}" class="comment-profile" alt=""/>
+                {{ else }}
+                <div class="profilepic-placeholder">{{firstChar commenter.fname}}{{firstChar commenter.lname}}</div>
+                {{/if}}
+                {{/if}}
             </div>
             <div class="col-md-10 col-xs-6 col-sm-9 pull-left mleft">
                 <div>{{ commenter.fname }} {{ commenter.lname }}</div>
@@ -201,26 +218,52 @@
     singlePostReady()
     // set comment as user
     if(localStorage['current_user']){
-       current_user = JSON.parse(localStorage.getItem('current_user'))
-       str = "<a href='#'>Comment as "+ current_user.fname +"<img src='"+ current_user.photo +"' width='30' height='30' alt=''> </a>"
-        $('.comment-as-user').html(str)
+        current_user = JSON.parse(localStorage.getItem('current_user'))
+        if(current_user.photo){
+            str = "<a href='#'>Comment as "+ current_user.fname +"<img src='"+ current_user.photo +"' alt=''> </a>"
+            $('.comment-as-user').html(str)
+        } else{
+            str ="<div class='profilepic-placeholder'>"
+            str += current_user.fname.substr(0, 1).toUpperCase() +""+current_user.lname.substr(0, 1).toUpperCase()
+            str ="</div>"
+            $('.comment-as-user').html(str)
+        }
         $('.comment-as-ananymous').html('')
+
     }
 
     $('.comment-as-user').on('click',function(e){
-        $('#comment-as-picture').attr('src',current_user.photo)
-         str = "<a href='#'>Comment as anonymous <img width='30' height='30' alt='' src='img/ananymous-placeholder.png'> </a>"
-         $('.comment-as-ananymous').html(str)
-         $(this).html('')
-        $('#comment-form').find('input[name="anonymous"]').val(true);
+        current_user = JSON.parse(localStorage.getItem('current_user'))
+        if(current_user.photo){
+            var img = $('<img alt="">');
+            img.attr('src', current_user.photo);
+            $('#comment-as-picture').html(img)
+        }else{
+            name ="<div class='profilepic-placeholder'>"
+            name += current_user.fname.substr(0, 1).toUpperCase() +""+current_user.lname.substr(0, 1).toUpperCase()
+            name ="</div>"
+            $('#comment-as-picture').html(name)
+        }
+        str = "<a href='#'>Comment as anonymous <img alt='' src='img/ananymous-placeholder.png'> </a>"
+        $('.comment-as-ananymous').html(str)
+        $(this).html('')
+        $('#comment-form').find('input[name="anonymous"]').val(false);
 
     })
 
     $('.comment-as-ananymous').on('click',function(e){
-        $('#comment-as-picture').attr('src','img/ananymous-placeholder.png')
         current_user = JSON.parse(localStorage.getItem('current_user'))
-        str = "<a href='#'>Comment as "+ current_user.fname +"<img src='"+ current_user.photo +"' width='30' height='30' alt=''> </a>"
-        $('.comment-as-user').html(str)
+        var img = $('<img alt="" src="img/ananymous-placeholder.png">');
+        $('#comment-as-picture').html(img)
+        if(current_user.photo){
+            str = "<a href='#'>Comment as "+ current_user.fname +"<img src='"+ current_user.photo +"' alt=''> </a>"
+            $('.comment-as-user').html(str)
+        } else{
+            str ="<div class='profilepic-placeholder'>"
+            str += current_user.fname.substr(0, 1).toUpperCase() +""+current_user.lname.substr(0, 1).toUpperCase()
+            str ="</div>"
+            $('.comment-as-user').html(str)
+        }
         $(this).html('')
         $('#comment-form').find('input[name="anonymous"]').val(true);
     })

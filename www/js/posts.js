@@ -25,6 +25,13 @@ function getPosts(){
           if(!localStorage.getItem('default_posts')){
               $('.load-up-posts').show()
           }
+          // when redirected here to after creating a post
+          if(sessionStorage['after-add-post']){
+              $('.load-up-posts').show()
+              // then remove
+              sessionStorage.removeItem('after-add-post')
+          }
+
         },
         success: function (data) {
             var source = $("#posts-template").html();
@@ -97,26 +104,6 @@ function singlePostReady(){
 }
 
 function commentReady(){
-    // toggle Comment As
-    /*$('.comment-as').on('click',function(e){
-        e.preventDefault()
-        console.log(localStorage['current_user'])
-        if(localStorage['current_user']){
-            comment_as = $(this).data('value')
-            ipt_comment_as = $('#comment-form').find('input[name="anonymous"]')
-            if(comment_as == 'anonymous'){
-                $('#btn-send-comment').text('as anonymous')
-                ipt_comment_as.val(true);
-            }else{
-                $('#btn-send-comment').text('as user')
-                ipt_comment_as.val(false);
-            }
-        }else{
-            window.location.href = 'signin.html'
-        }
-    })
-
-*/
     // send function
     $('#btn-send-comment').on('click',function(e) {
         e.preventDefault()

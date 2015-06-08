@@ -74,14 +74,14 @@ function signOutUser(){
                 "platform": device.platform
             }
         },
-        beforeSend: function () {  $('.loading_indicator').css('display', 'block');  },
+        beforeSend: function () { showAjaxSpinner()  },
         success: function (data) {
             // remove current_user and access_token
             localStorage.removeItem('current_user')
             localStorage.removeItem('access_token')
            // getAccessToken()// then get new access_token
            // successDialog('Success',data.message)
-            $('.loading_indicator').css('display', 'none');
+            hideAjaxSpinner()
             // window.location.href = 'signin.html'
             //$('.login-navbar #sign-out').hide()
             //$('.login-navbar #sign-in').show()
@@ -90,7 +90,7 @@ function signOutUser(){
         error: function(xhr,textStatus,errorThrown ) {
             var error_obj = $.parseJSON(xhr.responseText)
             console.log(error_obj)
-            $('.loading_indicator').css('display', 'none');
+            hideAjaxSpinner()
             errorDialog('Error',error_obj.message)
         }
     })

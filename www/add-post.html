@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+    <title>SamePinch</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href="css/jasny-bootstrap.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400' rel='stylesheet' type='text/css'>
+    <link href='http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css' rel='stylesheet' type='text/css'>
+</head>
+<body>
+
+<div id="addPost">
+    <nav class="navbar navbar-inverse navbar-fixed-top navbar-sp">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-xs-2">
+                    <a href="index.html"> <span class="glyphicon glyphicon-menu-left back"></span> </a>
+                </div>
+                <div class="col-md-6 col-xs-6 heading">ADD POST</div>
+                <div class="col-md-3 col-xs-4 nopadding-left">
+                    <div class="btn-group pull-right">
+                        <button type="button" class="btn btn-default" id="btn-send-post">&nbsp;Post as&nbsp;</button>
+                        <button id="switch-post-as" type="button" class="btn btn-default dropdown-toggle profilepic-img" data-toggle="dropdown" aria-expanded="false">
+                             <span id="post-as-picture">
+                                 <img src="img/ananymous-placeholder.png" alt="">
+                             </span>
+                            <span class="caret"></span>
+                            <span class="sr-only">Toggle Dropdown</span>
+                        </button>
+                        <ul class="dropdown-menu profilepic-img" role="menu">
+                            <span class="glyphicon glyphicon-triangle-top caret-dropdown"></span>
+                            <li class="post-as-user"></li>
+                            <li class="post-as-ananymous"></li>
+                        </ul>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mtop20">
+        <div class="row">
+            <div class="col-md-12">
+                <form id="add-post-form" >
+                    <input type="hidden" name="anonymous" value="true">
+                    <div id="content-div-wrapper">
+                        <div contenteditable="" id="content-div">
+                            <input id="post-content-text" class="hidden-textfield" type="text" placeholder="Write description" name="content">
+                        </div>
+                        <button id="imageButton" class="btn-rounded mbottom mtop">
+                            <span class="glyphicon glyphicon-camera"></span>
+                        </button>
+                        <input type="file" id="imageUpload">
+                    </div>
+                    <div class="clearfix"></div>
+                    <h4 class="mtop20">Select Tags</h4>
+                    <div>
+                        <ul class="tags-list" id="add-post-tags">
+                            <!-- tags will goes here dynamically -->
+                        </ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</div>
+
+<script id="get-tags-template" type="text/x-handlebars-template">
+    {{#groups}}
+    <li>
+        <div class="tag-wrapper pos-relative">
+            <div class="checkmark-wrapper">
+                <input type="checkbox"  name="tags_array" value="{{ name }}" class="css-checkbox" id="group-{{ uid }}"/>
+                <label class="css-label" for="group-{{ uid }}"></label>
+            </div>
+            <img src="{{ image }}"  alt=""/>
+            <div class="tagname">{{ name }}</div>
+        </div>
+    </li>
+    {{/groups}}
+</script>
+
+
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="js/jquery.serialize-hash.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jasny-bootstrap.js"></script>
+<script type="text/javascript" src="js/bootbox.min.js"></script>
+<script type="text/javascript" src="js/handlebars-v3.0.3.js"></script>
+<script type="text/javascript" src="js/handlebars-helpers.js"></script>
+<script type="text/javascript" src="js/fastclick.js"></script>
+<script type="text/javascript" src="js/spin.min.js"></script>
+<script type="text/javascript" src="js/api_calls.js"></script><!--must before application.js  -->
+<script type="text/javascript" src="js/application.js"></script>
+<script type="text/javascript" src="js/authentication.js"></script>
+<script type="text/javascript" src="js/posts.js"></script>
+
+<script>
+    $.ajax({
+        url: window.api_url+'groups',
+        type: 'post',
+        data: {
+            'command' :"favourites",
+            'access_token':  localStorage['access_token'],
+        },
+        beforeSend: function () { showAjaxSpinner();  },
+        success: function (data) {
+            var source = $("#get-tags-template").html();
+            var template = Handlebars.compile(source);
+            // $('#comments').append(template(data.body));
+            $("#add-post-tags").html(template(data.body))//.hide().fadeIn();
+            hideAjaxSpinner()
+            addPostReady()
+        },
+        error: function(xhr,textStatus,errorThrown ) {
+            var error_obj = $.parseJSON(xhr.responseText)
+            console.log(error_obj)
+            hideAjaxSpinner()
+            errorDialog('Error',error_obj.message)
+        }
+    })
+
+
+    function addPostReady(){
+        // add tags etc..
+        $('#post-content-text').focus()
+
+        $("#addPost ul.tags-list li").click(function(e) {
+            e.stopPropagation();
+            tag =  $(this).find(".tagname")
+            if(tag.hasClass('tagname-active')){
+                tag.removeClass("tagname-active");
+                $(this).find('input').prop('checked',false);
+            }else{
+                tag.addClass("tagname-active");
+                $(this).find('input').prop('checked',true);
+            }
+        });
+
+        $("#addPost ul.tags-list li .css-label").click(function(e) {
+            $(this).parents('li:first').trigger( "click" );
+            return false;
+        });
+
+
+        if(localStorage['current_user']){
+            current_user = JSON.parse(localStorage.getItem('current_user'))
+            if(current_user.photo){
+                str = "<a href='#'>Post as "+ current_user.fname +"<img src='"+ current_user.photo +"' alt=''> </a>"
+                $('.post-as-user').html(str)
+            } else{
+                str ="<div class='profilepic-placeholder'>"
+                str += current_user.fname.substr(0, 1).toUpperCase() +""+current_user.lname.substr(0, 1).toUpperCase()
+                str ="</div>"
+                $('.post-as-user').html(str)
+            }
+            $('.post-as-ananymous').html('')
+
+        }
+
+        $('.post-as-user').on('click',function(e){
+            current_user = JSON.parse(localStorage.getItem('current_user'))
+            if(current_user.photo){
+                var img = $('<img alt="">');
+                img.attr('src', current_user.photo);
+                $('#post-as-picture').html(img)
+            }else{
+                name ="<div class='profilepic-placeholder'>"
+                name += current_user.fname.substr(0, 1).toUpperCase() +""+current_user.lname.substr(0, 1).toUpperCase()
+                name ="</div>"
+                $('#post-as-picture').html(name)
+            }
+            str = "<a href='#'>Post as anonymous <img alt='' src='img/ananymous-placeholder.png'> </a>"
+            $('.post-as-ananymous').html(str)
+            $(this).html('')
+            $('#add-post-form').find('input[name="anonymous"]').val(false);
+
+        })
+
+        $('.post-as-ananymous').on('click',function(e){
+            current_user = JSON.parse(localStorage.getItem('current_user'))
+            var img = $('<img alt="" src="img/ananymous-placeholder.png">');
+            $('#post-as-picture').html(img)
+            if(current_user.photo){
+                str = "<a href='#'>Post as "+ current_user.fname +"<img src='"+ current_user.photo +"' alt=''> </a>"
+                $('.post-as-user').html(str)
+            } else{
+                str ="<div class='profilepic-placeholder'>"
+                str += current_user.fname.substr(0, 1).toUpperCase() +""+current_user.lname.substr(0, 1).toUpperCase()
+                str ="</div>"
+                $('.post-as-user').html(str)
+            }
+            $(this).html('')
+            $('#add-post-form').find('input[name="anonymous"]').val(true);
+        })
+
+
+
+
+
+        // redirect to signin if current user present and clicks on comment as or navigation
+        $('#switch-post-as').on('click',function(e){
+            if(!localStorage['current_user']){
+                window.location.href = 'signin.html'
+            }
+        })
+
+
+
+        $('#btn-send-post').on('click',function(e) {
+            e.preventDefault()
+            content = $('#add-post-form').find('input[name="content"]')
+            if (localStorage['current_user']) {
+                if(content.val() == '') {
+                    $('#post-content-text').focus()
+                    errorDialog('Error', 'Please enter text')
+                }else if($('input[type=checkbox]:checked').length == 0){
+                    errorDialog('Error', 'Please select atleast one tag')
+                }
+                else{
+                    // get checked tags
+                    var tagsArray = $("#add-post-form input:checkbox:checked").map(function(){
+                        return $(this).val();
+                    }).get(); ;
+                    var body_params = $.extend({}, $('#add-post-form').serializeHash())
+                    body_params['tags_array'] = tagsArray
+                    $.ajax({
+                        url: window.api_url + 'posts',
+                        type: 'post',
+                        data: {
+                            'command': "create",
+                            'access_token': localStorage['access_token'],
+                            'body': body_params
+                        },
+                        beforeSend: function () {
+                            showAjaxSpinner();
+                        },
+                        success: function (data) {
+                            hideAjaxSpinner();
+                            sessionStorage.setItem('after-add-post',true)
+                            window.location.href = 'index.html'
+                        },
+                        error: function (xhr, textStatus, errorThrown) {
+                            var error_obj = $.parseJSON(xhr.responseText)
+                            console.log(error_obj)
+                            errorDialog('Error', error_obj.message)
+                            hideAjaxSpinner();
+                        }
+                    })
+                }
+
+            }else {
+                window.location.href = 'signin.html'
+            }
+        })
+
+    }
+</script>
+</body>
+</html>
