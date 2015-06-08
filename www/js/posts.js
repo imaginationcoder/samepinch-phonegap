@@ -286,7 +286,7 @@ function getFavoriteGroups(){
 }
 
 function addPostReady(){
-    $('#post-content-text').focus()
+    //$('#post-content-text').focus()
     $("#addPost ul.tags-list li").click(function(e) {
         e.stopPropagation();
         tag =  $(this).find(".tagname")
@@ -364,8 +364,8 @@ function addPostReady(){
         content = $('#add-post-form').find('input[name="content"]')
         if (localStorage['current_user']) {
             if(content.val() == '') {
-                $('#post-content-text').focus()
                 errorDialog('Error', 'Please enter text')
+                $('#post-content-text').focus()
             }else if($('input[type=checkbox]:checked').length == 0){
                 errorDialog('Error', 'Please select atleast one tag')
             }

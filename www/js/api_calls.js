@@ -147,13 +147,15 @@ window.addEventListener('load', function() {
 })
 
 function showAjaxSpinner(){
-    spinner = new Spinner({color:'#000000', lines: 12,top: '40%'}).spin(document.body);
-    $("body").css({"opacity": "0.5"});
+    //spinner = new Spinner({color:'#000000', lines: 12,top: '40%'}).spin(document.body);
+    //$("body").css({"opacity": "0.5"});
+    $('.loading-box').show()
 }
 
 function hideAjaxSpinner(){
-    spinner.stop();
-    $("body").removeAttr('style');
+    //spinner.stop();
+    //$("body").removeAttr('style');
+    $('.loading-box').hide()
 }
 
 
