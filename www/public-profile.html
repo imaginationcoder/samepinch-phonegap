@@ -8,55 +8,46 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
     <title>SamePinch</title>
-    <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
-    <link href="css/jasny-bootstrap.css" rel="stylesheet">
+    <!--<link href="css/jasny-bootstrap.css" rel="stylesheet">-->
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400' rel='stylesheet' type='text/css'>
     <link href='http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css' rel='stylesheet' type='text/css'>
 </head>
 <body>
-<div class="loading-box">
-    <div class="sp-spinner"><i class="fa fa-spinner fa-spin"></i></div>
-</div>
-<div id="Wall">
-    <nav class="navbar navbar-inverse navbar-fixed-top navbar-sp" id="navbar">
+
+<div id="Profile-page">
+    <nav class="navbar navbar-inverse navbar-fixed-top navbar-sp">
         <div class="container">
             <div class="row">
-                <div class="col-md-3 col-xs-3" id="btnMyNavMenu">
+                <div class="col-md-3 col-xs-3">
+                    <a href="#" onclick="window.history.back();"> <span class="glyphicon glyphicon-menu-left back"></span> </a>
                 </div>
-                <div class="col-md-6 col-xs-6"><img src="img/header-icon-samepinch.png" class="img-responsive" width="47" height="28" alt=""/></div>
-                <div class="col-md-3 col-xs-3 nopadding-left" id="rightMenu">
-                    <a href="#" class="pull-right" id="search-toggle-btn"><img src="img/search.png" width="26" height="26" alt=""/></a>
+                <div class="col-md-6 col-xs-6 heading">PROFILE</div>
+                <div class="col-md-3 col-xs-3 nopadding-left">
                 </div>
             </div>
         </div>
     </nav>
 
-
-    <div class="container-fluid">
+    <div class="clearfix"></div>
+    <div class="container-fluid" id="Profile">
         <div class="row">
-            <div class="search-bar">
-                <div class="container">
-                    <div class="search-ph">
-                        <img src="img/icon-search-dark.png" width="20" height="20" alt=""/> search...
-                    </div>
-                    <div class="search-textfield">
-                        <img src="img/icon-search-dark.png" width="20" height="20" alt=""/> <input type="text" placeholder="search..." autofocus class="search-tf-style"> <span class="glyphicon glyphicon-remove-circle search-clear"></span>
-                    </div>
+            <div class="profile-box">
+                <div class="container txt-center">
+                    <span id="profile-pic-image">
+                        <!--<div class="profilepic-placeholder">JD</div>-->
+                        <div class="profilepic-img">
+                            <img src="img/profile-img.png" alt=""/>
+                        </div>
+                    </span>
+
+                    <div class="profile-name-profile"></div>
+                    <button class="btn-normal">follow</button>
                 </div>
             </div>
         </div>
     </div>
-
-
-    <div class="container-fluid">
-        <div class="row">
-            <div class="favorite-bar"> <a href="#"><span class="glyphicon glyphicon-star"></span></a> </div>
-        </div>
-    </div>
-
 
     <div class="container load-up-posts" style="display: none;">
         <div class="row">
@@ -66,22 +57,16 @@
         </div>
     </div>
 
-    <div class="container mtop20 mbottom20">
+    <div class="container mtop20 mbottom10">
         <div class="row">
-            <div class="col-md-12"  id="posts-list">
-                <!-- each post goes here ------ -->
+            <div class="col-md-12 posts-list" id="Wall">
 
             </div>
         </div>
     </div>
 
-    <div class="container load-below-posts" style="display: none;">
-            <div class="row">
-                <div class="sp-spinner"><i class="fa fa-spinner fa-spin"></i></div>
-            </div>
-    </div>
-    <!-- /.container -->
 </div>
+
 
 <script id="posts-template" type="text/x-handlebars-template">
     {{#posts}}
@@ -94,7 +79,7 @@
             </div>
             {{else}}
             {{#if owner.photo }}
-            <div class="profile-pic-wrap profilepic-img profile-avatar" data-uid="{{ owner.uid }}"  data-name="{{ owner.fname}} {{owner.lname}}">
+            <div class="profile-pic-wrap profilepic-img profile-avatar" data-uid="{{ owner.uid }}" data-name="{{ owner.fname}} {{owner.lname}}">
                 <img alt="" src="{{ owner.photo }}">
             </div>
             {{else}}
@@ -134,7 +119,7 @@
             <div class="clearfix"></div>
             <ul class="comments">
                 {{#each commenters}}
-                   <li><img src="{{ this }}" /></li>
+                <li><img src="{{ this }}" /></li>
                 {{/each}}
                 <li>
                     <div class="comment-bubble-count">{{ comment_count }}</div>
@@ -152,20 +137,102 @@
 <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="js/jquery.serialize-hash.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/jasny-bootstrap.js"></script>
+<!--<script type="text/javascript" src="js/jasny-bootstrap.js"></script>-->
 <script type="text/javascript" src="js/bootbox.min.js"></script>
 <script type="text/javascript" src="js/handlebars-v3.0.3.js"></script>
 <script type="text/javascript" src="js/handlebars-helpers.js"></script>
 <script type="text/javascript" src="js/fastclick.js"></script>
 <script type="text/javascript" src="js/api_calls.js"></script><!--must before application.js  -->
-<script type="text/javascript" src="js/application.js"></script>
-<!--<script type="text/javascript" src="js/authentication.js"></script>-->
+<!--<script type="text/javascript" src="js/application.js"></script>
+<script type="text/javascript" src="js/authentication.js"></script>
+-->
 <script type="text/javascript" src="js/posts.js"></script>
 
-<script>
-   //localStorage.clear()
-   //sessionStorage.clear()
-    getAccessToken()
+<script type="text/javascript">
+    $('#Profile-page .profile-name-profile').html(sessionStorage['profile_name'])
+    // sessionStorage.removeItem('profile_name')
+
+    // get Profile info by uid after that remove from session
+    $.ajax({
+        url: window.api_url+'users/'+sessionStorage['profile_uid'],
+        type: 'post',
+        data: {
+            'command' : 'public_profile',
+            'access_token':  localStorage['access_token'],
+        },
+        beforeSend: function () { },
+        success: function (data) {
+            img = ''
+            body = data.body
+            $('#Profile-page .profile-name-profile').html(body.full_name)
+            if(body.photo){
+                p_img = $('<img>')
+                p_img.attr('src',body.photo)
+                img +=  "<div class='profilepic-img'>"
+                img +=  '<img src='+ body.photo +' alt=""/>'
+                img +=  "</div>"
+            } else{
+             img += "<div class='profilepic-placeholder'>"
+             img +=   body.fname.substr(0, 1).toUpperCase() +""+body.lname.substr(0, 1).toUpperCase()
+             img += "</div>"
+            }
+
+            $('#Profile-page #profile-pic-image').html(img)
+        },
+        error: function(xhr,textStatus,errorThrown ) {
+            var error_obj = $.parseJSON(xhr.responseText)
+            console.log(error_obj)
+            hideAjaxSpinner()
+            errorDialog('Error',error_obj.message)
+        }
+    })
+
+
+
+    // invoke posts by user
+    $.ajax({
+        url: window.api_url+'posts',
+        type: 'post',
+        data: {
+            'command' :"filter",
+            'access_token':  localStorage['access_token'],
+            'body': {
+                "post_count": 0,
+                "last_modified":"",
+                "step":"",//# next or new
+                "etag":"",
+                "key": sessionStorage['profile_uid'] ,
+                "by": 'user'
+            }
+        },
+        beforeSend: function () {
+            $('.load-up-posts').show()
+        },
+        success: function (data) {
+            var source = $("#posts-template").html();
+            var template = Handlebars.compile(source);
+            body = data.body
+            $('.posts-list').prepend(template(body));
+            $('.load-up-posts').hide()
+            singlePostClickEvents() // enable js for single post click
+        },
+        error: function(xhr,textStatus,errorThrown ) {
+            var error_obj = $.parseJSON(xhr.responseText)
+            console.log(error_obj)
+            errorDialog('Error',error_obj.message)
+            $('.load-up-posts').hide()
+        }
+    })
+
+
+
+
+
+
+
+
+
 </script>
+
 </body>
 </html>

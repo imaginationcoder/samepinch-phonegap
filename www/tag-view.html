@@ -8,11 +8,9 @@
     <meta name="author" content="">
     <link rel="icon" href="favicon.ico">
     <title>SamePinch</title>
-    <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
-    <link href="css/jasny-bootstrap.css" rel="stylesheet">
+    <!--<link href="css/jasny-bootstrap.css" rel="stylesheet">-->
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400' rel='stylesheet' type='text/css'>
     <link href='http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css' rel='stylesheet' type='text/css'>
 </head>
@@ -43,7 +41,7 @@
                 <div class="container txt-center">
                     <!--<div class="profilepic-placeholder">JD</div>-->
                     <div class="tag-img" id="tag-image">
-
+                        <img src="img/tagview-placeholder.png" alt=""/>
                     </div>
                     <button class="btn-normal mtop15" id="tag-name"></button>
                 </div>
@@ -82,11 +80,11 @@
             </div>
             {{else}}
             {{#if owner.photo }}
-            <div class="profile-pic-wrap profilepic-img profile-avatar">
+            <div class="profile-pic-wrap profilepic-img profile-avatar" data-uid="{{ owner.uid }}" data-name="{{ owner.fname}} {{owner.lname}}">
                 <img alt="" src="{{ owner.photo }}">
             </div>
             {{else}}
-            <div class="profile-pic-wrap profilepic-placeholder profile-avatar">{{firstChar owner.fname}}{{firstChar owner.lname}}</div>
+            <div class="profile-pic-wrap profilepic-placeholder profile-avatar" data-uid="{{ owner.uid }}" data-name="{{ owner.fname}} {{owner.lname}}">{{firstChar owner.fname}}{{firstChar owner.lname}}</div>
             {{/if}}
             {{/if}}
             <div class="profile-name pull-left mleft50 mtop5">
@@ -136,70 +134,23 @@
 
 
 <script type="text/javascript" src="cordova.js"></script>
-<script type="text/javascript" src="js/index.js"></script>
+<!--<script type="text/javascript" src="js/index.js"></script>-->
 <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="js/jquery.serialize-hash.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
-<script type="text/javascript" src="js/jasny-bootstrap.js"></script>
+<!--<script type="text/javascript" src="js/jasny-bootstrap.js"></script>-->
 <script type="text/javascript" src="js/bootbox.min.js"></script>
 <script type="text/javascript" src="js/handlebars-v3.0.3.js"></script>
 <script type="text/javascript" src="js/handlebars-helpers.js"></script>
 <script type="text/javascript" src="js/fastclick.js"></script>
 <script type="text/javascript" src="js/api_calls.js"></script><!--must before application.js  -->
-<script type="text/javascript" src="js/application.js"></script>
+<!--<script type="text/javascript" src="js/application.js"></script>
 <script type="text/javascript" src="js/authentication.js"></script>
+-->
 <script type="text/javascript" src="js/posts.js"></script>
 
 <script>
-    //set tag name
-    $('#Tagview-page .add-post').on('click',function(e){
-        e.preventDefault();
-        if(localStorage['current_user']){
-            window.location.href = 'add-post.html'
-        }else{
-            window.location.href = 'signin.html'
-        }
-    })
-
-
-    $('#Tagview-page #tag-name').html(sessionStorage['tag_name'])
-    $.ajax({
-        url: window.api_url+'posts',
-        type: 'post',
-        data: {
-            'command' :"filter",
-            'access_token':  localStorage['access_token'],
-            'body': {
-                "post_count": 0,
-                "last_modified":"",
-                "step":"",//# next or new
-                "etag":"",
-                "key": sessionStorage['tag_name'].substring(1), // remove first char(#)
-                "by": 'tag'
-            }
-        },
-        beforeSend: function () {
-            $('.load-up-posts').show()
-        },
-        success: function (data) {
-            var source = $("#posts-template").html();
-            var template = Handlebars.compile(source);
-            body = data.body
-            //set tag image
-            tag_img = $('<img>')
-            tag_img.attr('src',body.tag.image)
-            $('#Tagview-page #tag-image').html(tag_img)
-            $('.posts-list').prepend(template(body));
-            $('.load-up-posts').hide()
-            singlePostClickEvents() // enable js for single post click
-        },
-        error: function(xhr,textStatus,errorThrown ) {
-            var error_obj = $.parseJSON(xhr.responseText)
-            console.log(error_obj)
-            errorDialog('Error',error_obj.message)
-            $('.load-up-posts').hide()
-        }
-    })
+    getPostsByTag()
 </script>
 </body>
 </html>

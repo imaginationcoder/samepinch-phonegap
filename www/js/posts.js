@@ -60,14 +60,7 @@ function singlePostClickEvents(){
         window.location.href = 'post-show.html'
     })
 
-    $('.single-post .profile-avatar').on('click',function(e){
-        e.stopPropagation()
-        if($(this).hasClass('anonymous')){
-            e.preventDefault()
-        }else{
-            alert('Under development')
-        }
-    })
+    profileAvatarClick()
 
     $('.single-post .single-tag').on('click',function(e){
         e.stopPropagation()
@@ -122,17 +115,21 @@ function singlePostShowReady(){
     })
 }
 
-function singlePostShowClickEvents(){
-
-    $('.post-show .profile-avatar').on('click',function(e){
+function profileAvatarClick(){
+    $('.profile-avatar').on('click',function(e){
         e.stopPropagation()
         if($(this).hasClass('anonymous')){
             e.preventDefault()
         }else{
-            alert('Under development')
+            sessionStorage.setItem('profile_uid',$(this).data('uid'))
+            sessionStorage.setItem('profile_name',$(this).data('name'))
+            window.location.href = 'public-profile.html'
         }
     })
+}
 
+function singlePostShowClickEvents(){
+    profileAvatarClick()
     $('.post-show .single-tag').on('click',function(e){
         e.stopPropagation()
         sessionStorage.setItem('tag_name',$(this).data('name'))
@@ -341,5 +338,57 @@ function addPostReady(){
             window.location.href = 'signin.html'
         }
     })
+}
 
+function getPostsByTag(){
+
+    $('#Tagview-page .add-post').on('click',function(e){
+        e.preventDefault();
+        if(localStorage['current_user']){
+            window.location.href = 'add-post.html'
+        }else{
+            window.location.href = 'signin.html'
+        }
+    })
+    // set tag name
+    $('#Tagview-page #tag-name').html(sessionStorage['tag_name'])
+
+    // invoke posts by tag
+    $.ajax({
+        url: window.api_url+'posts',
+        type: 'post',
+        data: {
+            'command' :"filter",
+            'access_token':  localStorage['access_token'],
+            'body': {
+                "post_count": 0,
+                "last_modified":"",
+                "step":"",//# next or new
+                "etag":"",
+                "key": sessionStorage['tag_name'].substring(1), // remove first char(#)
+                "by": 'tag'
+            }
+        },
+        beforeSend: function () {
+            $('.load-up-posts').show()
+        },
+        success: function (data) {
+            var source = $("#posts-template").html();
+            var template = Handlebars.compile(source);
+            body = data.body
+            //set tag image
+            tag_img = $('<img>')
+            tag_img.attr('src',body.tag.image)
+            $('#Tagview-page #tag-image').html(tag_img)
+            $('.posts-list').prepend(template(body));
+            $('.load-up-posts').hide()
+            singlePostClickEvents() // enable js for single post click
+        },
+        error: function(xhr,textStatus,errorThrown ) {
+            var error_obj = $.parseJSON(xhr.responseText)
+            console.log(error_obj)
+            errorDialog('Error',error_obj.message)
+            $('.load-up-posts').hide()
+        }
+    })
 }

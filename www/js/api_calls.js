@@ -41,8 +41,9 @@ localStorage.setItem('device_token',device_token)
  *  sessionStorage List =>
  * --------------------------------------------------
  *   1) tag_name
- *   2) tag_uid
- *   3) post_uid
+ *   2) post_uid
+ *   3) profile_uid
+ *   4) profile_name
  * -------------------------------------------------
  * Local Storage List =>
  *  1) current_user => {email,fname,lname,photo,uid}
@@ -76,7 +77,6 @@ function successDialog(title,msg){
         }
     });
 }
-
 
 // Get access token
 function getAccessToken() {
@@ -135,19 +135,12 @@ function getDeviceInfo(){
         }
     });
 }
+
 window.addEventListener('load', function() {
     console.log('invoked fastclick')
     new FastClick(document.body);
 }, false);
 
-
-
-// get access token if not present
-window.addEventListener('load', function() {
-    // sessionStorage.clear();
-    // localStorage.clear();
-  //  getAccessToken()
-})
 
 function showAjaxSpinner(){
     //spinner = new Spinner({color:'#000000', lines: 12,top: '40%'}).spin(document.body);

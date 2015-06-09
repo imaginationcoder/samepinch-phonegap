@@ -109,6 +109,9 @@ body {
 .pbottom5 {
 	padding-bottom:5px;
 }
+.ptop30 {
+	padding-top:30px;
+}
 
 .txt-center {
 	text-align:center;
@@ -349,7 +352,9 @@ body {
 	 margin:0 auto;
 	 margin-bottom:4px;
  }
- 
+ #Wall ul.tags li:hover {
+	 background-color:#eeeeee;
+ }
   #Wall ul.comments{
 	 list-style-type:none;
 	 margin:5px 0;
@@ -764,6 +769,10 @@ top:-11px;
 	font-size:10px;
 	margin-bottom:4px;
 }
+#viewPost .tag:hover {
+	background-color:#eeeeee;
+}
+
 #viewPost .border-bottom {
 	border-bottom:1px solid #e8e8e8;
 }
@@ -960,13 +969,58 @@ margin-right:10px;
 
 }
 
-	
+.static-text-iframe {
+	width:100%;
+	height:380px;
+	overflow:auto;
+	border:none;
+}
 
- 
+kbd {
+	padding:0 !important;
+  font-size:14px !important;
+  color: #222222 !important;
+  background-color: #f7f7f7 !important;
+  border-radius: none !important;
+  -webkit-box-shadow: none !important;
+  box-shadow: none !important;
+}
+
+code {
+	  color: #222222 !important;
+	  background-color:#f7f7f7 !important;
+}
+
+.edit-comment-textarea {
+	width:100%;
+	height:130px;
+	background-color:#ffffff;
+	border:1px solid #aaaaaa;
+	resize:none;
+	outline:none;
+}
+.edit-comment-bg {
+	background-color:#f7f7f7;
+	height:100%;
+	margin:0px;
 	
-	 
-	 	 
-	 
+}
+
+#editComment #addPost .navbar .heading {
+	font-size:20px;
+	padding:4px 0;
+}
+
+#editComment #addPost .btn-default {
+	padding:2px 0;
+	font-size:11px;
+}
+#Tagview-page .navbar-sp, #Profile-page .navbar-sp {
+	border-bottom:1px solid #555555;
+}
+.display-none {
+	display:none;
+}
 
 
 

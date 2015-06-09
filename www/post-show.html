@@ -12,7 +12,7 @@
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <!-- Custom styles for this template -->
     <link href="css/style.css" rel="stylesheet">
-    <link href="css/jasny-bootstrap.css" rel="stylesheet">
+    <!--<link href="css/jasny-bootstrap.css" rel="stylesheet">-->
     <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400' rel='stylesheet' type='text/css'>
     <link href='http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css' rel='stylesheet' type='text/css'>
 </head>
@@ -81,9 +81,9 @@
             <div class="profilepic-img pull-left profile-avatar anonymous"><img src="{{ anonymous_image }}"/></div>
             {{else}}
             {{#if owner.photo }}
-            <div class="profilepic-img pull-left profile-avatar"><img src="{{ owner.photo }}"  alt=""/></div>
+            <div class="profilepic-img pull-left profile-avatar" data-uid="{{ owner.uid }}" data-name="{{ owner.fname}} {{owner.lname}}"><img src="{{ owner.photo }}"  alt=""/></div>
             {{ else }}
-            <div class="profilepic-placeholder pull-left profile-avatar">{{firstChar owner.fname}}{{firstChar owner.lname}}</div>
+            <div class="profilepic-placeholder pull-left profile-avatar" data-uid="{{ owner.uid }}" data-name="{{ owner.fname}} {{owner.lname}}">{{firstChar owner.fname}}{{firstChar owner.lname}}</div>
             {{/if}}
             {{/if}}
             <div class="profile-name pull-left">
@@ -146,9 +146,9 @@
                         <div class="profilepic-placeholder profile-avatar anonymous"> <img src="img/ananymous-placeholder.png" alt=""/></div>
                         {{else}}
                         {{#if commenter.photo }}
-                        <img src="{{ commenter.photo }}" alt="" class="profile-avatar"/>
+                        <img src="{{ commenter.photo }}" alt="" class="profile-avatar" data-uid="{{ commenter.uid }}" data-name="{{ commenter.fname}} {{commenter.lname}}"/>
                         {{ else }}
-                        <div class="profilepic-placeholder profile-avatar">{{firstChar commenter.fname}}{{firstChar commenter.lname}}</div>
+                        <div class="profilepic-placeholder profile-avatar" data-uid="{{ commenter.uid }}" data-name="{{ commenter.fname}} {{commenter.lname}}">{{firstChar commenter.fname}}{{firstChar commenter.lname}}</div>
                         {{/if}}
                         {{/if}}
                     </div>
@@ -191,9 +191,9 @@
                 <div class="profilepic-img pull-left profile-avatar anonymous"><img src="img/ananymous-placeholder.png"/></div>
                 {{else}}
                 {{#if commenter.photo }}
-                <img src="{{ commenter.photo }}" class="comment-profile profile-avatar" alt=""/>
+                <img src="{{ commenter.photo }}" class="comment-profile profile-avatar" alt="" data-uid="{{ commenter.uid }}" data-name="{{ commenter.fname}} {{commenter.lname}}"/>
                 {{ else }}
-                <div class="profilepic-placeholder profile-avatar">{{firstChar commenter.fname}}{{firstChar commenter.lname}}</div>
+                <div class="profilepic-placeholder profile-avatar" data-uid="{{ commenter.uid }}" data-name="{{ commenter.fname}} {{commenter.lname}}">{{firstChar commenter.fname}}{{firstChar commenter.lname}}</div>
                 {{/if}}
                 {{/if}}
             </div>
@@ -236,8 +236,8 @@
 <script type="text/javascript" src="js/handlebars-helpers.js"></script>
 <script type="text/javascript" src="js/fastclick.js"></script>
 <script type="text/javascript" src="js/api_calls.js"></script><!--must before application.js  -->
-<script type="text/javascript" src="js/application.js"></script>
-<script type="text/javascript" src="js/authentication.js"></script>
+<!--<script type="text/javascript" src="js/application.js"></script>-->
+<!--<script type="text/javascript" src="js/authentication.js"></script>-->
 <script type="text/javascript" src="js/posts.js"></script>
 <script type="text/javascript" src="js/comments.js"></script>
 
