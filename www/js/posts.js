@@ -4,7 +4,7 @@ function getPosts(){
         var source = $("#posts-template").html();
         var template = Handlebars.compile(source);
         $('#posts-list').prepend(template(posts));
-        singlePostClick()
+        singlePostClickEvents()
     }
 
     $.ajax({
@@ -39,7 +39,7 @@ function getPosts(){
             body = data.body
             localStorage.setItem('default_posts',JSON.stringify(body))
             $('#posts-list').prepend(template(body));
-            singlePostClick() // enable js for single post click
+            singlePostClickEvents() // enable js for single post click
             $('.load-up-posts').hide()
         },
         error: function(xhr,textStatus,errorThrown ) {
@@ -52,16 +52,32 @@ function getPosts(){
 }
 
 
-function singlePostClick(){
+function singlePostClickEvents(){
     $('.single-post').on('click', function (e) {
         e.preventDefault()
         //  alert($(this).data('uid'))
         sessionStorage.setItem('post-uid', $(this).data('uid'))
         window.location.href = 'post-show.html'
     })
+
+    $('.single-post .profile-avatar').on('click',function(e){
+        e.stopPropagation()
+        if($(this).hasClass('anonymous')){
+            e.preventDefault()
+        }else{
+            alert('Under development')
+        }
+    })
+
+    $('.single-post .single-tag').on('click',function(e){
+        e.stopPropagation()
+        alert('Under development')
+    })
+
+
 }
 
-function singlePostReady(){
+function singlePostShowReady(){
     $.ajax({
         url: window.api_url+'posts/'+sessionStorage['post-uid'],
         type: 'post',
@@ -91,10 +107,10 @@ function singlePostReady(){
              alert(val);
              });
              */
+            hideAjaxSpinner()
             upDownVotePost()
             commentReady() //invoke comment section for after
-
-            hideAjaxSpinner()
+            singlePostShowClickEvents()
         },
         error: function(xhr,textStatus,errorThrown ) {
             var error_obj = $.parseJSON(xhr.responseText)
@@ -105,111 +121,25 @@ function singlePostReady(){
     })
 }
 
-function commentReady(){
-    // send function
-    $('#btn-send-comment').on('click',function(e) {
-        e.preventDefault()
-        comment_text = $('#comment-form').find('input[name="text"]')
-        if (localStorage['current_user']) {
-            if(comment_text.val() == '') {
-                errorDialog('Error', 'Please enter comment')
-            }else{
-                var body_params = $.extend({}, $('#comment-form').serializeHash())
-                $.ajax({
-                    url: window.api_url + 'comments',
-                    type: 'post',
-                    data: {
-                        'command': "create",
-                        'access_token': localStorage['access_token'],
-                        'body': body_params
-                    },
-                    beforeSend: function () {
-                        showAjaxSpinner();
-                    },
-                    success: function (data) {
-                        var source = $("#single-comment-template").html();
-                        var template = Handlebars.compile(source);
-                        // $('#comments').append(template(data.body));
-                        $("#comments ul:first").append(template(data.body)).hide().fadeIn();
-                        //clear input
-                        comment_text.val('')
-                        hideAjaxSpinner();
-                    },
-                    error: function (xhr, textStatus, errorThrown) {
-                        var error_obj = $.parseJSON(xhr.responseText)
-                        console.log(error_obj)
-                        errorDialog('Error', error_obj.message)
-                        hideAjaxSpinner();
-                    }
-                })
-            }
+function singlePostShowClickEvents(){
 
-        }else {
-            window.location.href = 'signin.html'
-        }
-    })
-
-
-    // set comment as user
-    if(localStorage['current_user']){
-        current_user = JSON.parse(localStorage.getItem('current_user'))
-        if(current_user.photo){
-            str = "<a href='#'>Comment as "+ current_user.fname +"<img src='"+ current_user.photo +"' alt=''> </a>"
-            $('.comment-as-user').html(str)
-        } else{
-            str ="<div class='profilepic-placeholder'>"
-            str += current_user.fname.substr(0, 1).toUpperCase() +""+current_user.lname.substr(0, 1).toUpperCase()
-            str ="</div>"
-            $('.comment-as-user').html(str)
-        }
-        $('.comment-as-ananymous').html('')
-
-    }
-
-    $('.comment-as-user').on('click',function(e){
-        current_user = JSON.parse(localStorage.getItem('current_user'))
-        if(current_user.photo){
-            var img = $('<img alt="">');
-            img.attr('src', current_user.photo);
-            $('#comment-as-picture').html(img)
+    $('.post-show .profile-avatar').on('click',function(e){
+        e.stopPropagation()
+        if($(this).hasClass('anonymous')){
+            e.preventDefault()
         }else{
-            name ="<div class='profilepic-placeholder'>"
-            name += current_user.fname.substr(0, 1).toUpperCase() +""+current_user.lname.substr(0, 1).toUpperCase()
-            name ="</div>"
-            $('#comment-as-picture').html(name)
+            alert('Under development')
         }
-        str = "<a href='#'>Comment as anonymous <img alt='' src='img/ananymous-placeholder.png'> </a>"
-        $('.comment-as-ananymous').html(str)
-        $(this).html('')
-        $('#comment-form').find('input[name="anonymous"]').val(false);
-
     })
 
-    $('.comment-as-ananymous').on('click',function(e){
-        current_user = JSON.parse(localStorage.getItem('current_user'))
-        var img = $('<img alt="" src="img/ananymous-placeholder.png">');
-        $('#comment-as-picture').html(img)
-        if(current_user.photo){
-            str = "<a href='#'>Comment as "+ current_user.fname +"<img src='"+ current_user.photo +"' alt=''> </a>"
-            $('.comment-as-user').html(str)
-        } else{
-            str ="<div class='profilepic-placeholder'>"
-            str += current_user.fname.substr(0, 1).toUpperCase() +""+current_user.lname.substr(0, 1).toUpperCase()
-            str ="</div>"
-            $('.comment-as-user').html(str)
-        }
-        $(this).html('')
-        $('#comment-form').find('input[name="anonymous"]').val(true);
+    $('.post-show .single-tag').on('click',function(e){
+        e.stopPropagation()
+        alert('Under development')
     })
 
 
-    // redirect to signin if current user present and clicks on comment as or navigation
-    $('#switch-comment-as').on('click',function(e){
-        if(!localStorage['current_user']){
-            window.location.href = 'signin.html'
-        }
-    })
 }
+
 
 function upDownVotePost(){
     $('.up-down-vote-post').on('click',function(e){
@@ -365,7 +295,7 @@ function addPostReady(){
         if (localStorage['current_user']) {
             if(content.val() == '') {
                 errorDialog('Error', 'Please enter text')
-                $('#post-content-text').focus()
+             //   $('#post-content-text').focus()
             }else if($('input[type=checkbox]:checked').length == 0){
                 errorDialog('Error', 'Please select atleast one tag')
             }

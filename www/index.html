@@ -89,16 +89,16 @@
         <div class="wall-post-box">
             <!-- user picture section -->
             {{#if anonymous}}
-            <div class="profile-pic-wrap profilepic-placeholder">
+            <div class="profile-pic-wrap profilepic-placeholder profile-avatar anonymous">
                 <img width="30" height="23" alt="" src="img/ananymous-placeholder.png">
             </div>
             {{else}}
             {{#if owner.photo }}
-            <div class="profile-pic-wrap profilepic-img">
+            <div class="profile-pic-wrap profilepic-img profile-avatar">
                 <img alt="" src="{{ owner.photo }}">
             </div>
             {{else}}
-            <div class="profile-pic-wrap profilepic-placeholder">{{firstChar owner.fname}}{{firstChar owner.lname}}</div>
+            <div class="profile-pic-wrap profilepic-placeholder profile-avatar">{{firstChar owner.fname}}{{firstChar owner.lname}}</div>
             {{/if}}
             {{/if}}
             <div class="profile-name pull-left mleft50 mtop5">
@@ -128,7 +128,7 @@
             <hr>
             <ul class="tags">
                 {{#each tags}}
-                <li>{{ this }}</li>
+                <li class="single-tag">{{ this }}</li>
                 {{/each}}
             </ul>
             <div class="clearfix"></div>
