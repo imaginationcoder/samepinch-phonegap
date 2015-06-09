@@ -25,6 +25,7 @@ function commentReady(){
                         var source = $("#single-comment-template").html();
                         var template = Handlebars.compile(source);
                         $(template(data.body)).appendTo('#all-comments').hide().fadeIn(2000);
+                       // $("html,body").animate({scrollTop: $('ul#all-comments li:last').offset().top - 30});
                         comment_text.val('')//clear input
                         hideAjaxSpinner();
                         upDownVoteComment()
@@ -103,6 +104,18 @@ function commentReady(){
             window.location.href = 'signin.html'
         }
     })
+
+    // edit comment
+    $('.edit-comment').on('click',function(e){
+        e.preventDefault()
+        alert('Under development')
+    })
+
+    // flag comment
+    $('.flag-comment').on('click',function(e){
+        e.preventDefault()
+        alert('Under development')
+    })
 }
 
 
@@ -148,8 +161,9 @@ function upDownVoteComment(){
             window.location.href = 'signin.html'
         }
     })
-
 }
+
+
 
 
 

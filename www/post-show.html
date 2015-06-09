@@ -114,7 +114,7 @@
             <div class="row">
                 <div class="col-md-10 col-xs-8">
                     {{#each tags}}
-                    <div class="tag single-tag">{{ this }}</div>
+                    <div class="tag single-tag" data-name="{{ this }}">{{ this }}</div>
                     {{/each}}
                 </div>
                 <!-- flag/like sesction -->
@@ -169,7 +169,10 @@
                               {{ else }}
                               <li><a href="#" class="up-down-vote-comment" data-id="{{ uid }}">Like</a></li>
                               {{/if}}
-                              <li><a href="#">Flag </a></li>
+                              {{#ifIn 'edit' can }}
+                              <li><a href="#" class="edit-comment" data-id="{{ uid }}">Edit</a></li>
+                              {{/ifIn}}
+                              <li><a href="#" class="flag-comment" data-id="{{ uid }}">Flag </a></li>
                           </ul>
                         </span>
                     </div>
@@ -211,7 +214,10 @@
                     {{ else }}
                     <li><a href="#" class="up-down-vote-comment" data-id="{{ uid }}">Like</a></li>
                     {{/if}}
-                    <li><a href="#">Flag </a></li>
+                    {{#ifIn 'edit' can }}
+                    <li><a href="#" class="edit-comment" data-id="{{ uid }}">Edit</a></li>
+                    {{/ifIn}}
+                    <li><a href="#" class="flag-comment" data-id="{{ uid }}">Flag </a></li>
                 </ul>
             </span>
             </div>

@@ -56,7 +56,7 @@ function singlePostClickEvents(){
     $('.single-post').on('click', function (e) {
         e.preventDefault()
         //  alert($(this).data('uid'))
-        sessionStorage.setItem('post-uid', $(this).data('uid'))
+        sessionStorage.setItem('post_uid', $(this).data('uid'))
         window.location.href = 'post-show.html'
     })
 
@@ -71,7 +71,8 @@ function singlePostClickEvents(){
 
     $('.single-post .single-tag').on('click',function(e){
         e.stopPropagation()
-        alert('Under development')
+        sessionStorage.setItem('tag_name',$(this).data('name'))
+        window.location.href = 'tag-view.html'
     })
 
 
@@ -79,7 +80,7 @@ function singlePostClickEvents(){
 
 function singlePostShowReady(){
     $.ajax({
-        url: window.api_url+'posts/'+sessionStorage['post-uid'],
+        url: window.api_url+'posts/'+sessionStorage['post_uid'],
         type: 'post',
         data: {
             'command' :"show",
@@ -93,7 +94,7 @@ function singlePostShowReady(){
             var template = Handlebars.compile(source);
 
             $('#post').html(template(data.body));
-            $('#comment-form').find('input[name="post_id"]').val(sessionStorage['post-uid'])
+            $('#comment-form').find('input[name="post_id"]').val(sessionStorage['post_uid'])
 
             //TODO place images
             /*str = $('.post-content').text()
@@ -134,7 +135,8 @@ function singlePostShowClickEvents(){
 
     $('.post-show .single-tag').on('click',function(e){
         e.stopPropagation()
-        alert('Under development')
+        sessionStorage.setItem('tag_name',$(this).data('name'))
+        window.location.href = 'tag-view.html'
     })
 
 
@@ -186,9 +188,7 @@ function upDownVotePost(){
 
 }
 
-
-
-
+//to add post
 function getFavoriteGroups(){
     $.ajax({
         url: window.api_url+'groups',
@@ -205,6 +205,11 @@ function getFavoriteGroups(){
             $("#add-post-tags").html(template(data.body))//.hide().fadeIn();
             hideAjaxSpinner()
             addPostReady() // invoke add post ready
+            // check tag if user comes from tag list posts and click on add-post button
+            if(sessionStorage['tag_name']){
+                $(":checkbox[value="+sessionStorage['tag_name']+"]").parents('li:first').trigger( "click" );
+                //sessionStorage.removeItem('tag_name')
+            }
         },
         error: function(xhr,textStatus,errorThrown ) {
             var error_obj = $.parseJSON(xhr.responseText)
@@ -214,6 +219,7 @@ function getFavoriteGroups(){
         }
     })
 }
+
 
 function addPostReady(){
     //$('#post-content-text').focus()

@@ -21,68 +21,53 @@
     <div class="sp-spinner"><i class="fa fa-spinner fa-spin"></i></div>
 </div>
 
-<div id="addPost">
+<div id="manageTags">
     <nav class="navbar navbar-inverse navbar-fixed-top navbar-sp">
         <div class="container">
             <div class="row">
-                <div class="col-md-3 col-xs-2">
+                <div class="col-md-2 col-xs-2">
                     <a href="#" onclick="window.history.back();"> <span class="glyphicon glyphicon-menu-left back"></span> </a>
                 </div>
-                <div class="col-md-6 col-xs-6 heading">ADD POST</div>
-                <div class="col-md-3 col-xs-4 nopadding-left">
-                    <div class="btn-group pull-right">
-                        <button type="button" class="btn btn-default" id="btn-send-post">&nbsp;Post as&nbsp;</button>
-                        <button id="switch-post-as" type="button" class="btn btn-default dropdown-toggle profilepic-img" data-toggle="dropdown" aria-expanded="false">
-                             <span id="post-as-picture">
-                                 <img src="img/ananymous-placeholder.png" alt="">
-                             </span>
-                            <span class="caret"></span>
-                            <span class="sr-only">Toggle Dropdown</span>
-                        </button>
-                        <ul class="dropdown-menu profilepic-img" role="menu">
-                            <span class="glyphicon glyphicon-triangle-top caret-dropdown"></span>
-                            <li class="post-as-user"></li>
-                            <li class="post-as-ananymous"></li>
-                        </ul>
-
-
-                    </div>
+                <div class="col-md-8 col-xs-8 heading">MANAGE TAGS</div>
+                <div class="col-md-2 col-xs-2 nopadding-left">
                 </div>
             </div>
         </div>
     </nav>
-
     <div class="container mtop20">
         <div class="row">
             <div class="col-md-12">
-                <form id="add-post-form" >
-                    <input type="hidden" name="anonymous" value="true">
-                    <div id="content-div-wrapper">
-                        <div contenteditable="" id="content-div">
-                            <input id="post-content-text" class="hidden-textfield" type="text" placeholder="Write description" name="content">
-                        </div>
-                        <!--<button id="imageButton" class="btn-rounded mbottom mtop">-->
-                            <!--<span class="glyphicon glyphicon-camera"></span>-->
-                        <!--</button>-->
-                        <input type="file" id="imageUpload">
-                    </div>
-                    <div class="clearfix"></div>
-                    <h4 class="mtop20">Select Tags</h4>
-                    <div>
-                        <ul class="tags-list" id="add-post-tags">
-                            <!-- tags will goes here dynamically -->
-                        </ul>
-                    </div>
-                </form>
+                <div>
+                    <ul class="tags-list">
+                        <!-- dynamic content -->
+                    </ul>
+                </div>
+
             </div>
         </div>
     </div>
-    <!-- /.container -->
 </div>
 
-<script id="get-tags-template" type="text/x-handlebars-template">
-    {{#groups}}
-    <li>
+
+<script id="favourites-tags-template" type="text/x-handlebars-template">
+    {{#favourites}}
+    <li data-uid="{{ uid }}">
+        <div class="tag-wrapper pos-relative">
+            <div class="checkmark-wrapper">
+                <input type="checkbox"  name="tags_array" value="{{ name }}" class="css-checkbox" id="group-{{ uid }}" checked/>
+                <label class="css-label" for="group-{{ uid }}"></label>
+            </div>
+            <img src="{{ image }}"  alt=""/>
+            <div class="tagname tagname-active">{{ name }}</div>
+        </div>
+    </li>
+    {{/favourites}}
+</script>
+
+
+<script id="recommended-tags-template" type="text/x-handlebars-template">
+    {{#recommended}}
+    <li data-uid="{{ uid }}">
         <div class="tag-wrapper pos-relative">
             <div class="checkmark-wrapper">
                 <input type="checkbox"  name="tags_array" value="{{ name }}" class="css-checkbox" id="group-{{ uid }}"/>
@@ -92,7 +77,7 @@
             <div class="tagname">{{ name }}</div>
         </div>
     </li>
-    {{/groups}}
+    {{/recommended}}
 </script>
 
 
@@ -107,13 +92,11 @@
 <script type="text/javascript" src="js/handlebars-helpers.js"></script>
 <script type="text/javascript" src="js/fastclick.js"></script>
 <script type="text/javascript" src="js/api_calls.js"></script><!--must before application.js  -->
-<script type="text/javascript" src="js/application.js"></script>
-<script type="text/javascript" src="js/authentication.js"></script>
-<script type="text/javascript" src="js/posts.js"></script>
 
-<script>
-    getFavoriteGroups()
-
+<script type="text/javascript" src="js/manage-tags.js"></script> 
+<script type="text/javascript">
+    getAllTagsToManage();
 </script>
+
 </body>
 </html>

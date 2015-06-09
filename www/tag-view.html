@@ -20,43 +20,36 @@
 <div class="loading-box">
     <div class="sp-spinner"><i class="fa fa-spinner fa-spin"></i></div>
 </div>
-<div id="Wall">
-    <nav class="navbar navbar-inverse navbar-fixed-top navbar-sp" id="navbar">
+<div id="Tagview-page">
+    <nav class="navbar navbar-inverse navbar-fixed-top navbar-sp">
         <div class="container">
             <div class="row">
-                <div class="col-md-3 col-xs-3" id="btnMyNavMenu">
+                <div class="col-md-3 col-xs-3" onclick="window.history.back();">
+                    <span class="glyphicon glyphicon-menu-left back"></span>
                 </div>
-                <div class="col-md-6 col-xs-6"><img src="img/header-icon-samepinch.png" class="img-responsive" width="47" height="28" alt=""/></div>
-                <div class="col-md-3 col-xs-3 nopadding-left" id="rightMenu">
-                    <a href="#" class="pull-right" id="search-toggle-btn"><img src="img/search.png" width="26" height="26" alt=""/></a>
+                <div class="col-md-6 col-xs-6 heading">TAG VIEW</div>
+                <div class="col-md-3 col-xs-3 nopadding-left">
+                    <a href="#" class="pull-right add-post">
+                        <img src="img/icon-createpost.png"  width="26" height="26" alt="" onmouseover="this.src='img/icon-createpost-active.png' " onmouseout="this.src='img/icon-createpost.png'"/>
+                    </a>
                 </div>
             </div>
         </div>
     </nav>
-
-
-    <div class="container-fluid">
+    <div class="clearfix"></div>
+    <div class="container-fluid" id="Tagview">
         <div class="row">
-            <div class="search-bar">
-                <div class="container">
-                    <div class="search-ph">
-                        <img src="img/icon-search-dark.png" width="20" height="20" alt=""/> search...
+            <div class="profile-box">
+                <div class="container txt-center">
+                    <!--<div class="profilepic-placeholder">JD</div>-->
+                    <div class="tag-img" id="tag-image">
+
                     </div>
-                    <div class="search-textfield">
-                        <img src="img/icon-search-dark.png" width="20" height="20" alt=""/> <input type="text" placeholder="search..." autofocus class="search-tf-style"> <span class="glyphicon glyphicon-remove-circle search-clear"></span>
-                    </div>
+                    <button class="btn-normal mtop15" id="tag-name"></button>
                 </div>
             </div>
         </div>
     </div>
-
-
-    <div class="container-fluid">
-        <div class="row">
-            <div class="favorite-bar"> <a href="#"><span class="glyphicon glyphicon-star"></span></a> </div>
-        </div>
-    </div>
-
 
     <div class="container load-up-posts" style="display: none;">
         <div class="row">
@@ -66,22 +59,17 @@
         </div>
     </div>
 
-    <div class="container mtop20 mbottom20">
+    <div class="container mtop20 mbottom10">
         <div class="row">
-            <div class="col-md-12"  id="posts-list">
-                <!-- each post goes here ------ -->
+            <div class="col-md-12 posts-list" id="Wall">
 
             </div>
         </div>
     </div>
 
-    <div class="container load-below-posts" style="display: none;">
-            <div class="row">
-                <div class="sp-spinner"><i class="fa fa-spinner fa-spin"></i></div>
-            </div>
-    </div>
-    <!-- /.container -->
+
 </div>
+
 
 <script id="posts-template" type="text/x-handlebars-template">
     {{#posts}}
@@ -134,7 +122,7 @@
             <div class="clearfix"></div>
             <ul class="comments">
                 {{#each commenters}}
-                   <li><img src="{{ this }}" /></li>
+                <li><img src="{{ this }}" /></li>
                 {{/each}}
                 <li>
                     <div class="comment-bubble-count">{{ comment_count }}</div>
@@ -163,9 +151,55 @@
 <script type="text/javascript" src="js/posts.js"></script>
 
 <script>
-   //localStorage.clear()
-   //sessionStorage.clear()
-    getAccessToken()
+    //set tag name
+    $('#Tagview-page .add-post').on('click',function(e){
+        e.preventDefault();
+        if(localStorage['current_user']){
+            window.location.href = 'add-post.html'
+        }else{
+            window.location.href = 'signin.html'
+        }
+    })
+
+
+    $('#Tagview-page #tag-name').html(sessionStorage['tag_name'])
+    $.ajax({
+        url: window.api_url+'posts',
+        type: 'post',
+        data: {
+            'command' :"filter",
+            'access_token':  localStorage['access_token'],
+            'body': {
+                "post_count": 0,
+                "last_modified":"",
+                "step":"",//# next or new
+                "etag":"",
+                "key": sessionStorage['tag_name'].substring(1), // remove first char(#)
+                "by": 'tag'
+            }
+        },
+        beforeSend: function () {
+            $('.load-up-posts').show()
+        },
+        success: function (data) {
+            var source = $("#posts-template").html();
+            var template = Handlebars.compile(source);
+            body = data.body
+            //set tag image
+            tag_img = $('<img>')
+            tag_img.attr('src',body.tag.image)
+            $('#Tagview-page #tag-image').html(tag_img)
+            $('.posts-list').prepend(template(body));
+            $('.load-up-posts').hide()
+            singlePostClickEvents() // enable js for single post click
+        },
+        error: function(xhr,textStatus,errorThrown ) {
+            var error_obj = $.parseJSON(xhr.responseText)
+            console.log(error_obj)
+            errorDialog('Error',error_obj.message)
+            $('.load-up-posts').hide()
+        }
+    })
 </script>
 </body>
 </html>

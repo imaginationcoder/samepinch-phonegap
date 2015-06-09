@@ -4,7 +4,7 @@
  */
 // Constants ------------------------------------------------
 
-var env = 'prod';
+var env = 'dev';
 //var env = 'local';
 //var env = 'prod';
 if(env == 'prod'){
@@ -38,10 +38,13 @@ var device_token = 'sample-android-device-token-123456'
 localStorage.setItem('device_token',device_token)
 
 /*
- *  LocalStorage List =>
- *   1) device_token
- *
- * Session Storage :
+ *  sessionStorage List =>
+ * --------------------------------------------------
+ *   1) tag_name
+ *   2) tag_uid
+ *   3) post_uid
+ * -------------------------------------------------
+ * Local Storage List =>
  *  1) current_user => {email,fname,lname,photo,uid}
  *  2) access_token
  *
