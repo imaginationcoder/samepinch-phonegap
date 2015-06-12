@@ -72,6 +72,7 @@ function singlePostClickEvents(){
 }
 
 function singlePostShowReady(){
+
     $.ajax({
         url: window.api_url+'posts/'+sessionStorage['post_uid'],
         type: 'post',
@@ -85,9 +86,17 @@ function singlePostShowReady(){
         success: function (data) {
             var source = $("#single-post-template").html();
             var template = Handlebars.compile(source);
-
-            $('#post').html(template(data.body));
+            body = data.body
+            //save obj for further comminication edit etc
+            $('#post').html(template(body));
             $('#comment-form').find('input[name="post_id"]').val(sessionStorage['post_uid'])
+            if(data.body.can){
+                sessionStorage.setItem('current_post',JSON.stringify({content: body.content,uid: body.uid,tags: body.tags,anonymous: body.anonymous}))
+                if($.inArray('edit',data.body.can) != -1){
+                    $('#edit-post-nav').html('<span class="glyphicon glyphicon-pencil back pull-right edit-post"></span>')
+                    $('.edit-post').attr('data-uid',data.body.uid)
+                }
+            }
 
             //TODO place images
             /*str = $('.post-content').text()
@@ -136,7 +145,11 @@ function singlePostShowClickEvents(){
         window.location.href = 'tag-view.html'
     })
 
-
+    $('.edit-post').on('click',function(e){
+        e.preventDefault()
+        sessionStorage.setItem('post_uid',$(this).data('uid'))
+        window.location.href = 'edit-post.html'
+    })
 }
 
 
@@ -186,7 +199,7 @@ function upDownVotePost(){
 }
 
 //to add post
-function getFavoriteGroups(){
+function getFavoriteGroups(from){
     $.ajax({
         url: window.api_url+'groups',
         type: 'post',
@@ -204,9 +217,21 @@ function getFavoriteGroups(){
             addPostReady() // invoke add post ready
             // check tag if user comes from tag list posts and click on add-post button
             if(sessionStorage['tag_name']){
-                $(":checkbox[value="+sessionStorage['tag_name']+"]").parents('li:first').trigger( "click" );
-                //sessionStorage.removeItem('tag_name')
+                $(':checkbox[value="' + sessionStorage['tag_name'] + '"]').parents('li:first').trigger( "click" );
+                sessionStorage.removeItem('tag_name')
             }
+            if(from == 'edit-post'){
+                post = JSON.parse(sessionStorage.getItem('current_post'))
+                tags = post.tags
+                if(post.anonymous == false){
+                    $('.post-as-user').trigger('click');
+                }
+                $('#post-content-text').val(post.content)
+                jQuery.each( tags, function( i, val ) {
+                    $(':checkbox[value="' + val + '"]').parents('li:first').trigger( "click" );
+                });
+            }
+
         },
         error: function(xhr,textStatus,errorThrown ) {
             var error_obj = $.parseJSON(xhr.responseText)
@@ -389,6 +414,66 @@ function getPostsByTag(){
             console.log(error_obj)
             errorDialog('Error',error_obj.message)
             $('.load-up-posts').hide()
+        }
+    })
+}
+
+function getFavouritePosts(){
+
+    $('#get-favourite-posts').on('click',function(e){
+        e.preventDefault()
+        if(localStorage['current_user']){
+            $('#posts-list').html('')
+            $('.load-up-posts').show()
+            if($(this).hasClass('fav-active')){
+                $(this).removeClass('fav-active')
+                getPosts()
+            }else{
+                $(this).addClass('fav-active')
+                if(localStorage.getItem('favourite_posts')){
+                    posts = JSON.parse(localStorage.getItem('favourite_posts'))
+                    var source = $("#posts-template").html();
+                    var template = Handlebars.compile(source);
+                    $('#posts-list').prepend(template(posts));
+                    singlePostClickEvents()
+                }
+                $.ajax({
+                    url: window.api_url+'posts',
+                    type: 'post',
+                    data: {
+                        'command' :"filter",
+                        'access_token':  localStorage['access_token'],
+                        'body': {
+                            "post_count": 0,
+                            "last_modified":"",
+                            "step":"",//# next or new
+                            "etag":"",
+                            "key": '', // remove first char(#)
+                            "by": 'favourites'
+                        }
+                    },
+                    beforeSend: function () {
+                        $('.load-up-posts').show()
+                    },
+                    success: function (data) {
+                        var source = $("#posts-template").html();
+                        var template = Handlebars.compile(source);
+                        body = data.body
+                        localStorage.setItem('favourite_posts',JSON.stringify(body))
+                        $('#posts-list').prepend(template(body));
+                        singlePostClickEvents() // enable js for single post click
+                        $('.load-up-posts').hide()
+                    },
+                    error: function(xhr,textStatus,errorThrown ) {
+                        var error_obj = $.parseJSON(xhr.responseText)
+                        console.log(error_obj)
+                        errorDialog('Error',error_obj.message)
+                        $('.load-up-posts').hide()
+                    }
+                })
+            }
+        }else{
+            window.location.href = 'signin.html'
         }
     })
 }

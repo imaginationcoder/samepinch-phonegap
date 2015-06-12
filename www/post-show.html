@@ -28,11 +28,12 @@
                     <a href="index.html"> <span class="glyphicon glyphicon-menu-left back"></span> </a>
                 </div>
                 <div class="col-md-6 col-xs-6 heading"><img src="img/header-icon-samepinch.png" class="img-responsive" width="47" height="28" alt=""/></div>
-                <div class="col-md-3 col-xs-3 nopadding-left"> </div>
+                <div class="col-md-3 col-xs-3 nopadding-left" id="edit-post-nav">
+                </div>
             </div>
         </div>
     </nav>
-    <div class="container">
+    <div class="container mbottom65">
         <!-- Example row of columns -->
         <div class="row">
             <div class="col-md-12 post-show" id="post">
@@ -136,11 +137,12 @@
         </div>
     </div>
     <div class="clearfix"></div>
-    <div id="comments" class="mbottom20">
+    <div class="comments-list-style">
         <ul id="all-comments">
             {{#comments }}
             <li id="comment-{{ uid }}" data-id="{{ uid }}">
                 <div class="row">
+                    <span class="comments-block">
                     <div class="col-md-1 col-xs-1 col-sm-1 profilepic-img">
                         {{#if anonymous}}
                         <div class="profilepic-placeholder profile-avatar anonymous"> <img src="img/ananymous-placeholder.png" alt=""/></div>
@@ -152,6 +154,7 @@
                         {{/if}}
                         {{/if}}
                     </div>
+                        </span>
                     <div class="col-md-10 col-xs-6 col-sm-9 pull-left mleft">
                         <div>{{ text }}</div>
                         <div class="time">{{ createdAt }}</div>
@@ -186,17 +189,19 @@
 <script id="single-comment-template" type="text/x-handlebars-template">
     <li id="comment-{{ uid }}" data-id="{{ uid }}">
         <div class="row">
-            <div class="col-md-1 col-xs-1 col-sm-1">
-                {{#if anonymous}}
-                <div class="profilepic-img pull-left profile-avatar anonymous"><img src="img/ananymous-placeholder.png"/></div>
-                {{else}}
-                {{#if commenter.photo }}
-                <img src="{{ commenter.photo }}" class="comment-profile profile-avatar" alt="" data-uid="{{ commenter.uid }}" data-name="{{ commenter.fname}} {{commenter.lname}}"/>
-                {{ else }}
-                <div class="profilepic-placeholder profile-avatar" data-uid="{{ commenter.uid }}" data-name="{{ commenter.fname}} {{commenter.lname}}">{{firstChar commenter.fname}}{{firstChar commenter.lname}}</div>
-                {{/if}}
-                {{/if}}
-            </div>
+             <span class="comments-block">
+                    <div class="col-md-1 col-xs-1 col-sm-1 profilepic-img">
+                        {{#if anonymous}}
+                        <div class="profilepic-placeholder profile-avatar anonymous"> <img src="img/ananymous-placeholder.png" alt=""/></div>
+                        {{else}}
+                        {{#if commenter.photo }}
+                        <img src="{{ commenter.photo }}" alt="" class="profile-avatar" data-uid="{{ commenter.uid }}" data-name="{{ commenter.fname}} {{commenter.lname}}"/>
+                        {{ else }}
+                        <div class="profilepic-placeholder profile-avatar" data-uid="{{ commenter.uid }}" data-name="{{ commenter.fname}} {{commenter.lname}}">{{firstChar commenter.fname}}{{firstChar commenter.lname}}</div>
+                        {{/if}}
+                        {{/if}}
+                    </div>
+                        </span>
             <div class="col-md-10 col-xs-6 col-sm-9 pull-left mleft">
                 <div>{{ text }}</div>
                 <div class="time">{{ createdAt }}</div>

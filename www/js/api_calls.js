@@ -44,6 +44,7 @@ localStorage.setItem('device_token',device_token)
  *   2) post_uid
  *   3) profile_uid
  *   4) profile_name
+ *   5) current_post => {uid,content etc}
  * -------------------------------------------------
  * Local Storage List =>
  *  1) current_user => {email,fname,lname,photo,uid}

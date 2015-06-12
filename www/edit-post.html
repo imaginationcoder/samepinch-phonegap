@@ -26,12 +26,12 @@
         <div class="container">
             <div class="row">
                 <div class="col-md-3 col-xs-2">
-                    <a href="index.html"> <span class="glyphicon glyphicon-menu-left back"></span> </a>
+                    <a href="post-show.html"> <span class="glyphicon glyphicon-menu-left back"></span> </a>
                 </div>
-                <div class="col-md-6 col-xs-6 heading">ADD POST</div>
+                <div class="col-md-6 col-xs-6 heading">EDIT POST</div>
                 <div class="col-md-3 col-xs-4 nopadding-left">
                     <div class="btn-group pull-right">
-                        <button type="button" class="btn btn-default" id="btn-send-post">&nbsp;Post as&nbsp;</button>
+                        <button type="button" class="btn btn-default" id="btn-edit-post">&nbsp;Save&nbsp;</button>
                         <button id="switch-post-as" type="button" class="btn btn-default dropdown-toggle profilepic-img" data-toggle="dropdown" aria-expanded="false">
                              <span id="post-as-picture">
                                  <img src="img/ananymous-placeholder.png" alt="">
@@ -44,8 +44,6 @@
                             <li class="post-as-user"></li>
                             <li class="post-as-ananymous"></li>
                         </ul>
-
-
                     </div>
                 </div>
             </div>
@@ -62,7 +60,7 @@
                             <input id="post-content-text" class="hidden-textfield" type="text" placeholder="Write description" name="content">
                         </div>
                         <!--<button id="imageButton" class="btn-rounded mbottom mtop">-->
-                            <!--<span class="glyphicon glyphicon-camera"></span>-->
+                        <!--<span class="glyphicon glyphicon-camera"></span>-->
                         <!--</button>-->
                         <input type="file" id="imageUpload">
                     </div>
@@ -112,7 +110,51 @@
 <script type="text/javascript" src="js/posts.js"></script>
 
 <script>
-    getFavoriteGroups('add-post')
+    getFavoriteGroups('edit-post')
+    $('#btn-edit-post').on('click',function(e) {
+        e.preventDefault()
+        content = $('#add-post-form').find('input[name="content"]')
+        if (localStorage['current_user']) {
+            if(content.val() == '') {
+                errorDialog('Error', 'Please enter text')
+                //   $('#post-content-text').focus()
+            }else if($('input[type=checkbox]:checked').length == 0){
+                errorDialog('Error', 'Please select atleast one tag')
+            }
+            else{
+                // get checked tags
+                var tagsArray = $("#add-post-form input:checkbox:checked").map(function(){
+                    return $(this).val();
+                }).get(); ;
+                var body_params = $.extend({}, $('#add-post-form').serializeHash())
+                body_params['tags_array'] = tagsArray
+                $.ajax({
+                    url: window.api_url + 'posts/'+post.uid,
+                    type: 'post',
+                    data: {
+                        'command': "update",
+                        'access_token': localStorage['access_token'],
+                        'body': body_params
+                    },
+                    beforeSend: function () {
+                        showAjaxSpinner();
+                    },
+                    success: function (data) {
+                        hideAjaxSpinner();
+                        window.location.href = 'post-show.html'
+                    },
+                    error: function (xhr, textStatus, errorThrown) {
+                        var error_obj = $.parseJSON(xhr.responseText)
+                        console.log(error_obj)
+                        errorDialog('Error', error_obj.message)
+                        hideAjaxSpinner();
+                    }
+                })
+            }
+        }else {
+            window.location.href = 'signin.html'
+        }
+    })
 
 </script>
 </body>
