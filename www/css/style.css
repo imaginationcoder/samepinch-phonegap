@@ -134,7 +134,7 @@ body {
 	color:#c5c5c5;
 }
 
-.favorite-bar a:hover{
+.favorite-bar a:hover, .favorite-bar a.fav-active{
 	color:#c52128;
 }
 

@@ -13,7 +13,7 @@ if(env == 'prod'){
     window.app_client_id = '3e0786a2f258e6f9b08250dbd7f35010480988e0d3d1ef373b79e07884be79f9'
     window.app_client_secret = '813c95cc2eb6c0cf4f49d30d0add0c6fc3ea82863d30507beb6733c0e643927c'
     // comment below for apk generation
-    // var device = {model: 'XT1033', platform: 'Android',version: '5.0.2',uuid: 'dd46057341bf77df',cordova: '3.7.0'}
+   // var device = {model: 'XT1033', platform: 'Android',version: '5.0.2',uuid: 'dd46057341bf77df',cordova: '3.7.0'}
 }else if(env=='dev'){
     window.auth_url = 'http://localhost:3000/users/auth/'
     window.api_url = 'http://localhost:3000/api/'
@@ -90,6 +90,7 @@ function getAccessToken() {
             },
             beforeSend: function () {
                 console.log('getting access_token..')
+                $('.load-up-posts').show()
             },
             success: function (data) {
                 localStorage.setItem('access_token', data.access_token)

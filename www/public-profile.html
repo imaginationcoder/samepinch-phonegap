@@ -15,13 +15,15 @@
     <link href='http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css' rel='stylesheet' type='text/css'>
 </head>
 <body>
-
+<div class="loading-box">
+    <div class="sp-spinner"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
 <div id="Profile-page">
     <nav class="navbar navbar-inverse navbar-fixed-top navbar-sp">
         <div class="container">
             <div class="row">
                 <div class="col-md-3 col-xs-3">
-                    <a href="#" onclick="window.history.back();"> <span class="glyphicon glyphicon-menu-left back"></span> </a>
+                    <a href="index.html"> <span class="glyphicon glyphicon-menu-left back"></span> </a>
                 </div>
                 <div class="col-md-6 col-xs-6 heading">PROFILE</div>
                 <div class="col-md-3 col-xs-3 nopadding-left">
@@ -38,12 +40,14 @@
                     <span id="profile-pic-image">
                         <!--<div class="profilepic-placeholder">JD</div>-->
                         <div class="profilepic-img">
-                            <img src="img/profile-img.png" alt=""/>
+                            <img src="img/profile-default-avatar.png" alt=""/>
                         </div>
                     </span>
 
                     <div class="profile-name-profile"></div>
-                    <button class="btn-normal">follow</button>
+                    <span class="follow-or-unfollow-user">
+
+                    </span>
                 </div>
             </div>
         </div>
@@ -147,92 +151,9 @@
 <script type="text/javascript" src="js/authentication.js"></script>
 -->
 <script type="text/javascript" src="js/posts.js"></script>
-
-<script type="text/javascript">
-    $('#Profile-page .profile-name-profile').html(sessionStorage['profile_name'])
-    // sessionStorage.removeItem('profile_name')
-
-    // get Profile info by uid after that remove from session
-    $.ajax({
-        url: window.api_url+'users/'+sessionStorage['profile_uid'],
-        type: 'post',
-        data: {
-            'command' : 'public_profile',
-            'access_token':  localStorage['access_token'],
-        },
-        beforeSend: function () { },
-        success: function (data) {
-            img = ''
-            body = data.body
-            $('#Profile-page .profile-name-profile').html(body.full_name)
-            if(body.photo){
-                p_img = $('<img>')
-                p_img.attr('src',body.photo)
-                img +=  "<div class='profilepic-img'>"
-                img +=  '<img src='+ body.photo +' alt=""/>'
-                img +=  "</div>"
-            } else{
-             img += "<div class='profilepic-placeholder'>"
-             img +=   body.fname.substr(0, 1).toUpperCase() +""+body.lname.substr(0, 1).toUpperCase()
-             img += "</div>"
-            }
-
-            $('#Profile-page #profile-pic-image').html(img)
-        },
-        error: function(xhr,textStatus,errorThrown ) {
-            var error_obj = $.parseJSON(xhr.responseText)
-            console.log(error_obj)
-            hideAjaxSpinner()
-            errorDialog('Error',error_obj.message)
-        }
-    })
+<script type="text/javascript" src="js/public_profile.js"></script>
 
 
-
-    // invoke posts by user
-    $.ajax({
-        url: window.api_url+'posts',
-        type: 'post',
-        data: {
-            'command' :"filter",
-            'access_token':  localStorage['access_token'],
-            'body': {
-                "post_count": 0,
-                "last_modified":"",
-                "step":"",//# next or new
-                "etag":"",
-                "key": sessionStorage['profile_uid'] ,
-                "by": 'user'
-            }
-        },
-        beforeSend: function () {
-            $('.load-up-posts').show()
-        },
-        success: function (data) {
-            var source = $("#posts-template").html();
-            var template = Handlebars.compile(source);
-            body = data.body
-            $('.posts-list').prepend(template(body));
-            $('.load-up-posts').hide()
-            singlePostClickEvents() // enable js for single post click
-        },
-        error: function(xhr,textStatus,errorThrown ) {
-            var error_obj = $.parseJSON(xhr.responseText)
-            console.log(error_obj)
-            errorDialog('Error',error_obj.message)
-            $('.load-up-posts').hide()
-        }
-    })
-
-
-
-
-
-
-
-
-
-</script>
 
 </body>
 </html>

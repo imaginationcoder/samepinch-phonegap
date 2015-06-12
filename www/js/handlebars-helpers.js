@@ -11,8 +11,10 @@ Handlebars.registerHelper('firstChar', function(str) {
 //usage :
 // {{#ifIn id ../favourites }}color: red{{/ifIn}}
 Handlebars.registerHelper('ifIn', function(elem, list, options) {
-    if(list.indexOf(elem) > -1) {
-        return options.fn(this);
+    if(list) {
+        if (list.indexOf(elem) > -1) {
+            return options.fn(this);
+        }
+        return options.inverse(this);
     }
-    return options.inverse(this);
 });

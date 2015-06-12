@@ -30,7 +30,7 @@ $(document).ready(function() {
         myNavMenuList += "            <li><a href=\"add-post.html\"> <img src=\"img/icon-createpost.png\" width=\"26\" height=\"26\" alt=\"\"\/>  Create Post<\/a><\/li>";
         myNavMenuList += "            <li><a href=\"#\"> <img src=\"img/menu-settings.png\" width=\"26\" height=\"26\" alt=\"\"\/>  Settings<\/a><\/li>";
         myNavMenuList += "            <li><a href=\"manage-tags.html\"> <img src=\"img/icon-menu-mtags.png\" width=\"26\" height=\"26\" alt=\"\"\/>  Manage Tags<\/a><\/li>";
-        myNavMenuList += "            <li><a href=\"#\"> <img src=\"img/icon-menu-about.png\" width=\"26\" height=\"26\" alt=\"\"\/>  About<\/a><\/li>";
+        myNavMenuList += "            <li><a href=\"about.html\"> <img src=\"img/icon-menu-about.png\" width=\"26\" height=\"26\" alt=\"\"\/>  About<\/a><\/li>";
         myNavMenuList += "            <li id=\"sign-out\"><a href=\"#\"> <img src=\"img/menu-logout.png\" width=\"26\" height=\"26\" alt=\"\"\/> Logout<\/a><\/li>";
         myNavMenuList += "        <\/ul>";
         myNavMenuList += "    <\/nav>";
@@ -40,9 +40,9 @@ $(document).ready(function() {
         //TODO enable if same as in IOS app
       //  $('#myNavmenu').offcanvas({autohide:true, toggle:faldse})
     }else{
-        var btnSignIn="";
-        btnSignIn += "<a class=\"pull-right\" href=\"signin.html\"><img width=\"26\" height=\"26\" alt=\"\" src=\"img/icon-createpost.png\"><\/a>";
-        $('#rightMenu').prepend(btnSignIn)
+        //var btnSignIn="";
+        //btnSignIn += "<a class=\"pull-right\" href=\"signin.html\"><img width=\"26\" height=\"26\" alt=\"\" src=\"img/icon-createpost.png\"><\/a>";
+        //$('#rightMenu').prepend(btnSignIn)
     }
 
 
@@ -52,6 +52,14 @@ $(document).ready(function() {
     $(".search-bar").click(function() {
         $(".search-ph").hide();
         $(".search-textfield").show();
+    })
+
+    $('#menu-add-post').on('click',function(){
+        if(localStorage['current_user']){
+            window.location.href = 'add-post.html'
+        }else{
+            window.location.href = 'signin.html'
+        }
     })
 
 })

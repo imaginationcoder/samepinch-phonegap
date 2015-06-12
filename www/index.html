@@ -28,6 +28,9 @@
                 </div>
                 <div class="col-md-6 col-xs-6"><img src="img/header-icon-samepinch.png" class="img-responsive" width="47" height="28" alt=""/></div>
                 <div class="col-md-3 col-xs-3 nopadding-left" id="rightMenu">
+                    <a href="#" class="pull-right" id="menu-add-post">
+                        <img src="img/icon-createpost.png"  width="26" height="26" alt=""/>
+                    </a>
                     <a href="#" class="pull-right" id="search-toggle-btn"><img src="img/search.png" width="26" height="26" alt=""/></a>
                 </div>
             </div>
@@ -53,7 +56,9 @@
 
     <div class="container-fluid">
         <div class="row">
-            <div class="favorite-bar"> <a href="#"><span class="glyphicon glyphicon-star"></span></a> </div>
+            <div class="favorite-bar">
+                <a href="#" id="get-favourite-posts"><span class="glyphicon glyphicon-star"></span></a>
+            </div>
         </div>
     </div>
 
@@ -163,9 +168,65 @@
 <script type="text/javascript" src="js/posts.js"></script>
 
 <script>
-   //localStorage.clear()
-   //sessionStorage.clear()
+  //  localStorage.clear()
+  //  sessionStorage.clear()
     getAccessToken()
+
+    $('#get-favourite-posts').on('click',function(){
+        if(localStorage['current_user']){
+            $('#posts-list').html('')
+            $('.load-up-posts').show()
+            if($(this).hasClass('fav-active')){
+                $(this).removeClass('fav-active')
+               getPosts()
+            }else{
+                $(this).addClass('fav-active')
+                if(localStorage.getItem('favourite_posts')){
+                    posts = JSON.parse(localStorage.getItem('favourite_posts'))
+                    var source = $("#posts-template").html();
+                    var template = Handlebars.compile(source);
+                    $('#posts-list').prepend(template(posts));
+                    singlePostClickEvents()
+                }
+                $.ajax({
+                    url: window.api_url+'posts',
+                    type: 'post',
+                    data: {
+                        'command' :"filter",
+                        'access_token':  localStorage['access_token'],
+                        'body': {
+                            "post_count": 0,
+                            "last_modified":"",
+                            "step":"",//# next or new
+                            "etag":"",
+                            "key": '', // remove first char(#)
+                            "by": 'favourites'
+                        }
+                    },
+                    beforeSend: function () {
+                        $('.load-up-posts').show()
+                    },
+                    success: function (data) {
+                        var source = $("#posts-template").html();
+                        var template = Handlebars.compile(source);
+                        body = data.body
+                        localStorage.setItem('favourite_posts',JSON.stringify(body))
+                        $('#posts-list').prepend(template(body));
+                        singlePostClickEvents() // enable js for single post click
+                        $('.load-up-posts').hide()
+                    },
+                    error: function(xhr,textStatus,errorThrown ) {
+                        var error_obj = $.parseJSON(xhr.responseText)
+                        console.log(error_obj)
+                        errorDialog('Error',error_obj.message)
+                        $('.load-up-posts').hide()
+                    }
+                })
+            }
+        }else{
+            window.location.href = 'signin.html'
+        }
+    })
 </script>
 </body>
 </html>
