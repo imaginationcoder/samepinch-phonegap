@@ -136,7 +136,7 @@ body {
 	color:#c5c5c5;
 }
 
-.favorite-bar a.fav-active{
+.favorite-bar a:hover, .favorite-bar a.fav-active{
 	color:#c52128;
 }
 
@@ -191,6 +191,8 @@ body {
 	text-transform:uppercase;
 	color:#bbbbbb;
 }
+
+
 
 #viewPost .comments-block .profilepic-placeholder {
 	width:30px;
@@ -507,6 +509,19 @@ a.color-blue {
 #Signup .upload-profile img{
 	width:51px;
 	height:51px;
+	border-radius:100%;
+
+}
+
+#Signup #Editprofile .upload-profile {
+	width:100px;
+	height:100px;
+	margin:0 auto;
+}
+
+#Signup #Editprofile .upload-profile img{
+	width:100px;
+	height:100px;
 	border-radius:100%;
 
 }
@@ -1035,4 +1050,8 @@ code {
 	border-bottom:1px solid #e8e8e8;
 }
 
+.about-description {
+	background-color:#ffffff;
+	padding:9px 0;
+}
 

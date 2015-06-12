@@ -13,7 +13,7 @@ $(document).ready(function() {
 
         var myNavMenuList="";
         myNavMenuList += "<nav id=\"myNavmenu\" class=\"navmenu navmenu-default navmenu-fixed-left offcanvas\" role=\"navigation\">";
-        myNavMenuList += "        <a class=\"navmenu-brand\" href=\"#\">"
+        myNavMenuList += "        <a class=\"navmenu-brand\" href=\"edit-profile.html\">"
         if(current_user.photo){
             myNavMenuList += "           <img src="+current_user.photo+">"
 

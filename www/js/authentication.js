@@ -121,6 +121,34 @@ function resetPassword(){
     })
 }
 
+function editProfile(){
+    // merge form data with device-info
+    var body_params =   $('#edit-profile-form').serializeHash()
+    $.ajax({
+        url: window.api_url+'users',
+        type: 'post',
+        data: {
+            'command' :"update",
+            'access_token':  localStorage['access_token'],
+            'body': body_params
+        },
+        beforeSend: function () {  showAjaxSpinner()  },
+        success: function (data) {
+            hideAjaxSpinner()
+            //set current user
+            body = data.body
+            localStorage.setItem('current_user',JSON.stringify(body))
+            window.location.href = 'index.html'
+        },
+        error: function(xhr,textStatus,errorThrown ) {
+            var error_obj = $.parseJSON(xhr.responseText)
+            console.log(error_obj)
+            hideAjaxSpinner()
+            errorDialog('Error',error_obj.message)
+        }
+    })
+}
+
 $(document).on('ready',function(){
     // signUp ----------------------------------------------
     $('#signup-form #btn-submit-signup').on('click',function(e){
@@ -168,5 +196,25 @@ $(document).on('ready',function(){
             resetPassword()
         }
     })
+
+
+    $('#btn-edit-profile').on('click',function(e){
+        e.preventDefault()
+        form=  $('#edit-profile-form')
+        fname = $.trim(form.find('input[name="fname"]').val())
+        lname = $.trim(form.find('input[name="lname"]').val())
+        email = $.trim(form.find('input[name="email"]').val())
+        if(fname == ''){
+            errorDialog('Error',"First name can't be blank")
+        }else if(lname==''){
+            errorDialog('Error',"Last name can't be blank")
+        }else if(email == ''){
+            errorDialog('Error',"Email can't be blank")
+        }else{
+            editProfile()
+        }
+    })
+
+
 })
 

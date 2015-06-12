@@ -25,7 +25,13 @@ $.ajax({
             img +=   body.fname.substr(0, 1).toUpperCase() +""+body.lname.substr(0, 1).toUpperCase()
             img += "</div>"
         }
-
+        // add summary
+        if(body.summary){
+            str = '<div class="about-description"><div class="container">'
+            str += body.summary
+            str +=  '</div></div>'
+            $(str).insertAfter(".profile-box");
+        }
         $('#Profile-page #profile-pic-image').html(img)
         $('.follow-or-unfollow-user').attr('data-uid',body.uid)
         if(body.follow== false){

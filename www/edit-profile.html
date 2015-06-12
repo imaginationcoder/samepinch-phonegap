@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="favicon.ico">
+    <title>SamePinch</title>
+    <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="css/style.css" rel="stylesheet">
+    <link href='http://fonts.googleapis.com/css?family=Ubuntu:300,400' rel='stylesheet' type='text/css'>
+    <link href='http://fortawesome.github.io/Font-Awesome/assets/font-awesome/css/font-awesome.css' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+<div class="loading-box">
+    <div class="sp-spinner"><i class="fa fa-spinner fa-spin"></i></div>
+</div>
+<div id="Profile-page">
+    <nav class="navbar navbar-inverse navbar-fixed-top navbar-sp">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-xs-3">
+                    <a href="index.html"> <span class="glyphicon glyphicon-menu-left back"></span></a>
+                </div>
+                <div class="col-md-6 col-xs-6 heading">PROFILE</div>
+                <div class="col-md-3 col-xs-3 nopadding-left">
+                </div>
+            </div>
+        </div>
+    </nav>
+    <div class="clearfix"></div>
+    <div id="Signup">
+        <div id="Editprofile" class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <form class="mtop30" id="edit-profile-form" name="editprofileform">
+                        <div class="upload-profile" id="profile-image">
+                            <img src="img/icon-profile-edit.png"  alt=""/>
+                        </div>
+
+                        <div class="clearfix"></div>
+                        <div class="row">
+                            <div class="col-md-6 col-xs-6"><input type="text" name="fname" class="login-textfield" placeholder="First name"></div>
+                            <div class="col-md-6 col-xs-6"><input type="text" name="lname" class="login-textfield" placeholder="Last name"></div>
+                        </div>
+                        <div class="mtop15"><input type="email" name="email" class="login-textfield" placeholder="Email"></div>
+                        <div class="mtop15"><input type="text" name='summary' class="login-textfield" placeholder="About"></div>
+                        <div class="mtop20"><button class="btn btn-danger btn-sp btn-block" id="btn-edit-profile">Update</button></div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" src="cordova.js"></script>
+<script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="js/jquery.serialize-hash.js"></script>
+<script type="text/javascript" src="js/fastclick.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/bootbox.min.js"></script>
+<script type="text/javascript" src="js/api_calls.js"></script><!--must before application.js  -->
+<script type="text/javascript" src="js/authentication.js"></script>
+
+<script type="text/javascript">
+    current_user = JSON.parse(localStorage.getItem('current_user'))
+    form = document.editprofileform
+    form.fname.value = current_user.fname;
+    form.lname.value = current_user.lname;
+    form.email.value = current_user.email;
+    form.summary.value = current_user.summary;
+    if(current_user.photo){
+        $('#profile-image img').attr('src',current_user.photo)
+    }
+</script>
+
+</body>
+</html>
