@@ -28,7 +28,7 @@ $(document).ready(function() {
         myNavMenuList += "        <ul class=\"nav navmenu-nav\">";
         myNavMenuList += "            <li><a href=\"index.html\"> <img src=\"img/menu-home.png\" width=\"26\" height=\"26\" alt=\"\"\/>  Wall<\/a><\/li>";
         myNavMenuList += "            <li><a href=\"add-post.html\"> <img src=\"img/icon-createpost.png\" width=\"26\" height=\"26\" alt=\"\"\/>  Create Post<\/a><\/li>";
-        myNavMenuList += "            <li><a href=\"#\"> <img src=\"img/menu-settings.png\" width=\"26\" height=\"26\" alt=\"\"\/>  Settings<\/a><\/li>";
+        myNavMenuList += "            <li><a href=\"settings.html\"> <img src=\"img/menu-settings.png\" width=\"26\" height=\"26\" alt=\"\"\/>  Settings<\/a><\/li>";
         myNavMenuList += "            <li><a href=\"manage-tags.html\"> <img src=\"img/icon-menu-mtags.png\" width=\"26\" height=\"26\" alt=\"\"\/>  Manage Tags<\/a><\/li>";
         myNavMenuList += "            <li><a href=\"about.html\"> <img src=\"img/icon-menu-about.png\" width=\"26\" height=\"26\" alt=\"\"\/>  About<\/a><\/li>";
         myNavMenuList += "            <li id=\"sign-out\"><a href=\"#\"> <img src=\"img/menu-logout.png\" width=\"26\" height=\"26\" alt=\"\"\/> Logout<\/a><\/li>";

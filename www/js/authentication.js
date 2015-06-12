@@ -174,13 +174,10 @@ $(document).on('ready',function(){
     })
 
     // signOut ----------------------------------------------
-    $('.login-navbar #sign-out').on('click',function(e){
-        e.preventDefault()
-        signOutUser()
-    })
+
 
     $('#sign-out').on('click',function(e){
-        e.preventDefault()
+        e.preventDefault() 
         signOutUser()
     })
 
