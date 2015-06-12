@@ -96,6 +96,31 @@ function signOutUser(){
     })
 }
 
+function resetPassword(){
+    // merge form data with device-info
+    var body_params =   $('#change-password-form').serializeHash()
+    $.ajax({
+        url: window.api_url+'users',
+        type: 'post',
+        data: {
+            'command' :"change_password",
+            'access_token':  localStorage['access_token'],
+            'body': body_params
+        },
+        beforeSend: function () {  showAjaxSpinner()  },
+        success: function (data) {
+            hideAjaxSpinner()
+            window.location.href = 'settings.html'
+        },
+        error: function(xhr,textStatus,errorThrown ) {
+            var error_obj = $.parseJSON(xhr.responseText)
+            console.log(error_obj)
+            hideAjaxSpinner()
+            errorDialog('Error',error_obj.message)
+        }
+    })
+}
+
 $(document).on('ready',function(){
     // signUp ----------------------------------------------
     $('#signup-form #btn-submit-signup').on('click',function(e){
@@ -129,6 +154,19 @@ $(document).on('ready',function(){
     $('#sign-out').on('click',function(e){
         e.preventDefault()
         signOutUser()
+    })
+
+    $('#btn-change-password').on('click',function(e){
+        e.preventDefault()
+        form=  $('#change-password-form')
+        curtent_pswd = form.find('input[name="current_password"]').val()
+        pswd = form.find('input[name="password"]').val()
+        conf_pswd = form.find('input[name="password_confirmation"]').val()
+        if(curtent_pswd =='' || pswd == '' || conf_pswd == ''){
+            errorDialog('Error','All fields are required')
+        }else{
+            resetPassword()
+        }
     })
 })
 
