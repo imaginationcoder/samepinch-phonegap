@@ -96,20 +96,7 @@ function singlePostShowReady(){
                     $('#edit-post-nav').html('<span class="glyphicon glyphicon-pencil back pull-right edit-post"></span>')
                     $('.edit-post').attr('data-uid',data.body.uid)
                 }
-            }
-
-            //TODO place images
-            /*str = $('.post-content').text()
-             //alert(str.match(/\::(.*?)\::/))
-             // alert(str.match("::(.*)::"))
-             console.log(str.match("::(.*)::"))
-             $.each(str.match("::(.*)::"), function(ix, val) {
-             val = $.trim(val); //remove \r|\n
-             if (val !== "")
-             alert(ix);
-             alert(val);
-             });
-             */
+            }  
           //  hideAjaxSpinner()
             $('.loading-content').hide()
             upDownVotePost()
