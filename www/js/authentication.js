@@ -177,7 +177,7 @@ $(document).on('ready',function(){
 
 
     $('#sign-out').on('click',function(e){
-        e.preventDefault() 
+        e.preventDefault()
         signOutUser()
     })
 

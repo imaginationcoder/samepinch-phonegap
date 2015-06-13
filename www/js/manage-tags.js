@@ -6,7 +6,9 @@ function getAllTagsToManage(){
             'command' :"all",
             'access_token':  localStorage['access_token'],
         },
-        beforeSend: function () { showAjaxSpinner();  },
+        beforeSend: function () {
+           // showAjaxSpinner();
+        },
         success: function (data) {
             // favorites
             var fav_source = $("#favourites-tags-template").html();
@@ -17,13 +19,15 @@ function getAllTagsToManage(){
             var rec_template = Handlebars.compile(rec_source);
             $("#manageTags .tags-list").append(rec_template(data.body))//.hide().fadeIn();
             // bind all click events
-            hideAjaxSpinner()
+           // hideAjaxSpinner()
+            $('.loading-content').hide()
             bindManageTagClicks()
         },
         error: function(xhr,textStatus,errorThrown ) {
             var error_obj = $.parseJSON(xhr.responseText)
             console.log(error_obj)
-            hideAjaxSpinner()
+           // hideAjaxSpinner()
+            $('.loading-content').hide()
             errorDialog('Error',error_obj.message)
         }
     })

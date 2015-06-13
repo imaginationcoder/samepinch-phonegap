@@ -81,14 +81,14 @@ function singlePostShowReady(){
             'access_token':  localStorage['access_token']
         },
         beforeSend: function () {
-            showAjaxSpinner()
+            // showAjaxSpinner()
         },
         success: function (data) {
             var source = $("#single-post-template").html();
             var template = Handlebars.compile(source);
             body = data.body
             //save obj for further comminication edit etc
-            $('#post').html(template(body));
+            $('#post').html(template(body))//.hide().fadeIn('slow');
             $('#comment-form').find('input[name="post_id"]').val(sessionStorage['post_uid'])
             if(data.body.can){
                 sessionStorage.setItem('current_post',JSON.stringify({content: body.content,uid: body.uid,tags: body.tags,anonymous: body.anonymous}))
@@ -110,7 +110,8 @@ function singlePostShowReady(){
              alert(val);
              });
              */
-            hideAjaxSpinner()
+          //  hideAjaxSpinner()
+            $('.loading-content').hide()
             upDownVotePost()
             commentReady() //invoke comment section for after
             singlePostShowClickEvents()
@@ -119,7 +120,8 @@ function singlePostShowReady(){
             var error_obj = $.parseJSON(xhr.responseText)
             console.log(error_obj)
             errorDialog('Error',error_obj.message)
-            hideAjaxSpinner()
+           // hideAjaxSpinner()
+            $('.loading-content').hide()
         }
     })
 }
@@ -207,13 +209,16 @@ function getFavoriteGroups(from){
             'command' :"favourites",
             'access_token':  localStorage['access_token'],
         },
-        beforeSend: function () { showAjaxSpinner();  },
+        beforeSend: function () {
+           // showAjaxSpinner();
+        },
         success: function (data) {
             var source = $("#get-tags-template").html();
             var template = Handlebars.compile(source);
             // $('#comments').append(template(data.body));
             $("#add-post-tags").html(template(data.body))//.hide().fadeIn();
-            hideAjaxSpinner()
+            //hideAjaxSpinner()
+            $('.loading-content').hide()
             addPostReady() // invoke add post ready
             // check tag if user comes from tag list posts and click on add-post button
             if(sessionStorage['tag_name']){
@@ -236,7 +241,8 @@ function getFavoriteGroups(from){
         error: function(xhr,textStatus,errorThrown ) {
             var error_obj = $.parseJSON(xhr.responseText)
             console.log(error_obj)
-            hideAjaxSpinner()
+           // hideAjaxSpinner()
+            $('.loading-content').hide()
             errorDialog('Error',error_obj.message)
         }
     })
