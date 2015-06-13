@@ -96,7 +96,7 @@ function singlePostShowReady(){
                     $('#edit-post-nav').html('<span class="glyphicon glyphicon-pencil back pull-right edit-post"></span>')
                     $('.edit-post').attr('data-uid',data.body.uid)
                 }
-            }  
+            }
           //  hideAjaxSpinner()
             $('.loading-content').hide()
             upDownVotePost()

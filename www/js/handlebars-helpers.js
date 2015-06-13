@@ -38,7 +38,7 @@ Handlebars.registerHelper('parsePostContent', function(text,large_images) {
         img_contents.push(arguments[0]);
     });
     $.each( img_contents, function( i, val ) {
-        text =  text.replace(val, "<img width='295' src="+ large_images[img_keys[i]]+"></img>");
+        text =  text.replace(val, "<div class='post-image-placeholder'><img height='165' width='295'  src="+ large_images[img_keys[i]]+"></img></div>");
     });
     return new Handlebars.SafeString(text);
 });
