@@ -81,6 +81,7 @@ $.ajax({
         $('.posts-list').prepend(template(body));
         $('.load-up-posts').hide()
         singlePostClickEvents() // enable js for single post click
+        $("time.timeago").timeago();
     },
     error: function(xhr,textStatus,errorThrown ) {
         var error_obj = $.parseJSON(xhr.responseText)

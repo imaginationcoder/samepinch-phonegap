@@ -1060,4 +1060,9 @@ code {
 	width: 295px;
 }
 
+.profile-name {
+	white-space: nowrap;
+	overflow: hidden;
+}
+
 

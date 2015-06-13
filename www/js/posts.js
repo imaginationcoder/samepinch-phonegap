@@ -5,6 +5,8 @@ function getPosts(){
         var template = Handlebars.compile(source);
         $('#posts-list').prepend(template(posts));
         singlePostClickEvents()
+        $("time.timeago").timeago();
+
     }
 
     $.ajax({
@@ -41,6 +43,7 @@ function getPosts(){
             $('#posts-list').prepend(template(body));
             singlePostClickEvents() // enable js for single post click
             $('.load-up-posts').hide()
+            $("time.timeago").timeago();
         },
         error: function(xhr,textStatus,errorThrown ) {
             var error_obj = $.parseJSON(xhr.responseText)
@@ -99,6 +102,7 @@ function singlePostShowReady(){
             }
           //  hideAjaxSpinner()
             $('.loading-content').hide()
+            $("time.timeago").timeago();
             upDownVotePost()
             commentReady() //invoke comment section for after
             singlePostShowClickEvents()
@@ -401,6 +405,7 @@ function getPostsByTag(){
             $('.posts-list').prepend(template(body));
             $('.load-up-posts').hide()
             singlePostClickEvents() // enable js for single post click
+            $("time.timeago").timeago();
         },
         error: function(xhr,textStatus,errorThrown ) {
             var error_obj = $.parseJSON(xhr.responseText)

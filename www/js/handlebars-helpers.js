@@ -43,3 +43,11 @@ Handlebars.registerHelper('parsePostContent', function(text,large_images) {
     return new Handlebars.SafeString(text);
 });
 
+Handlebars.registerHelper('isoTime', function(datetime) {
+    console.log(datetime)
+    var d = Date.parse(datetime);
+    console.log(d)
+    var n = d.toISOString();
+    return n
+});
+

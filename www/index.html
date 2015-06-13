@@ -116,11 +116,14 @@
             <!--END -- user picture section -->
             <div class="pull-right mtop5 icon-counts">
                 <img src="img/icon-view-count.png" width="26" height="15" alt=""/>
-                <span class="mright5">{{ views }}</span>
+                <span>{{ views }}</span>
                 <img src="img/icon-upvote-gray.png" width="21" height="21" alt=""/>
-                <span class="mright5">{{ upvote_count }}</span>
+                <span>{{ upvote_count }}</span>
                 <img src="img/time.png" width="20" height="20" alt=""/>
-                <span class="mright5 time-style">TD</span> </div>
+                <span class="time-style">
+                   <time class="timeago" datetime="{{ isoCreatedAt }}"></time>
+                </span>
+            </div>
             <div class="clearfix"></div>
             <div class="post-content mleft50">
                 <p>
@@ -156,6 +159,7 @@
 <!--<script type="text/javascript" src="js/index.js"></script>-->
 <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
 <script type="text/javascript" src="js/jquery.serialize-hash.js"></script>
+<script type="text/javascript" src="js/jquery.timeago.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
 <script type="text/javascript" src="js/jasny-bootstrap.js"></script>
 <script type="text/javascript" src="js/bootbox.min.js"></script>
