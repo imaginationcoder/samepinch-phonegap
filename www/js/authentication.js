@@ -178,6 +178,7 @@ $(document).on('ready',function(){
 
     $('#sign-out').on('click',function(e){
         e.preventDefault()
+        $('#myNavmenu').offcanvas('hide')
         signOutUser()
     })
 

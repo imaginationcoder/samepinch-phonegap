@@ -58,6 +58,9 @@ body {
 .mtop30{
 	margin-top:30px;
 }
+.mtop40{
+	margin-top:40px;
+}
 
 .mbottom5 {
 	margin-bottom:5px;
@@ -121,10 +124,12 @@ body {
 
 
 .favorite-bar {
-	background-color:#ffffff;
+	background-color:rgba(255,255,255,0.9);
 	height:30px;
 	width:100%;
 	padding:4px 0;
+	position:fixed;
+	z-index:10;
 }
 .favorite-bar a{
 	text-align:center;
@@ -136,8 +141,11 @@ body {
 	color:#c5c5c5;
 }
 
-.favorite-bar a:hover, .favorite-bar a.fav-active{
+.favorite-bar a.fav-active{
 	color:#c52128;
+}
+.fav-inactive {
+	color:#c5c5c5;
 }
 
 .wall-post-box {
@@ -320,6 +328,8 @@ body {
 	font-size:15px;
 	font-weight:bold;
 }
+
+
 #viewPost .profile-name {
 	margin-left:5px;
 	margin-top:5px;
@@ -960,7 +970,7 @@ a.color-blue {
 	position:fixed;
 	z-index:1032;
 	margin-top:-50px;
-	display:none;
+	display: none;
 }
 .loading-box .sp-spinner{
 	color:#ffffff;
@@ -1054,15 +1064,30 @@ code {
 	background-color:#ffffff;
 	padding:9px 0;
 }
+
 .post-image-placeholder{
-  background: url('../img/viewpost-postimg-placeholder.png') no-repeat;
+	background: url('../img/viewpost-postimg-placeholder.png') no-repeat;
 	height: 165px;
 	width: 295px;
 }
 
 .profile-name {
+	text-overflow: ellipsis;
+	width: 75px;
+	border: 1px solid transparent;
 	white-space: nowrap;
 	overflow: hidden;
 }
 
+@media (min-width:400px) {
+	#Wall .profile-name {
+		text-overflow: ellipsis;
+		width:auto;
+		border: 1px solid transparent;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+}
 
+ 
+ 

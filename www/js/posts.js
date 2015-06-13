@@ -6,7 +6,6 @@ function getPosts(){
         $('#posts-list').prepend(template(posts));
         singlePostClickEvents()
         $("time.timeago").timeago();
-
     }
 
     $.ajax({
@@ -418,22 +417,22 @@ function getPostsByTag(){
 
 function getFavouritePosts(){
 
-    $('#get-favourite-posts').on('click',function(e){
+    $('#btn-favourite-posts').on('click',function(e){
         e.preventDefault()
         if(localStorage['current_user']){
-            $('#posts-list').html('')
-            $('.load-up-posts').show()
             if($(this).hasClass('fav-active')){
                 $(this).removeClass('fav-active')
                 getPosts()
             }else{
                 $(this).addClass('fav-active')
                 if(localStorage.getItem('favourite_posts')){
+                    $('#posts-list').html('')
                     posts = JSON.parse(localStorage.getItem('favourite_posts'))
                     var source = $("#posts-template").html();
                     var template = Handlebars.compile(source);
                     $('#posts-list').prepend(template(posts));
                     singlePostClickEvents()
+                    $("time.timeago").timeago();
                 }
                 $.ajax({
                     url: window.api_url+'posts',
@@ -451,7 +450,9 @@ function getFavouritePosts(){
                         }
                     },
                     beforeSend: function () {
-                        $('.load-up-posts').show()
+                        if(!localStorage.getItem('favourite_posts')){
+                            $('.load-up-posts').show()
+                        }
                     },
                     success: function (data) {
                         var source = $("#posts-template").html();
@@ -461,6 +462,7 @@ function getFavouritePosts(){
                         $('#posts-list').prepend(template(body));
                         singlePostClickEvents() // enable js for single post click
                         $('.load-up-posts').hide()
+                        $("time.timeago").timeago();
                     },
                     error: function(xhr,textStatus,errorThrown ) {
                         var error_obj = $.parseJSON(xhr.responseText)

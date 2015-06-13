@@ -3,14 +3,6 @@ $(document).ready(function() {
     if(localStorage['current_user']){
         current_user = JSON.parse(localStorage.getItem('current_user'))
        // console.log(current_user)
-        var btnMyNavMenu="";
-        btnMyNavMenu += "<button type=\"button\" class=\"navbar-toggle mytoggle-menu\" data-toggle=\"offcanvas\" data-target=\"#myNavmenu\" data-canvas=\"body\">";
-        btnMyNavMenu += "                        <span class=\"icon-bar\"><\/span>";
-        btnMyNavMenu += "                        <span class=\"icon-bar\"><\/span>";
-        btnMyNavMenu += "                        <span class=\"icon-bar\"><\/span>";
-        btnMyNavMenu += "                    <\/button>";
-
-
         var myNavMenuList="";
         myNavMenuList += "<nav id=\"myNavmenu\" class=\"navmenu navmenu-default navmenu-fixed-left offcanvas\" role=\"navigation\">";
         myNavMenuList += "        <a class=\"navmenu-brand\" href=\"edit-profile.html\">"
@@ -26,7 +18,7 @@ $(document).ready(function() {
         myNavMenuList += "                 "+current_user.lname
         myNavMenuList += "                <\/a>";
         myNavMenuList += "        <ul class=\"nav navmenu-nav\">";
-        myNavMenuList += "            <li><a href=\"index.html\"> <img src=\"img/menu-home.png\" width=\"26\" height=\"26\" alt=\"\"\/>  Wall<\/a><\/li>";
+        myNavMenuList += "            <li><a href=\"#\" id=\"offcanvas-wall\"> <img src=\"img/menu-home.png\" width=\"26\" height=\"26\" alt=\"\"\/>  Wall<\/a><\/li>";
         myNavMenuList += "            <li><a href=\"add-post.html\"> <img src=\"img/icon-createpost.png\" width=\"26\" height=\"26\" alt=\"\"\/>  Create Post<\/a><\/li>";
         myNavMenuList += "            <li><a href=\"settings.html\"> <img src=\"img/menu-settings.png\" width=\"26\" height=\"26\" alt=\"\"\/>  Settings<\/a><\/li>";
         myNavMenuList += "            <li><a href=\"manage-tags.html\"> <img src=\"img/icon-menu-mtags.png\" width=\"26\" height=\"26\" alt=\"\"\/>  Manage Tags<\/a><\/li>";
@@ -35,7 +27,7 @@ $(document).ready(function() {
         myNavMenuList += "        <\/ul>";
         myNavMenuList += "    <\/nav>";
 
-        $('#btnMyNavMenu').html(btnMyNavMenu)
+        $('#btnMyNavMenu').show()
         $('#navbar').append(myNavMenuList)
         //TODO enable if same as in IOS app
       //  $('#myNavmenu').offcanvas({autohide:true, toggle:faldse})
@@ -43,6 +35,7 @@ $(document).ready(function() {
         //var btnSignIn="";
         //btnSignIn += "<a class=\"pull-right\" href=\"signin.html\"><img width=\"26\" height=\"26\" alt=\"\" src=\"img/icon-createpost.png\"><\/a>";
         //$('#rightMenu').prepend(btnSignIn)
+        $('#btnMyNavMenu').hide()
     }
 
 
@@ -60,6 +53,11 @@ $(document).ready(function() {
         }else{
             window.location.href = 'signin.html'
         }
+    })
+
+    $('#offcanvas-wall').on('click',function(e){
+        e.preventDefault()
+        $('#myNavmenu').offcanvas('hide')
     })
 
 })

@@ -36,9 +36,7 @@
 
     <div class="container loading-content">
         <div class="row">
-            <div class="row">
-                <div class="sp-spinner"><i class="fa fa-spinner fa-spin"></i></div>
-            </div>
+            <div class="sp-spinner"><i class="fa fa-spinner fa-spin"></i></div>
         </div>
     </div>
     <div class="container mbottom65">
@@ -133,9 +131,9 @@
                 <!-- flag/like sesction -->
                 <div class="pull-right col-md-2 col-xs-4">
                     <div class="pull-right">
-                        <a href="#">
-                            <img src="img/viewpost-flag.png" width="32" height="32" alt="" onmouseover="this.src='img/viewpost-flag-active.png' " onmouseout="this.src='img/viewpost-flag.png'" />
-                        </a>
+                        <!--<a href="#">-->
+                            <!--<img src="img/viewpost-flag.png" width="32" height="32" alt="" onmouseover="this.src='img/viewpost-flag-active.png' " onmouseout="this.src='img/viewpost-flag.png'" />-->
+                        <!--</a>-->
 
                         {{#if upvoted }}
                         <div class="viewPostLikeActive up-down-vote-post" data-id="{{ uid }}"></div>
@@ -189,7 +187,7 @@
                               {{#ifIn 'edit' can }}
                               <li><a href="#" class="edit-comment" data-id="{{ uid }}">Edit</a></li>
                               {{/ifIn}}
-                              <li><a href="#" class="flag-comment" data-id="{{ uid }}">Flag </a></li>
+                              <!--<li><a href="#" class="flag-comment" data-id="{{ uid }}">Flag </a></li>-->
                           </ul>
                         </span>
                     </div>
@@ -238,7 +236,7 @@
                     {{#ifIn 'edit' can }}
                     <li><a href="#" class="edit-comment" data-id="{{ uid }}">Edit</a></li>
                     {{/ifIn}}
-                    <li><a href="#" class="flag-comment" data-id="{{ uid }}">Flag </a></li>
+                    <!--<li><a href="#" class="flag-comment" data-id="{{ uid }}">Flag </a></li>-->
                 </ul>
             </span>
             </div>
