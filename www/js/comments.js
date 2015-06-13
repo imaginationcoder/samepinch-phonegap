@@ -29,6 +29,7 @@ function commentReady(){
                         comment_text.val('')//clear input
                         hideAjaxSpinner();
                         upDownVoteComment()
+                        $("time.timeago").timeago();
                     },
                     error: function (xhr, textStatus, errorThrown) {
                         var error_obj = $.parseJSON(xhr.responseText)
