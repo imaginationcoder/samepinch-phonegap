@@ -4,7 +4,7 @@
  */
 // Constants ------------------------------------------------
 
-var env = 'prod';
+var env = 'dev';
 //var env = 'local';
 //var env = 'prod';
 if(env == 'prod'){

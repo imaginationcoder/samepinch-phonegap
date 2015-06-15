@@ -104,6 +104,7 @@ function singlePostShowReady(){
             $("time.timeago").timeago();
             upDownVotePost()
             commentReady() //invoke comment section for after
+            editComment()
             singlePostShowClickEvents()
         },
         error: function(xhr,textStatus,errorThrown ) {
