@@ -83,7 +83,7 @@
 
 <script id="single-post-template" type="text/x-handlebars-template">
     <div id="toppanel" class="row mtop5 pbottom5 border-bottom">
-        <div class="col-md-5 col-xs-4">
+        <div class="col-md-5 col-xs-6">
             {{#if anonymous}}
             <div class="profilepic-img pull-left profile-avatar anonymous"><img src="{{ anonymous_image }}"/></div>
             {{else}}
@@ -101,8 +101,8 @@
                 {{/if}}
             </div>
         </div>
-        <div class="col-md-7 col-xs-8">
-            <div class="pull-right mtop5 icon-counts">
+        <div class="col-md-7 col-xs-6 nopadding">
+            <div class="mtop5 icon-counts">
                 <img src="img/icon-view-count.png" width="26" height="15" alt="">
                 <span>{{ views }}</span>
                 <img src="img/icon-upvote-gray.png" width="21" height="21" alt="">
@@ -308,6 +308,9 @@
 
 <script type="text/javascript">
     singlePostShowReady()
+    $('#comment-form').submit(function(e){
+        e.preventDefault()
+    })
 </script>
 
 </body>

@@ -1071,16 +1071,37 @@ code {
 	width: 295px;
 }
 
-.profile-name {
+
+#Wall .profile-name {
 	text-overflow: ellipsis;
-	width: 75px;
+	width: 29%;
+	border: 1px solid transparent;
+	white-space: nowrap;
+	overflow: hidden;
+	font-size: 13px;
+}
+
+@media (min-width:400px) {
+	#Wall .profile-name {
+		text-overflow: ellipsis;
+		width:auto;
+		border: 1px solid transparent;
+		white-space: nowrap;
+		overflow: hidden;
+	}
+}
+
+
+#viewPost .profile-name {
+	text-overflow: ellipsis;
+	width:70%;
 	border: 1px solid transparent;
 	white-space: nowrap;
 	overflow: hidden;
 }
 
 @media (min-width:400px) {
-	#Wall .profile-name {
+	#viewPost .profile-name {
 		text-overflow: ellipsis;
 		width:auto;
 		border: 1px solid transparent;

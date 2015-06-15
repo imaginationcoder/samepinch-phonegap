@@ -125,7 +125,7 @@ function commentReady(){
 function editComment(){
 
     $('.edit-post-comment').unbind().bind('click',function(e){
-        e.preventDefault() 
+        e.preventDefault()
         $('#viewPost').removeClass('display-block').addClass('display-none')
         $('#editComment').removeClass('display-none').addClass('display-block')
         $('#edit-comment-form').find('input[name="anonymous"]').val($(this).data('anonymous'));

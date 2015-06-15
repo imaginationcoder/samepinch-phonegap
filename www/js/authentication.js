@@ -121,6 +121,33 @@ function resetPassword(){
     })
 }
 
+
+function forgotPassword(){
+    // merge form data with device-info
+    var body_params =   $('#forgot-password-form').serializeHash()
+    $.ajax({
+        url: window.api_url+'users',
+        type: 'post',
+        data: {
+            'command' :"forgot_password",
+            'access_token':  localStorage['access_token'],
+            'body': body_params
+        },
+        beforeSend: function () {  showAjaxSpinner()  },
+        success: function (data) {
+            hideAjaxSpinner()
+            successDialog('Success',data.message)
+        },
+        error: function(xhr,textStatus,errorThrown ) {
+            var error_obj = $.parseJSON(xhr.responseText)
+            console.log(error_obj)
+            hideAjaxSpinner()
+            errorDialog('Error',error_obj.message)
+        }
+    })
+}
+
+
 function editProfile(){
     // merge form data with device-info
     var body_params =   $('#edit-profile-form').serializeHash()
@@ -193,6 +220,21 @@ $(document).on('ready',function(){
         }else{
             resetPassword()
         }
+    })
+
+    $('#btn-forgot-password').on('click',function(e){
+        e.preventDefault()
+        form=  $('#forgot-password-form')
+        email = form.find('input[name="email"]').val()
+        if(email =='' ){
+            errorDialog('Error','Please enter email')
+        }else{
+            forgotPassword()
+        }
+    })
+
+    $("#forgot-password-form,#change-password-form,#signin-form,#edit-profile-form,#signup-form").submit(function (e) {
+        e.preventDefault();
     })
 
 
